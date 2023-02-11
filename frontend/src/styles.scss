@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  letter-spacing: normal;
+  box-sizing: border-box;
+  background: #fafafa;
+}
+
+ul {
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color:inherit;
+}
+
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
+
+:root {
+  --secondary-color: #707070;
+}

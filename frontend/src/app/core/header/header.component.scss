@@ -1,0 +1,27 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    &--text {
+      gap: 64px;
+    }
+    &--icons {
+      gap: 39px;
+    }
+  }
+  &__separator {
+    content: '';
+    margin: 0 48px;
+    width: 0.0625rem;
+    height: 1.0625rem;
+    background: var(--secondary-color);
+  }
+}
+
