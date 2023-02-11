@@ -1,0 +1,39 @@
+@import '../../../styles';
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $tertiary-color;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  &__list {
+    display: flex;
+    justify-content: space-around;
+    &--text {
+      gap: 4rem;
+    }
+    &--icons {
+      gap: 2.4375rem;
+    }
+    .menu__item {
+      padding: 1.6875rem 0;
+      font-size: 1rem;
+      line-height: 1.6875;
+      &--active {
+        border-bottom: 2px solid $black-color;
+      }
+    }
+  }
+  &__separator {
+    content: '';
+    width: 0.0625rem;
+    height: 1.0625rem;
+    margin: 0 3rem;
+    background: $secondary-color;
+  }
+}
