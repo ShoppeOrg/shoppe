@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import 'styles/variables';
 
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 html,
@@ -13,25 +14,15 @@ body {
 
 body {
   letter-spacing: normal;
-  box-sizing: border-box;
-  background: #fafafa;
+  background: $white-color;
+  font-family: 'DM Sans', 'Roboto', sans-serif;
 }
 
 ul {
   list-style: none;
 }
 
-a{
+a {
   text-decoration: none;
-  color:inherit;
-}
-
-@function toRem($value) {
-  $remValue: ($value / 16) + rem;
-  @return $remValue;
-}
-
-
-:root {
-  --secondary-color: #707070;
+  color: inherit;
 }
