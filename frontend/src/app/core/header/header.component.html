@@ -1,35 +1,37 @@
-<header>
-  <nav class="nav">
-    <div>
-      <a routerLink="/shop">
-        <img src="./assets/icons/logo.svg" alt="Company logo" />
-      </a>
-    </div>
+<header class="header">
+  <div class="header__logo">
+    <a routerLink="/shop">
+      <img src="./assets/icons/logo.svg" alt="Company logo" />
+    </a>
+  </div>
 
-    <div class="menu">
-      <ul class="menu__list menu__list--text">
-        <li class="menu__item" routerLinkActive="menu__item--active">
+  <div class="header__menu menu">
+    <nav class="menu__item nav">
+      <ul class="nav__list">
+        <li class="nav__item" routerLinkActive="nav__item--active">
           <a routerLink="/shop">Shop</a>
         </li>
-        <li class="menu__item" routerLinkActive="menu__item--active">
+        <li class="nav__item" routerLinkActive="nav__item--active">
           <a routerLink="/story">Our Story</a>
         </li>
-        <li class="menu__item" routerLinkActive="menu__item--active">
+        <li class="nav__item" routerLinkActive="nav__item--active">
           <a routerLink="/blog">Blog</a>
         </li>
       </ul>
-      <span class="menu__separator"></span>
-      <ul class="menu__list menu__list--icons">
-        <li class="menu__item" routerLinkActive="menu__item--active">
-          <mat-icon>search</mat-icon>
-        </li>
-        <li class="menu__item" routerLinkActive="menu__item--active">
-          <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
-        </li>
-        <li class="menu__item" routerLinkActive="menu__item--active">
-          <a routerLink="/my-profile"><mat-icon>person</mat-icon></a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+    </nav>
+
+    <span class="menu__separator"></span>
+
+    <ul class="menu__item links">
+      <li class="links__item">
+        <mat-icon>search</mat-icon>
+      </li>
+      <li class="links__item">
+        <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
+      </li>
+      <li class="links__item">
+        <a routerLink="/my-profile"><mat-icon>person</mat-icon></a>
+      </li>
+    </ul>
+  </div>
 </header>
