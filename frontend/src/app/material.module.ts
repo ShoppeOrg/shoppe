@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-  imports: [MatIconModule, MatToolbarModule],
-  exports: [MatIconModule, MatToolbarModule]
+  imports: [MatIconModule, MatInputModule],
+  exports: [MatIconModule, MatInputModule]
 })
 export class MaterialModule {
   constructor(iconRegistry: MatIconRegistry) {
