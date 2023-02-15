@@ -4,6 +4,14 @@
 
 *BEFORE RUNNING COMMANDS MAKE SURE THAT YOU ARE IN THE ROOT OF THE BACKEND DIRECTORY*
 
+First activate environment variables that are stored inside of `.env` file
+
+```
+set -a 
+source .env
+set +a
+```
+
 If you running for first time use these:
 
 ```
