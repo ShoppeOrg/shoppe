@@ -1,0 +1,38 @@
+altgraph @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-124/altgraph-0.17.2-py2.py3-none-any.whl
+asgiref==3.6.0
+cli-helpers==2.3.0
+click==8.1.3
+configobj==5.0.8
+Django==4.1.7
+djangorestframework==3.14.0
+drfpasswordless==1.5.8
+flake8==6.0.0
+Flask==2.2.2
+future @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-124/future-0.18.2-py3-none-any.whl
+importlib-metadata==6.0.0
+itsdangerous==2.1.2
+Jinja2==3.1.2
+macholib @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-124/macholib-1.15.2-py2.py3-none-any.whl
+Markdown==3.4.1
+MarkupSafe==2.1.1
+mccabe==0.7.0
+pendulum==2.1.2
+pgcli==3.5.0
+pgspecial==2.0.1
+prompt-toolkit==3.0.36
+psycopg==3.1.8
+psycopg2-binary==2.9.5
+pycodestyle==2.10.0
+pyflakes==3.0.1
+Pygments==2.14.0
+python-dateutil==2.8.2
+pytz==2022.7.1
+pytzdata==2020.1
+setproctitle==1.3.2
+six @ file:///System/Volumes/Data/SWE/Apps/DT/BuildRoots/BuildRoot2/ActiveBuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-124/six-1.15.0-py2.py3-none-any.whl
+sqlparse==0.4.3
+tabulate==0.9.0
+typing_extensions==4.4.0
+wcwidth==0.2.6
+Werkzeug==2.2.2
+zipp==3.11.0
