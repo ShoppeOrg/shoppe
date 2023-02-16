@@ -9,6 +9,10 @@
     flex-basis: 25%;
     max-width: 25%;
   }
+  &__icon{
+    width: 158px;
+    height: 40px;
+  }
   &__menu {
     flex-basis: 75%;
     max-width: 75%;
@@ -65,5 +69,8 @@
     &:last-child {
       margin-right: 0;
     }
+  }
+  &__icon:hover{
+    color: $primary-color;
   }
 }
