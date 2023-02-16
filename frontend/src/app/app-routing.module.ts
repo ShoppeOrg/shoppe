@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { NotFoundComponent } from './core/not-found/not-found.component';
+import { LoginComponent } from './core/auth/pages/login/login.component';
+import {AuthGuard} from './core/guards/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/shop',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    redirectTo: '/shop'
   },
   {
     path: 'shop',
@@ -25,7 +29,20 @@ const routes: Routes = [
   },
   {
     path: 'my-profile',
-    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule)
+    canMatch: [AuthGuard],
+    loadChildren: () => import('./features/user/user.module').then(m => m.UserModule),
+  },
+  {
+    path: 'my-profile',
+    component: LoginComponent
+  },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found'
   }
 ];
 

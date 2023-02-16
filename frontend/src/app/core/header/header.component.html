@@ -1,7 +1,7 @@
 <header class="header">
   <div class="header__logo">
     <a routerLink="/shop">
-      <img src="./assets/icons/logo.svg" alt="Company logo" />
+      <mat-icon class='header__icon'  svgIcon="logo"></mat-icon>
     </a>
   </div>
 
@@ -24,13 +24,19 @@
 
     <ul class="menu__item links">
       <li class="links__item">
-        <mat-icon>search</mat-icon>
+        <a routerLink="/cart">
+          <mat-icon class="links__icon">search</mat-icon>
+        </a>
       </li>
       <li class="links__item">
-        <a routerLink="/cart"><mat-icon>shopping_cart</mat-icon></a>
+        <a routerLink="/cart">
+          <mat-icon class="links__icon">shopping_cart</mat-icon>
+        </a>
       </li>
       <li class="links__item">
-        <a routerLink="/my-profile"><mat-icon>person</mat-icon></a>
+        <a routerLink="/my-profile">
+          <mat-icon class="links__icon">person</mat-icon>
+        </a>
       </li>
     </ul>
   </div>
