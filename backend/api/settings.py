@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'drfpasswordless',
     'django.contrib.staticfiles',
-    'user'
+    'user',
+    'products'
 ]
 
 MIDDLEWARE = [
