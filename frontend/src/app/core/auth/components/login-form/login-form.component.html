@@ -1,8 +1,10 @@
 <div class="container">
-  <form class="form" [formGroup]='signupForm' (ngSubmit)='onSubmit()'>
+  <form class="form" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
     <mat-form-field class="form__field">
-      <input class="form__input" matInput type="email" placeholder="Email"  formControlName='email' />
+      <input class="form__input" matInput type="email" ngModel required name="email" />
     </mat-form-field>
-    <button type='submit' class="form__button" mat-raised-button>SIGN IN</button>
+    <button type="submit" class="form__button" mat-raised-button [disabled]="!authForm.valid">
+      SIGN IN
+    </button>
   </form>
 </div>

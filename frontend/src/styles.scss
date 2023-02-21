@@ -93,8 +93,8 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
 }
 
 .mdc-text-field--filled .mdc-line-ripple:after,
-.mdc-text-field--filled:not(.mdc-text-field--disabled):hover .mdc-line-ripple:before,
-.mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple:before {
+.mdc-text-field--filled:not(.mdc-text-field--invalid):hover .mdc-line-ripple:before,
+.mdc-text-field--filled:not(.mdc-text-field--invalid) .mdc-line-ripple:before {
   border-width: 1px;
   border-bottom-color: $tertiary-color;
 }
@@ -110,4 +110,8 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
     background-color: $black-color;
     color: $white-color;
   }
+}
+
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-line-ripple:before{
+  border-bottom-color: $error-color;
 }
