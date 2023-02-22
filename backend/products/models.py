@@ -3,7 +3,7 @@ from django.db.models.fields import DateTimeField, CharField, DecimalField, Inte
 from django.core.validators import  MinValueValidator
 
 class Product(models.Model):
-    name = CharField(max_length=150)
+    name = CharField(max_length=150, unique=True)
     price = DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])
     amount = IntegerField(default=0, validators=[MinValueValidator(0)])
     description = TextField(default="")
