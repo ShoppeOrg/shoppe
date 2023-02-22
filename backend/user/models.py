@@ -7,6 +7,6 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
         if not self.username:
-            self.username = self.email.split("@")[0]
-        super(User, self).save(*args, **kwargs)
+            self.username = self.email
+        super().save(*args, **kwargs)
 
