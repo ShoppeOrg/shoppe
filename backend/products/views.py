@@ -11,6 +11,6 @@ class ProductViewSet(ModelViewSet):
     filterset_class = ProductFilter
 
     def get_permissions(self):
-        if self.action != 'list':
+        if self.action not in ('list', 'detail'):
             return [IsAdminUser()]
         return super().get_permissions()
