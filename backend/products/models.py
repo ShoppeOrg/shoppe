@@ -10,5 +10,10 @@ class Product(models.Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
+    def __repr__(self):
+        return f'<Product {self.id}: ({self.name})>'
+    @property
+    def in_stock(self):
+        return self.amount != 0
 
 
