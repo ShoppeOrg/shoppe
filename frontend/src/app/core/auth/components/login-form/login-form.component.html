@@ -1,0 +1,9 @@
+<div class="container">
+  <app-custom-form
+    [name]="name"
+    [placeholder]="placeholder"
+    [pattern]="emailPattern"
+    formAction="SIGN IN"
+    (formSubmit)="onSubmit($event)"
+  ></app-custom-form>
+</div>

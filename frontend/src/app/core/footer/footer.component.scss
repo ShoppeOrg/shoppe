@@ -1,0 +1,93 @@
+@import '../../../styles/_variables.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 0 4rem;
+  border-top: 1px solid $tertiary-color;
+  &__widget {
+  }
+
+  &__info {
+  }
+}
+
+.widget {
+  display: flex;
+  flex-direction: column;
+  &__navigation {
+  }
+  &__text {
+    margin-top: 2.9375rem;
+    font-size: 1rem;
+    line-height: 1.6875;
+  }
+  a {
+    color: $secondary-color;
+    &:hover {
+      color: $black-color;
+    }
+  }
+}
+
+.navigation {
+  &__list {
+    display: flex;
+  }
+
+  &__item {
+    color: $secondary-color;
+    font-size: 1rem;
+    line-height: 1.6875;
+    &:first-child {
+      margin-right: 2.5625rem;
+    }
+    &:last-child {
+      margin-left: 2.5625rem;
+    }
+    &:hover {
+      color: $black-color;
+    }
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  &__form {
+    width: 300px;
+  }
+
+  &__social {
+    margin-top: 2.9375rem;
+    align-self: end;
+  }
+}
+
+.social {
+  display: flex;
+  &__link {
+    margin: 0 15px;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+  &__icon {
+    width: 18px;
+    height: 18px;
+    color: $secondary-color;
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+
+.form{
+  &__field{
+    width: 300px;
+  }
+}
