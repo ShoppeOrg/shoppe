@@ -1,0 +1,19 @@
+.form {
+  &__field {
+    margin: 2.875rem 0;
+    &--long{
+      width: 500px;
+    }
+    &--short{
+      width: 300px;
+    }
+  }
+  &__button {
+    &--long{
+      width: 500px;
+    }
+    &--short{
+      width: 300px;
+    }
+  }
+}
