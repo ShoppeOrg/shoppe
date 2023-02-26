@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../services/auth.service';
-import { patterns } from 'src/app/shared/regexPatterns/patterns';
+import { patterns} from '../../../../shared/regexPatterns/patterns';
 import { IFormData } from '../../interfaces/IFormData';
 import { AuthModalComponent } from '../../modals/auth-modal/auth-modal.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-form',
