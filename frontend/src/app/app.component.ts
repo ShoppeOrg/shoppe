@@ -11,4 +11,3 @@ export class AppComponent {
     this.iconService.addIcons();
   }
 }
-

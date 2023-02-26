@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { patterns } from 'src/app/shared/regexPatterns/patterns';
+import { IFormData } from '../../interfaces/IFormData';
+import { AuthModalComponent } from '../../modals/auth-modal/auth-modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-form',
@@ -10,41 +13,27 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  signupForm: FormGroup;
+  emailPattern = patterns.regexEmail;
+  name = 'email';
+  placeholder = 'Email';
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.signupForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email])
-    });
-  }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
-  onSubmit(authForm: NgForm) {
-    if (!authForm.valid) {
-      return;
-    }
-
-    const email = authForm.value.email;
-
-    this.authService.login(email);
-
-    // console.log('form', this.signupForm.value.email);
-    // return this.http
-    //   .post('http://127.0.0.1:8000/auth/email/', { email:this.signupForm.value.email })
-    //   .subscribe(res => {
-    //     console.log('res', res);
-    //   });
-  }
-
-  loginHandler() {
-    return this.http
-      .post('http://127.0.0.1:8000/auth/token/', {
-        email: 'tyrpuchy0611@gmail.com',
-        token: '219142'
-      })
-      .subscribe(res => {
-        console.log('res', res);
-      });
+  onSubmit(formValue: IFormData): void {
+    const email = formValue[this.name];
+    this.authService.login(email).subscribe({
+      next: () => {
+        this.authService.openModal(AuthModalComponent, email);
+      },
+      error: err => {
+        this.snackBar.open(err, 'Close', { duration: 5000 });
+      }
+    });
   }
 }
