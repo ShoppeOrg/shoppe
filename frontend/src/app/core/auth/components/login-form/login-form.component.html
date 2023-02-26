@@ -1,8 +1,9 @@
 <div class="container">
-  <form class="form" [formGroup]='signupForm' (ngSubmit)='onSubmit()'>
-    <mat-form-field class="form__field">
-      <input class="form__input" matInput type="email" placeholder="Email"  formControlName='email' />
-    </mat-form-field>
-    <button type='submit' class="form__button" mat-raised-button>SIGN IN</button>
-  </form>
+  <app-custom-form
+    [name]="name"
+    [placeholder]="placeholder"
+    [pattern]="emailPattern"
+    formAction="SIGN IN"
+    (formSubmit)="onSubmit($event)"
+  ></app-custom-form>
 </div>

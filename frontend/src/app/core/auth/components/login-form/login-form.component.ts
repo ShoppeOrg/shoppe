@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { FormControl, FormGroup } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { patterns} from '../../../../shared/regexPatterns/patterns';
+import { IFormData } from '../../interfaces/IFormData';
+import { AuthModalComponent } from '../../modals/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-login-form',
@@ -8,17 +13,27 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  signupForm: FormGroup;
+  emailPattern = patterns.regexEmail;
+  name = 'email';
+  placeholder = 'Email';
 
-  constructor() {
-    this.signupForm = new FormGroup({
-      email: new FormControl(null)
-    });
-  }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
-  onSubmit() {
-    console.log('form', this.signupForm);
+  onSubmit(formValue: IFormData): void {
+    const email = formValue[this.name];
+    this.authService.login(email).subscribe({
+      next: () => {
+        this.authService.openModal(AuthModalComponent, email);
+      },
+      error: err => {
+        this.snackBar.open(err, 'Close', { duration: 5000 });
+      }
+    });
   }
 }
