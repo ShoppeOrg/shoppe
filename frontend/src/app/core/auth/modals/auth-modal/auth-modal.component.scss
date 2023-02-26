@@ -1,0 +1,24 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  &__title {
+  }
+}
+
+.content {
+  &__text {
+    text-align: center;
+    margin: 20px 0;
+  }
+  &__emphasis {
+    font-weight: 700;
+  }
+  &__form {
+    margin: 0 auto;
+    max-width: 300px;
+  }
+}

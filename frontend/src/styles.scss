@@ -1,0 +1,118 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$shoppe-primary: mat.define-palette(mat.$indigo-palette);
+$shoppe-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$shoppe-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$shoppe-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $shoppe-primary,
+      accent: $shoppe-accent,
+      warn: $shoppe-warn
+    )
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($shoppe-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@import 'styles/_variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  letter-spacing: normal;
+  background: $white-color;
+  font-family: 'DM Sans', 'Roboto', sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mat-mdc-form-field {
+  .mat-mdc-text-field-wrapper {
+    padding-left: 2px;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: auto;
+  }
+}
+
+.mat-mdc-form-field:hover .mat-mdc-form-field-focus-overlay {
+  opacity: 0;
+}
+
+.mdc-text-field .mdc-text-field__input {
+  caret-color: $black-color;
+}
+
+.mat-mdc-form-field-focus-overlay,
+mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+  background: transparent;
+}
+
+.mdc-text-field--filled .mdc-line-ripple:after,
+.mdc-text-field--filled:not(.mdc-text-field--invalid):hover .mdc-line-ripple:before,
+.mdc-text-field--filled:not(.mdc-text-field--invalid) .mdc-line-ripple:before {
+  border-width: 1px;
+  border-bottom-color: $tertiary-color;
+}
+
+.mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-infix {
+  padding-bottom: 8px;
+  padding-top: 0;
+}
+
+.mdc-button {
+  &.mat-mdc-raised-button:not(:disabled) {
+    background-color: $black-color;
+    color: $white-color;
+  }
+}
+
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-line-ripple:before {
+  border-bottom-color: $error-color;
+}
+
+.mat-mdc-form-field-subscript-wrapper .mat-mdc-form-field-error-wrapper {
+  padding: 0;
+}
+
+.mat-mdc-progress-spinner .mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $black-color!important;
+}

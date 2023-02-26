@@ -1,0 +1,43 @@
+<header class="header">
+  <div class="header__logo">
+    <a routerLink="/shop">
+      <mat-icon class='header__icon'  svgIcon="logo"></mat-icon>
+    </a>
+  </div>
+
+  <div class="header__menu menu">
+    <nav class="menu__item nav">
+      <ul class="nav__list">
+        <li class="nav__item" routerLinkActive="nav__item--active">
+          <a routerLink="/shop">Shop</a>
+        </li>
+        <li class="nav__item" routerLinkActive="nav__item--active">
+          <a routerLink="/story">Our Story</a>
+        </li>
+        <li class="nav__item" routerLinkActive="nav__item--active">
+          <a routerLink="/blog">Blog</a>
+        </li>
+      </ul>
+    </nav>
+
+    <span class="menu__separator"></span>
+
+    <ul class="menu__item links">
+      <li class="links__item">
+        <a routerLink="/cart">
+          <mat-icon class="links__icon">search</mat-icon>
+        </a>
+      </li>
+      <li class="links__item">
+        <a routerLink="/cart">
+          <mat-icon class="links__icon">shopping_cart</mat-icon>
+        </a>
+      </li>
+      <li class="links__item">
+        <a routerLink="/my-profile">
+          <mat-icon class="links__icon">person</mat-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
