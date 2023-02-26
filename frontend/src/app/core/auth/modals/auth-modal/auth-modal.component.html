@@ -1,0 +1,23 @@
+<div class="container">
+  <header class="header">
+    <h2 class="header__title">Verify code</h2>
+    <button class="header__btn" mat-button mat-dialog-close>
+      <mat-icon>clear</mat-icon>
+    </button>
+  </header>
+  <main class="content">
+    <p class="content__text">
+      Verification code has been sent on <span class="content__emphasis">{{ data.email }}</span>
+    </p>
+    <div class='content__form'>
+      <app-custom-form
+        [name]="name"
+        [placeholder]="placeholder"
+        [pattern]="codePattern"
+        formAction="VERIFY"
+        (formSubmit)="onSubmit($event)"
+      ></app-custom-form>
+    </div>
+  </main>
+</div>
+
