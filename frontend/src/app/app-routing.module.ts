@@ -29,11 +29,11 @@ const routes: Routes = [
   },
   {
     path: 'my-profile',
-    canMatch: [AuthGuard],
+    canActivate: [AuthGuard],
     loadChildren: () => import('./features/user/user.module').then(m => m.UserModule),
   },
   {
-    path: 'my-profile',
+    path: 'login',
     component: LoginComponent
   },
   {
