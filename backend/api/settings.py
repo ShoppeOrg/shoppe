@@ -20,27 +20,32 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:4200',
 ]
 
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
+    'debug_toolbar',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'corsheaders',
-    'rest_framework',
-    'rest_framework.authtoken',
+    'django.contrib.staticfiles',
     'django_filters',
     'drfpasswordless',
-    'django.contrib.staticfiles',
+    'products',
+    'rest_framework',
+    'rest_framework.authtoken',
     'user',
-    'products'
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
