@@ -12,6 +12,12 @@ class Product(models.Model):
 
     def __repr__(self):
         return f"<Product {self.id}: ({self.name})>"
+
+    def save(self, *args, **kwargs):
+        inventory = ProductInventory(product=self)
+        super().save(*args, **kwargs)
+        inventory.save()
+
     @property
     def in_stock(self):
         return self.inventory.quantity != 0
@@ -24,8 +30,8 @@ class ProductInventory(models.Model):
         primary_key=True,
         related_name="inventory",
     )
-    quantity = IntegerField(default=0, validators=[MinValueValidator(0)])
-    sold_qty = IntegerField(default=0, validators=[MinValueValidator(0)])
+    quantity = IntegerField(default=0, null=False, validators=[MinValueValidator(0)])
+    sold_qty = IntegerField(default=0, null=False, validators=[MinValueValidator(0)])
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
