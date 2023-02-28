@@ -10,13 +10,16 @@ class Product(models.Model):
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["-updated_at"]
+
     def __repr__(self):
         return f"<Product {self.id}: ({self.name})>"
 
     def save(self, *args, **kwargs):
-        inventory = ProductInventory(product=self)
+        obj, created = ProductInventory.objects.get_or_create(product=self)
         super().save(*args, **kwargs)
-        inventory.save()
+        obj.save()
 
     @property
     def in_stock(self):
@@ -33,11 +36,12 @@ class ProductInventory(models.Model):
     )
     quantity = IntegerField(default=0, null=False, validators=[MinValueValidator(0)])
     sold_qty = IntegerField(default=0, null=False, validators=[MinValueValidator(0)])
-    created_at = DateTimeField(auto_now_add=True)
+    created_at = DateTimeField(auto_now_add=True, null=False)
     updated_at = DateTimeField(auto_now=True)
 
     class Meta:
         db_table = "products_product_inventory"
+        ordering = ['-updated_at']
 
     def __repr__(self):
         return f"<Inventory of {repr(self.product)}>"
