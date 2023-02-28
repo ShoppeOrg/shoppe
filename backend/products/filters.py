@@ -6,10 +6,11 @@ class NamedOrderingFilter(OrderingFilter):
     def get_ordering_value(self, param):
         param, ending = param.split(".")
         prefix = "-" if ending == "desc" else ""
-        return prefix + self.param_map.get(param,param)
+        return prefix + self.param_map.get(param, param)
 
 
 class ProductFilter(FilterSet):
+
     min_price = NumberFilter(field_name="price", lookup_expr="gte")
     max_price = NumberFilter(field_name="price", lookup_expr="lte")
     in_stock = BooleanFilter(field_name="inventory__quantity", method="filter_in_stock")
