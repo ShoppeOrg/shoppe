@@ -6,6 +6,7 @@ from .serializers import ProductSerializer
 
 
 class ProductViewSet(ModelViewSet):
+
     queryset = Product.objects.select_related('inventory')
     serializer_class = ProductSerializer
     filterset_class = ProductFilter

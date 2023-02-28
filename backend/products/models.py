@@ -24,6 +24,7 @@ class Product(models.Model):
 
 
 class ProductInventory(models.Model):
+
     product = models.OneToOneField(
         to=Product,
         on_delete=models.CASCADE,
@@ -37,3 +38,6 @@ class ProductInventory(models.Model):
 
     class Meta:
         db_table = "products_product_inventory"
+
+    def __repr__(self):
+        return f"<Inventory of {repr(self.product)}>"
