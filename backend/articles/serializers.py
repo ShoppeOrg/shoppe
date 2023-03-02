@@ -37,5 +37,12 @@ class ArticleCreateSerializer(ModelSerializer):
     )
 
     class Meta:
-        model = Article,
-        fields = ["title", "slug", "categories", "author"]
+        model = Article
+        fields = ["title", "slug","categories", "data", "is_published", "is_scheduled", "scheduled_at"]
+
+
+class ArticleCategorySerializer(ModelSerializer):
+
+    class Meta:
+        model = ArticleCategory
+        fields = ["name"]

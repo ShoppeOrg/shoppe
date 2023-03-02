@@ -3,7 +3,7 @@ from django.core.validators import validate_slug
 from django.db.models import (
     Model, CharField, TextField, DateTimeField, ManyToManyField, ForeignKey, BooleanField, PROTECT
 )
-from datetime import datetime
+
 
 class ArticleCategory(Model):
 
@@ -13,6 +13,7 @@ class ArticleCategory(Model):
         db_table = "articles_article_category"
         verbose_name = "category"
         verbose_name_plural = "categories"
+        ordering = ["name"]
 
     def save(self, *args, **kwargs):
         self.name = self.name.lower()
