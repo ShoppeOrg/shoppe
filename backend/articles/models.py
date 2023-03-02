@@ -3,7 +3,7 @@ from django.core.validators import validate_slug
 from django.db.models import (
     Model, CharField, TextField, DateTimeField, ManyToManyField, ForeignKey, BooleanField, PROTECT
 )
-
+from datetime import datetime
 
 class ArticleCategory(Model):
 
@@ -39,9 +39,9 @@ class Article(Model):
         related_name="articles",
     )
     is_published = BooleanField(default=False)
-    published_at = DateTimeField()
+    published_at = DateTimeField(null=True)
     is_scheduled = BooleanField(default=False)
-    scheduled_at = DateTimeField()
+    scheduled_at = DateTimeField(null=True)
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
 
