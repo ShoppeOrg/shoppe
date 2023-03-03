@@ -13,8 +13,11 @@ class Product(models.Model):
     class Meta:
         ordering = ["-updated_at"]
 
+    def __str__(self):
+        return self.name
+
     def __repr__(self):
-        return f"<Product {self.id}: ({self.name})>"
+        return f"<Product {self.id}: ({self})>"
 
     def save(self, *args, **kwargs):
         obj, created = ProductInventory.objects.get_or_create(product=self)
@@ -44,4 +47,4 @@ class ProductInventory(models.Model):
         ordering = ['-updated_at']
 
     def __repr__(self):
-        return f"<Inventory of {repr(self.product)}>"
+        return f"<Inventory of {self}>"
