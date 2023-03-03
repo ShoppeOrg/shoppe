@@ -1,4 +1,5 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, CharField, SlugRelatedField
+from user.models import User
 from .models import Article, ArticleCategory
 
 
@@ -35,10 +36,14 @@ class ArticleCreateSerializer(ModelSerializer):
         queryset=ArticleCategory.objects.all(),
         many=True,
     )
+    author = SlugRelatedField(
+        slug_field="email",
+        queryset=User.objects.all()
+    )
 
     class Meta:
         model = Article
-        fields = ["title", "slug","categories", "data", "is_published", "is_scheduled", "scheduled_at"]
+        fields = ["title", "slug", "categories", "author", "data", "is_published", "is_scheduled", "scheduled_at"]
 
 
 class ArticleCategorySerializer(ModelSerializer):
