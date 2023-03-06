@@ -4,7 +4,7 @@ from .views import ArticleListAPIView, ArticleRetrieveAPIView, ArticleCategoryLi
 
 urlpatterns = [
     path("articles/", ArticleListAPIView.as_view()),
-    path("articles/<slug:slug>", ArticleRetrieveAPIView.as_view(), name="article-detail"),
+    path("articles/<slug:pk>/", ArticleRetrieveAPIView.as_view(), name="article-detail"),
     path("articles/categories/", ArticleCategoryListAPIView.as_view()),
     path("articles/<slug:pk>/publish/", ArticlePublishAPIView.as_view(), name="article-publish")
 ]

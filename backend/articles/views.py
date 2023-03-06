@@ -5,11 +5,23 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
 from django.db.models import ObjectDoesNotExist
 from .models import Article, ArticleCategory
-from .serializers import ArticleSerializer, ArticleDetailSerializer, ArticleCategorySerializer, ArticleCreateSerializer
+from .serializers import (
+    ArticleSerializer,
+    ArticleDetailSerializer,
+    ArticleCategorySerializer,
+    ArticleCreateSerializer,
+    ArticleFullDetailSerializer
+)
+from .filters import ArticleFilter
 
 
 class ArticleListAPIView(ListCreateAPIView):
-    queryset = Article.objects.filter(is_published=True).prefetch_related("author", "categories")
+    filterset_class = ArticleFilter
+
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Article.objects.prefetch_related("author", "categories")
+        return Article.objects.filter(is_published=True).prefetch_related("author", "categories")
 
     def get_permissions(self):
         if self.request.method == "POST":
@@ -17,14 +29,20 @@ class ArticleListAPIView(ListCreateAPIView):
         return super().get_permissions()
 
     def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return ArticleFullDetailSerializer
         if self.request.method == "POST":
             return ArticleCreateSerializer
         return ArticleSerializer
 
 
 class ArticleRetrieveAPIView(RetrieveAPIView):
-    queryset = Article.objects.filter(is_published=True).prefetch_related("author", "categories")
-    serializer_class = ArticleDetailSerializer
+    queryset = Article.objects.prefetch_related("author", "categories")
+
+    def get_serializer_class(self):
+        if self.request.user.is_staff:
+            return ArticleFullDetailSerializer
+        return ArticleDetailSerializer
 
 
 class ArticleCategoryListAPIView(ListCreateAPIView):
