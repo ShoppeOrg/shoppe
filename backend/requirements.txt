@@ -5,6 +5,7 @@ configobj==5.0.8
 Django==4.1.7
 django-cors-headers==3.13.0
 django-filter==22.1
+django_debug_toolbar==3.8.1
 djangorestframework==3.14.0
 drfpasswordless==1.5.8
 flake8==6.0.0

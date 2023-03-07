@@ -6,5 +6,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('drfpasswordless.urls')),
     path('', include('products.urls')),
+    path('', include('articles.urls'))
 ]
  
