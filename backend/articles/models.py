@@ -3,6 +3,7 @@ from django.core.validators import validate_slug
 from django.db.models import (
     Model, CharField, TextField, DateTimeField, ManyToManyField, ForeignKey, BooleanField, PROTECT
 )
+from django.utils import timezone
 
 
 class ArticleCategory(Model):
@@ -34,6 +35,7 @@ class Article(Model):
     author = ForeignKey(
         to=AUTH_USER_MODEL,
         on_delete=PROTECT,
+        blank=False
     )
     categories = ManyToManyField(
         to=ArticleCategory,
@@ -48,6 +50,13 @@ class Article(Model):
 
     class Meta:
         ordering = ["-published_at"]
+
+    def save(self, *args, **kwargs):
+        if self.scheduled_at is not None:
+            self.is_scheduled = True
+        if self.is_published:
+            self.published_at = timezone.now()
+        return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.slug
