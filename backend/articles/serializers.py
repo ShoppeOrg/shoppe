@@ -1,7 +1,8 @@
 from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, CharField, SlugRelatedField
-from rest_framework.serializers import Serializer
+from rest_framework.serializers import Serializer, ValidationError
 from user.models import User
 from .models import Article, ArticleCategory
+from django.utils import timezone
 
 
 class AuthorInfo(Serializer):
@@ -47,9 +48,16 @@ class ArticleCreateSerializer(ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ["title", "slug", "categories", "author", "data", "is_published", "is_scheduled", "scheduled_at"]
+        fields = ["title", "slug", "categories", "author", "data", "is_published", "scheduled_at"]
+
+    def validate_scheduled_at(self, value):
+        if value and value < timezone.now():
+            raise ValidationError("Field 'scheduled_at' should be a date in future.")
+        return value
 
     def create(self, validated_data):
+        if validated_data["is_published"]:
+            validated_data["scheduled_at"] = None
         return super().create(validated_data)
 
 

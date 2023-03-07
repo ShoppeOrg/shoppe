@@ -2,7 +2,7 @@ from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
-from rest_framework.status import HTTP_200_OK, HTTP_404_NOT_FOUND
+from rest_framework.status import HTTP_404_NOT_FOUND
 from django.db.models import ObjectDoesNotExist
 from .models import Article, ArticleCategory
 from .serializers import (
@@ -29,7 +29,7 @@ class ArticleListAPIView(ListCreateAPIView):
         return super().get_permissions()
 
     def get_serializer_class(self):
-        if self.request.user.is_staff:
+        if self.request.method == "GET" and self.request.user.is_staff:
             return ArticleFullDetailSerializer
         if self.request.method == "POST":
             return ArticleCreateSerializer
