@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user',
     'products',
     'articles',
+    'pictures',
 ]
 
 MIDDLEWARE = [
@@ -151,5 +152,9 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_URL = 'static/'
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'user.User'
