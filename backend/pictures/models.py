@@ -17,4 +17,6 @@ class Picture(Model):
         ordering = ["-uploaded_at"]
 
     def save(self, *args, **kwargs):
+        _, ext = self.picture.name.split(".")
+        self.picture.name = f"{uuid4()}.{ext}"
         return super().save(*args, **kwargs)
