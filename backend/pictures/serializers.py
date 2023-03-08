@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ImageField
 from.models import Picture
 
 
@@ -13,4 +13,12 @@ class PictureSerializer(ModelSerializer):
                 "use_url": True,
                 "allow_empty_file": False,
             }
+        }
+
+    def to_representation(self, instance):
+        result = super().to_representation(instance)
+        return {
+            "title": result["title"],
+            "ulr": result["picture"],
+            "uploaded_at": result["uploaded_at"]
         }
