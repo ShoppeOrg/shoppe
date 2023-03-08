@@ -16,6 +16,10 @@ class Picture(Model):
     class Meta:
         ordering = ["-uploaded_at"]
 
+    @property
+    def url(self):
+        return self.url
+
     def save(self, *args, **kwargs):
         _, ext = self.picture.name.split(".")
         self.picture.name = f"{uuid4()}.{ext}"
