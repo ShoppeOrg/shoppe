@@ -157,4 +157,6 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+ALLOWED_FILE_EXTENSIONS = ['jpg', 'png']
+
 AUTH_USER_MODEL = 'user.User'
