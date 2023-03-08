@@ -6,6 +6,16 @@ from django.core.validators import  MinValueValidator
 class Product(models.Model):
     name = CharField(max_length=150, unique=True)
     price = DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])
+    main_image = models.ForeignKey(
+        to="pictures.Picture",
+        null=True,
+        blank=True,
+        on_delete=models.PROTECT
+    )
+    images = models.ManyToManyField(
+        to="pictures.Picture",
+        related_name="products",
+    )
     description = TextField(default="")
     created_at = DateTimeField(auto_now_add=True)
     updated_at = DateTimeField(auto_now=True)
