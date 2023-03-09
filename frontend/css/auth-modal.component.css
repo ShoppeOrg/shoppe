@@ -1,0 +1,26 @@
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.content__text {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.content__emphasis {
+  font-weight: 700;
+}
+
+.content__form {
+  margin: 0 auto;
+  max-width: 300px;
+}
