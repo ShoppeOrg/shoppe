@@ -15,7 +15,7 @@ from .serializers import (
 from .filters import ArticleFilter
 
 
-class ArticleListAPIView(ListCreateAPIView):
+class ArticleListCreateAPIView(ListCreateAPIView):
     filterset_class = ArticleFilter
 
     def get_queryset(self):
@@ -45,7 +45,7 @@ class ArticleRetrieveAPIView(RetrieveAPIView):
         return ArticleDetailSerializer
 
 
-class ArticleCategoryListAPIView(ListCreateAPIView):
+class ArticleCategoryListCreateAPIView(ListCreateAPIView):
     queryset = ArticleCategory.objects.all()
     serializer_class = ArticleCategorySerializer
     permission_classes = (IsAdminUser, )
