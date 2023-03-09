@@ -5,6 +5,6 @@ from rest_framework.routers import DefaultRouter
 router = DefaultRouter()
 router.register(r"products", ProductViewSet, basename="product")
 urlpatterns = [
-    path("products/<int:pk>/inventory", ProductInventoryRetrieveUpdateAPIVIew.as_view())
+    path("products/<int:pk>/inventory", ProductInventoryRetrieveUpdateAPIVIew.as_view(), name="product_inventory")
 ]
 urlpatterns += router.urls
