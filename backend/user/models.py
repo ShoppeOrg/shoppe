@@ -10,3 +10,7 @@ class User(AbstractUser):
             self.username = self.email
         super().save(*args, **kwargs)
 
+    @property
+    def fullname(self):
+        return self.get_full_name()
+
