@@ -3,8 +3,8 @@ from .views import ArticleListAPIView, ArticleRetrieveAPIView, ArticleCategoryLi
 
 
 urlpatterns = [
-    path("articles/", ArticleListAPIView.as_view()),
+    path("articles/", ArticleListAPIView.as_view(), name="article-list"),
     path("articles/<slug:pk>/", ArticleRetrieveAPIView.as_view(), name="article-detail"),
-    path("articles/categories/", ArticleCategoryListAPIView.as_view()),
-    path("articles/<slug:pk>/publish/", ArticlePublishAPIView.as_view(), name="article-publish")
+    path("articles/categories/", ArticleCategoryListAPIView.as_view(), name="article_categories"),
+    path("articles/<slug:pk>/publish/", ArticlePublishAPIView.as_view(), name="article_publish")
 ]
