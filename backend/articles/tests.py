@@ -5,12 +5,17 @@ from django.contrib.auth import get_user_model
 from .models import Article
 
 
-class ArticleTestCase(APITestCase):
+class APITestCaseBase(APITestCase):
 
     def setUp(self):
-        self.admin = get_user_model().objects.get(username="demo")
         self.username = "demo"
         self.password = "demo1234"
+
+class ArticleTestCase(APITestCaseBase):
+
+    def setUp(self):
+        super().setUp()
+        self.admin = get_user_model().objects.get(username="demo")
         self.slug = "test_title"
         self.data = {
             "title": "My title",
@@ -43,11 +48,10 @@ class ArticleTestCase(APITestCase):
         self.assertEqual(response.status_code, HTTP_200_OK)
 
 
-class CategoryTestCase(APITestCase):
+class CategoryTestCase(APITestCaseBase):
 
     def setUp(self):
-        self.username = "demo"
-        self.password = "demo1234"
+        super().setUp()
         self.data = {
             "category": "my test category"
         }
@@ -70,59 +74,63 @@ class CategoryTestCase(APITestCase):
         self.assertEqual(r.status_code, HTTP_200_OK)
 
 
-class ArticleFilterTestCase(APITestCase):
+class ArtilceFilterTestCase(APITestCaseBase):
 
-    def test_get_all(self):
-        r = self.client.get(reverse("article-list"))
-        data = r.json()
-        self.assertIn("next", data)
-        self.assertIn("previous", data)
-        self.assertIn("result", data)
-        self.assertEqual(10, len(data["result"]))
-
-    def test_page_size(self):
-        r = self.client.get(reverse("article-list"), {"page_size": 30})
-        data = r.json()
-        self.assertEqual(30, len(data["result"]))
-        r = self.client.get(reverse("article-list"), {"page_size": 5})
-        data = r.json()
-        self.assertEqual(10, len(data["result"]))
-        r = self.client.get(reverse("article-list"), {"page_size": 120})
-        data = r.json()
-        self.assertEqual(100, len(data["result"]))
-
-    def test_in_stock(self):
-        r = self.client.get(reverse("article-list"), {"in_stock": True})
+    def test_is_published_true(self):
+        r = self.client.get(reverse("article-list"), {"is_published": True})
+        self.assertEqual(r.status_code, HTTP_200_OK)
         data = r.json()
         result = data["result"]
+        first = result[0]
+        self.assertNotEqual(0, data["count"])
+        self.assertNotIn("slug", first)
+        self.assertNotIn("is_published", first)
+        self.assertIn("categories", first)
         self.assertTrue(
             all(
                 map(
-                    lambda x: x["in_stock"],
-                    result,
-                )
-            )
-        )
-        r = self.client.get(reverse("article-list"), {"in_stock": False})
-        data = r.json()
-        result = data["result"]
-        self.assertFalse(
-            any(
-                map(
-                    lambda x: x["in_stock"],
+                    lambda x: bool(x["published_at"]),
                     result,
                 )
             )
         )
 
-    def test_min_max_price(self):
-        r = self.client.get(reverse("article-list"), {"min_price": 10, "max_price": 500})
+    def test_is_published_false(self):
+        r = self.client.get(reverse("article-list"), {"is_published": False})
         data = r.json()
+        self.assertEqual(0, data["count"])
+
+    def test_categories(self):
+        r = self.client.get(reverse("article-list"), {"category": ["winter", "for him"]})
         self.assertEqual(r.status_code, HTTP_200_OK)
-        self.assertTrue(len(data["result"]) > 0)
-        r = self.client.get(reverse("article-list"), {"min_price": 10, "max_price": -500})
-        self.assertNotEqual(r.status_code, HTTP_200_OK)
-        r = self.client.get(reverse("article-list"), {"min_price": 10, "max_price": 0})
-        self.assertNotEqual(r.status_code, HTTP_200_OK)
+        data = r.json()
+        self.assertNotEqual(0, data["count"])
+        first = data["result"][0]
+        self.assertIn("categories", first)
+        self.assertIn("winter", first["categories"])
+        self.assertIn("for him", first["categories"])
+
+    def test_is_published_admin(self):
+        self.client.login(username=self.username, password=self.password)
+        r = self.client.get(reverse("article-list"), {"is_published": False})
+        self.assertEqual(r.status_code, HTTP_200_OK)
+        data = r.json()
+        result = data["result"]
+        first = result[0]
+        self.assertNotEqual(0, data["count"])
+        self.assertIn("is_scheduled", first)
+        self.assertIn("scheduled_at", first)
+        self.assertIn("is_published", first)
+        self.assertIn("slug", first)
+        self.assertTrue(
+            all(
+                map(
+                    lambda x: bool(x["is_published"]),
+                    result,
+                )
+            )
+        )
+
+
 
 
