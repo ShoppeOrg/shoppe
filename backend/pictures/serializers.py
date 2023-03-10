@@ -18,7 +18,8 @@ class PictureSerializer(ModelSerializer):
     def to_representation(self, instance):
         result = super().to_representation(instance)
         return {
+            "id": instance.id,
             "title": result["title"],
-            "ulr": result["picture"],
+            "url": result["picture"],
             "uploaded_at": result["uploaded_at"]
         }
