@@ -11,6 +11,7 @@ class APITestCaseBase(APITestCase):
         self.username = "demo"
         self.password = "demo1234"
 
+
 class ArticleTestCase(APITestCaseBase):
 
     def setUp(self):
@@ -74,7 +75,7 @@ class CategoryTestCase(APITestCaseBase):
         self.assertEqual(r.status_code, HTTP_200_OK)
 
 
-class ArtilceFilterTestCase(APITestCaseBase):
+class ArticleFilterTestCase(APITestCaseBase):
 
     def test_is_published_true(self):
         r = self.client.get(reverse("article-list"), {"is_published": True})
@@ -130,7 +131,3 @@ class ArtilceFilterTestCase(APITestCaseBase):
                 )
             )
         )
-
-
-
-

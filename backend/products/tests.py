@@ -5,6 +5,7 @@ from .filters import NamedOrderingFilter
 from .models import Product, ProductInventory
 from django.core.exceptions import ValidationError
 
+
 class FilterTestCase(APITestCase):
 
     def test_get_ordering_value(self):
@@ -85,7 +86,7 @@ class ProductTestCase(APITestCase):
             "price": 20.10,
             "quantity": 5,
             "main_image": 1,
-            "images": [1,2,3]
+            "images": [1, 2, 3]
         }
         cls.username = "demo"
         cls.password = "demo1234"
@@ -130,6 +131,7 @@ class ProductTestCase(APITestCase):
 
 class InventoryTestCase(APITestCase):
 
+    @classmethod
     def setUpTestData(cls):
         cls.username = "demo"
         cls.password = "demo1234"
