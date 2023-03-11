@@ -8,6 +8,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Tests
 Tests are written in python. Before running test **make sure you are in root folder**
 
+Create virtual environment for python (skip if you have one)
+
+`python3 -m venv tests/venv`
+
 Activate python virtual environment (skip if you have already activated it)
 
 `source tests/venv/bin/activate`
