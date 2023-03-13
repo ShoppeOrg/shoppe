@@ -14,7 +14,7 @@ importlib-metadata==6.0.0
 itsdangerous==2.1.2
 Jinja2==3.1.2
 Markdown==3.4.1
-MarkupSafe==2.1.1
+MarkupSafe==2.1.2
 mccabe==0.7.0
 pendulum==2.1.2
 pgcli==3.5.0
