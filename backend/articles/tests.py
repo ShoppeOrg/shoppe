@@ -2,7 +2,7 @@ from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_201_CREATED, HTTP_401_UNAUTHORIZED, HTTP_200_OK
 from django.contrib.auth import get_user_model
-from .models import Article
+from .models import Article, ArticleCategory
 
 
 class APITestCaseBase(APITestCase):
@@ -75,11 +75,22 @@ class CategoryTestCase(APITestCaseBase):
 
 class ArticleFilterTestCase(APITestCaseBase):
 
+    def setUp(self):
+        super().setUp()
+        article = Article.objects.create(
+            title="my_unique_test_title",
+            slug="my_unique_test_title",
+            is_published=True,
+            author_id=1
+        )
+        winter = ArticleCategory.objects.get(name="winter")
+        for_him = ArticleCategory.objects.get(name="for him")
+        article.categories.add(winter, for_him)
+
     def test_is_published_true(self):
         r = self.client.get(reverse("article-list"), {"is_published": True})
         self.assertEqual(r.status_code, HTTP_200_OK)
         data = r.json()
-        print(data)
         result = data["results"]
         first = result[0]
         self.assertNotEqual(0, data["count"])
