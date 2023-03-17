@@ -1,6 +1,7 @@
 from django.db import models
-from django.db.models.fields import DateTimeField, CharField, DecimalField, IntegerField, TextField
-from django.core.validators import  MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import ForeignKey, DateTimeField, CharField, DecimalField, IntegerField, TextField, CASCADE
+from django.contrib.auth import get_user_model
 
 
 class Product(models.Model):
@@ -58,3 +59,12 @@ class ProductInventory(models.Model):
 
     def __repr__(self):
         return f"<Inventory of {self}>"
+
+
+class Review(models.Model):
+
+    user = ForeignKey(
+        to=get_user_model(),
+        on_delete=CASCADE
+    )
+    rating = IntegerField(validators=[MinValueValidator(0), MaxValueValidator(6)])

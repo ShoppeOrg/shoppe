@@ -1,4 +1,4 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, CharField, SlugRelatedField
+from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, CharField, SlugRelatedField, PrimaryKeyRelatedField
 from rest_framework.serializers import Serializer, ValidationError
 from user.models import User
 from .models import Article, ArticleCategory
@@ -11,8 +11,7 @@ class AuthorInfo(Serializer):
 
 
 class ArticleSerializer(HyperlinkedModelSerializer, AuthorInfo):
-    categories = SlugRelatedField(
-        slug_field="name",
+    categories = PrimaryKeyRelatedField(
         read_only=True,
         many=True,
     )
@@ -24,25 +23,17 @@ class ArticleSerializer(HyperlinkedModelSerializer, AuthorInfo):
 
 class ArticleDetailSerializer(ModelSerializer, AuthorInfo):
 
-    categories = SlugRelatedField(
-        slug_field="name",
-        read_only=True,
-        many=True,
-    )
-
     class Meta:
         model = Article
         fields = ["title", "author_fullname", "author_username", "categories", "data", "published_at"]
 
 
 class ArticleCreateSerializer(ModelSerializer):
-    categories = SlugRelatedField(
-        slug_field="name",
+    categories = PrimaryKeyRelatedField(
         queryset=ArticleCategory.objects.all(),
         many=True,
     )
-    author = SlugRelatedField(
-        slug_field="username",
+    author = PrimaryKeyRelatedField(
         queryset=User.objects.all()
     )
 
@@ -72,6 +63,7 @@ class ArticleFullDetailSerializer(ArticleSerializer):
             "author_fullname",
             "author_username",
             "data",
+            "categories",
             "is_published",
             "published_at",
             "is_scheduled",
