@@ -31,8 +31,8 @@ class Product(models.Model):
         return f"<Product {self.id}: ({self})>"
 
     def save(self, *args, **kwargs):
-        obj, created = ProductInventory.objects.get_or_create(product=self)
         super().save(*args, **kwargs)
+        obj, created = ProductInventory.objects.get_or_create(product=self)
         obj.save()
 
     @property

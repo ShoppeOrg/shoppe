@@ -18,9 +18,12 @@ class Picture(Model):
 
     @property
     def url(self):
-        return self.url
+        return self.picture.url
 
     def save(self, *args, **kwargs):
         _, ext = self.picture.name.split(".")
         self.picture.name = f"{uuid4()}.{ext}"
-        return super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.picture.name
