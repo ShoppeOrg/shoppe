@@ -53,6 +53,8 @@ class ArticleCategoryListCreateAPIView(ListCreateAPIView):
 
 class ArticlePublishAPIView(APIView):
 
+    permission_classes = (IsAdminUser, )
+
     def post(self, request, pk=None):
         try:
             article = Article.objects.get(pk=pk)
