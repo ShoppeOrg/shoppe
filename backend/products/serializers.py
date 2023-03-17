@@ -63,7 +63,8 @@ class ProductCreateSerializer(ModelSerializer):
     quantity = IntegerField(source="inventory.quantity")
     main_image = PrimaryKeyRelatedField(
         many=False,
-        queryset=Picture.objects.all()
+        queryset=Picture.objects.all(),
+        allow_null=True
     )
     images = PrimaryKeyRelatedField(
         many=True,
@@ -90,6 +91,16 @@ class ProductCreateSerializer(ModelSerializer):
         obj_inventory.quantity = inventory["quantity"]
         obj_inventory.save()
         return obj
+
+    def update(self, instance, validated_data):
+        if "inventory" in validated_data:
+            inventory = validated_data.pop("inventory")
+            instance = super().update(instance, validated_data)
+            obj_inventory = ProductInventory.objects.get(product=instance)
+            obj_inventory.quantity = inventory["quantity"]
+            obj_inventory.save()
+            return instance
+        return super().update(instance, validated_data)
 
 
 class ProductInventorySerializer(ModelSerializer):
