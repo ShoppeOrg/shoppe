@@ -5,6 +5,7 @@ from .filters import NamedOrderingFilter
 from .models import Product, ProductInventory
 from django.core.exceptions import ValidationError
 from pictures.models import Picture
+import json
 
 
 class APITestCaseBase(APITestCase):
@@ -139,6 +140,24 @@ class ProductTestCase(APITestCaseBase):
         self.assertIn("images", result)
         self.assertNotEqual(0, len(result["images"]))
 
+    def test_update_product(self):
+        self.client.login(username=self.username, password=self.password)
+        r = self.client.get(reverse("product-detail", {1}))
+        data = r.json()
+        data["images"] = [4, 5, 6]
+        data.pop("created_at")
+        data.pop("updated_at")
+        data = {
+            "images": [4, 5, 6]
+        }
+        r = self.client.put(reverse("product-detail", {1}), json.dumps(data), content_type="application/json")
+        data = r.json()
+        self.assertEqual(r.status_code, HTTP_200_OK, r.content)
+        self.assertIn("images", data)
+        self.assertIn(4, data)
+        self.assertIn(5, data)
+        self.assertIn(6, data)
+
 
 class InventoryTestCase(APITestCaseBase):
 
@@ -154,7 +173,7 @@ class InventoryTestCase(APITestCaseBase):
     def test_inventory_access_denied(self):
         r = self.client.get(reverse("product_inventory", {1}))
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
-        r = self.client.put(reverse("product_inventory", {1}), self.data)
+        r = self.client.put(reverse("product_inventory", {1}), data=self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_get_and_update_inventory(self):
@@ -165,7 +184,7 @@ class InventoryTestCase(APITestCaseBase):
         self.assertEqual(1, result["product_id"])
         self.assertIn("sold_qty", result)
         self.assertIn("quantity", result)
-        r = self.client.put(reverse("product_inventory", {1}), self.data)
+        r = self.client.put(reverse("product_inventory", {1}), data=self.data)
         result = r.json()
         for key in self.data:
             self.assertIn(key, result)
