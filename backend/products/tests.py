@@ -6,7 +6,12 @@ from .models import Product, ProductInventory
 from django.core.exceptions import ValidationError
 
 
-class FilterTestCase(APITestCase):
+class APITestCaseBase(APITestCase):
+
+    fixtures = ["fixture.json"]
+
+
+class FilterTestCase(APITestCaseBase):
 
     def test_get_ordering_value(self):
         o = NamedOrderingFilter(
@@ -20,31 +25,34 @@ class FilterTestCase(APITestCase):
         self.assertEqual(o.get_ordering_value("test.asc"), "test")
 
 
-class ProductFilterTestCase(APITestCase):
+class ProductFilterTestCase(APITestCaseBase):
 
     def test_get_all(self):
         r = self.client.get(reverse("product-list"))
         data = r.json()
         self.assertIn("next", data)
         self.assertIn("previous", data)
-        self.assertIn("result", data)
-        self.assertEqual(10, len(data["result"]))
+        self.assertIn("results", data)
+        self.assertEqual(10, len(data["results"]))
 
     def test_page_size(self):
         r = self.client.get(reverse("product-list"), {"page_size": 30})
         data = r.json()
-        self.assertEqual(30, len(data["result"]))
+        self.assertEqual(30, len(data["results"]))
+        r = self.client.get(reverse("product-list"), {"page_size": -2})
+        data = r.json()
+        self.assertEqual(10, len(data["results"]))
         r = self.client.get(reverse("product-list"), {"page_size": 5})
         data = r.json()
-        self.assertEqual(10, len(data["result"]))
+        self.assertEqual(5, len(data["results"]))
         r = self.client.get(reverse("product-list"), {"page_size": 120})
         data = r.json()
-        self.assertEqual(100, len(data["result"]))
+        self.assertEqual(100, len(data["results"]))
 
     def test_in_stock(self):
         r = self.client.get(reverse("product-list"), {"in_stock": True})
         data = r.json()
-        result = data["result"]
+        result = data["results"]
         self.assertTrue(
             all(
                 map(
@@ -55,7 +63,7 @@ class ProductFilterTestCase(APITestCase):
         )
         r = self.client.get(reverse("product-list"), {"in_stock": False})
         data = r.json()
-        result = data["result"]
+        result = data["results"]
         self.assertFalse(
             any(
                 map(
@@ -69,14 +77,17 @@ class ProductFilterTestCase(APITestCase):
         r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": 500})
         data = r.json()
         self.assertEqual(r.status_code, HTTP_200_OK)
-        self.assertTrue(len(data["result"]) > 0)
+        self.assertTrue(len(data["results"]) > 0)
         r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": -500})
-        self.assertNotEqual(r.status_code, HTTP_200_OK)
+        self.assertEqual(r.status_code, HTTP_200_OK)
+        self.assertEqual(0, len(r.json()["results"]))
         r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": 0})
-        self.assertNotEqual(r.status_code, HTTP_200_OK)
+        self.assertEqual(r.status_code, HTTP_200_OK)
+        self.assertEqual(0, len(r.json()["results"]))
 
 
-class ProductTestCase(APITestCase):
+
+class ProductTestCase(APITestCaseBase):
 
     @classmethod
     def setUpTestData(cls):
@@ -129,7 +140,7 @@ class ProductTestCase(APITestCase):
         self.assertNotEqual(0, len(result["images"]))
 
 
-class InventoryTestCase(APITestCase):
+class InventoryTestCase(APITestCaseBase):
 
     @classmethod
     def setUpTestData(cls):
@@ -161,7 +172,7 @@ class InventoryTestCase(APITestCase):
             self.assertEqual(result[key], self.data[key])
 
 
-class ModelsAPITestCase(APITestCase):
+class ModelsAPITestCase(APITestCaseBase):
 
     def test_inventory_created(self):
         obj = Product(
