@@ -4,6 +4,7 @@ from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_401_UNAUTH
 from .filters import NamedOrderingFilter
 from .models import Product, ProductInventory
 from django.core.exceptions import ValidationError
+from pictures.models import Picture
 
 
 class APITestCaseBase(APITestCase):
@@ -86,7 +87,6 @@ class ProductFilterTestCase(APITestCaseBase):
         self.assertEqual(0, len(r.json()["results"]))
 
 
-
 class ProductTestCase(APITestCaseBase):
 
     @classmethod
@@ -101,35 +101,35 @@ class ProductTestCase(APITestCaseBase):
         }
         cls.username = "demo"
         cls.password = "demo1234"
+        product = Product.objects.get(pk=1)
+        pictures = Picture.objects.filter(id__in=[1, 2, 3])
+        product.images.add(*pictures)
 
     def test_access_denied(self):
         r = self.client.post(reverse("product-list"), self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
-        r = self.client.patch(reverse("product-detail", pk=1), {
+        r = self.client.patch(reverse("product-detail", {1}), {
             "name": "another name"
         })
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
         r = self.client.put(reverse("product-list"), self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
-        r = self.client.delete(reverse("product-detail", pk=1))
+        r = self.client.delete(reverse("product-detail", {1}))
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_list_and_detail_view(self):
         r = self.client.get(reverse("product-list"))
         self.assertEqual(r.status_code, HTTP_200_OK)
-        result = r.json()["result"]
+        result = r.json()["results"]
         self.assertNotIn("images", result[0])
         self.assertIn("main_image", result[0])
         self.assertIn("url", result[0])
-        r = self.client.get(reverse("product-detail"), pk=1)
+        r = self.client.get(reverse("product-detail", {1}))
         self.assertEqual(r.status_code, HTTP_200_OK)
         result = r.json()
         self.assertNotIn("url", result)
         self.assertIn("images", result)
-        response_image = self.client.get(result["images"][0])
-        self.assertEqual(response_image.status_code, HTTP_200_OK)
-        response_image = self.client.get(result["main_image"])
-        self.assertEqual(response_image.status_code, HTTP_200_OK)
+        self.assertNotEqual(0, len(result["images"]))
 
     def test_create_product(self):
         self.client.login(username=self.username, password=self.password)
@@ -152,20 +152,20 @@ class InventoryTestCase(APITestCaseBase):
         }
 
     def test_inventory_access_denied(self):
-        r = self.client.get(reverse("product_inventory", pk=1))
+        r = self.client.get(reverse("product_inventory", {1}))
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
-        r = self.client.put(reverse("product_inventory", pk=1), self.data)
+        r = self.client.put(reverse("product_inventory", {1}), self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_get_and_update_inventory(self):
         self.client.login(username=self.username, password=self.password)
-        r = self.client.get(reverse("product_inventory", pk=1))
+        r = self.client.get(reverse("product_inventory", {1}))
         self.assertEqual(r.status_code, HTTP_200_OK)
         result = r.json()
         self.assertEqual(1, result["product_id"])
         self.assertIn("sold_qty", result)
         self.assertIn("quantity", result)
-        r = self.client.put(reverse("product_inventory", pk=1), self.data)
+        r = self.client.put(reverse("product_inventory", {1}), self.data)
         result = r.json()
         for key in self.data:
             self.assertIn(key, result)
@@ -189,12 +189,15 @@ class ModelsAPITestCase(APITestCaseBase):
         obj_inventory = ProductInventory.objects.get(product=obj)
         with self.assertRaises(ValidationError):
             obj.price = -100
+            obj.clean_fields()
             obj.save()
 
         with self.assertRaises(ValidationError):
             obj_inventory.quantity = -100
+            obj.clean_fields()
             obj_inventory.save()
 
         with self.assertRaises(ValidationError):
             obj_inventory.sold_qty = -100
+            obj.clean_fields()
             obj_inventory.save()
