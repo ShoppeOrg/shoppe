@@ -12,7 +12,6 @@ class ProductViewSet(ModelViewSet):
     filterset_class = ProductFilter
 
     def get_serializer_class(self):
-        print(self.action)
         if self.action not in ('retrieve', 'update', 'partial_update'):
             return ProductListSerializer
         return ProductDetailSerializer
