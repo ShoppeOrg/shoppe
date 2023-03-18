@@ -1,6 +1,6 @@
 from rest_framework.test import APITestCase
 from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_401_UNAUTHORIZED
+from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
 from .filters import NamedOrderingFilter
 from .models import Product, ProductInventory
 from django.core.exceptions import ValidationError
@@ -143,20 +143,32 @@ class ProductTestCase(APITestCaseBase):
     def test_update_product(self):
         self.client.login(username=self.username, password=self.password)
         r = self.client.get(reverse("product-detail", {1}))
-        data = r.json()
-        data["images"] = [4, 5, 6]
-        data.pop("created_at")
-        data.pop("updated_at")
-        data = {
+
+        data_patch = {
             "images": [4, 5, 6]
         }
-        r = self.client.put(reverse("product-detail", {1}), json.dumps(data), content_type="application/json")
-        data = r.json()
-        self.assertEqual(r.status_code, HTTP_200_OK, r.content)
-        self.assertIn("images", data)
-        self.assertIn(4, data)
-        self.assertIn(5, data)
-        self.assertIn(6, data)
+        data_put = r.json()
+        data_put["images"] = data_patch["images"]
+
+        r = self.client.put(
+            reverse("product-detail", {1}), json.dumps(data_patch), content_type="application/json"
+        )
+        self.assertEqual(r.status_code, HTTP_400_BAD_REQUEST)
+
+        r_put = self.client.put(
+            reverse("product-detail", {1}), json.dumps(data_put), content_type="application/json"
+        )
+        r_patch = self.client.patch(
+            reverse("product-detail", {1}), json.dumps(data_patch), content_type="application/json"
+        )
+        for r in [r_patch, r_put]:
+            data = r.json()
+            self.assertEqual(r.status_code, HTTP_200_OK, r.content)
+            self.assertIn("images", data)
+            self.assertEqual(3, len(data["images"]))
+            self.assertIn(4, data["images"])
+            self.assertIn(5, data["images"])
+            self.assertIn(6, data["images"])
 
 
 class InventoryTestCase(APITestCaseBase):
