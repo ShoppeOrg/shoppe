@@ -30,16 +30,18 @@ class ProductListSerializer(HyperlinkedModelSerializer):
 
 
 class ProductDetailSerializer(ModelSerializer):
-    quantity = IntegerField(source="inventory.quantity", read_only=True)
+    quantity = IntegerField(source="inventory.quantity", read_only=True, required=False)
     main_image = SlugRelatedField(
         many=False,
         read_only=True,
-        slug_field="url"
+        slug_field="url",
+        required=False,
     )
     images = SlugRelatedField(
         many=True,
         read_only=True,
-        slug_field="url"
+        slug_field="url",
+        required=False
     )
 
     class Meta:
@@ -64,7 +66,7 @@ class ProductCreateSerializer(ModelSerializer):
     main_image = PrimaryKeyRelatedField(
         many=False,
         queryset=Picture.objects.all(),
-        allow_null=True
+        allow_null=True,
     )
     images = PrimaryKeyRelatedField(
         many=True,
