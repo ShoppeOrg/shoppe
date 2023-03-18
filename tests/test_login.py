@@ -1,14 +1,13 @@
+import imaplib
+import os
+import re
+
 from pytest import fixture
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from email.header import decode_header
-import imaplib
-import email
-import re
-import os
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 @fixture
@@ -18,8 +17,7 @@ def driver():
     chrome_options.add_argument("no-sandbox")
     chrome_options.add_argument("--window-size=800,600")
     driver = webdriver.Chrome(
-        service=ChromeService(ChromeDriverManager().install()),
-        options=chrome_options
+        service=ChromeService(ChromeDriverManager().install()), options=chrome_options
     )
     yield driver
     driver.close()
@@ -27,7 +25,9 @@ def driver():
 
 @fixture
 def no_reply():
-    return os.environ.get("PASSWORDLESS_EMAIL_NOREPLY_ADDRESS", "noreply.shoppe.app@gmail.com")
+    return os.environ.get(
+        "PASSWORDLESS_EMAIL_NOREPLY_ADDRESS", "noreply.shoppe.app@gmail.com"
+    )
 
 
 @fixture
@@ -53,7 +53,7 @@ def test_my_profile_redirect(driver, base_url):
 
 
 def test_login_email(driver, base_url):
-    driver.get(base_url+"/login")
+    driver.get(base_url + "/login")
     submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
     email_form = driver.find_element(By.ID, "mat-input-1")
     email_form.send_keys("wr@sdfsd")
@@ -100,7 +100,9 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     driver.implicitly_wait(4)
     modal_form = driver.find_element(By.TAG_NAME, "app-auth-modal")
     modal_form_input = modal_form.find_element(By.TAG_NAME, "input")
-    modal_form_submit_button = modal_form.find_element(By.CSS_SELECTOR, "button[type='submit']")
+    modal_form_submit_button = modal_form.find_element(
+        By.CSS_SELECTOR, "button[type='submit']"
+    )
 
     assert modal_form is not None
     assert creds_email[0] in modal_form.text
@@ -128,8 +130,3 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     # wait.until(lambda d: driver.current_url != f"{base_url}/my-profile")
     #
     # assert driver.current_url.endswith("/my-profile")
-
-
-
-
-

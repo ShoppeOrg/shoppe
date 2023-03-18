@@ -1,8 +1,15 @@
-from rest_framework.serializers import HyperlinkedModelSerializer, ModelSerializer, CharField, SlugRelatedField, PrimaryKeyRelatedField
-from rest_framework.serializers import Serializer, ValidationError
-from user.models import User
-from .models import Article, ArticleCategory
 from django.utils import timezone
+from rest_framework.serializers import CharField
+from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import PrimaryKeyRelatedField
+from rest_framework.serializers import Serializer
+from rest_framework.serializers import SlugRelatedField
+from rest_framework.serializers import ValidationError
+from user.models import User
+
+from .models import Article
+from .models import ArticleCategory
 
 
 class AuthorInfo(Serializer):
@@ -18,14 +25,27 @@ class ArticleSerializer(HyperlinkedModelSerializer, AuthorInfo):
 
     class Meta:
         model = Article
-        fields = ["url", "title", "author_fullname", "author_username", "categories", "published_at"]
+        fields = [
+            "url",
+            "title",
+            "author_fullname",
+            "author_username",
+            "categories",
+            "published_at",
+        ]
 
 
 class ArticleDetailSerializer(ModelSerializer, AuthorInfo):
-
     class Meta:
         model = Article
-        fields = ["title", "author_fullname", "author_username", "categories", "data", "published_at"]
+        fields = [
+            "title",
+            "author_fullname",
+            "author_username",
+            "categories",
+            "data",
+            "published_at",
+        ]
 
 
 class ArticleCreateSerializer(ModelSerializer):
@@ -33,13 +53,19 @@ class ArticleCreateSerializer(ModelSerializer):
         queryset=ArticleCategory.objects.all(),
         many=True,
     )
-    author = PrimaryKeyRelatedField(
-        queryset=User.objects.all()
-    )
+    author = PrimaryKeyRelatedField(queryset=User.objects.all())
 
     class Meta:
         model = Article
-        fields = ["title", "slug", "categories", "author", "data", "is_published", "scheduled_at"]
+        fields = [
+            "title",
+            "slug",
+            "categories",
+            "author",
+            "data",
+            "is_published",
+            "scheduled_at",
+        ]
 
     def validate_scheduled_at(self, value):
         if value and value < timezone.now():
@@ -53,7 +79,6 @@ class ArticleCreateSerializer(ModelSerializer):
 
 
 class ArticleFullDetailSerializer(ArticleSerializer):
-
     class Meta:
         model = Article
         fields = [
@@ -69,12 +94,11 @@ class ArticleFullDetailSerializer(ArticleSerializer):
             "is_scheduled",
             "scheduled_at",
             "created_at",
-            "updated_at"
+            "updated_at",
         ]
 
 
 class ArticleCategorySerializer(ModelSerializer):
-
     class Meta:
         model = ArticleCategory
         fields = ["name"]

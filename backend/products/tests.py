@@ -1,20 +1,24 @@
-from rest_framework.test import APITestCase
-from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_201_CREATED, HTTP_200_OK, HTTP_401_UNAUTHORIZED, HTTP_400_BAD_REQUEST
-from .filters import NamedOrderingFilter
-from .models import Product, ProductInventory
+import json
+
 from django.core.exceptions import ValidationError
 from pictures.models import Picture
-import json
+from rest_framework.reverse import reverse
+from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_201_CREATED
+from rest_framework.status import HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.test import APITestCase
+
+from .filters import NamedOrderingFilter
+from .models import Product
+from .models import ProductInventory
 
 
 class APITestCaseBase(APITestCase):
-
     fixtures = ["fixture.json"]
 
 
 class FilterTestCase(APITestCaseBase):
-
     def test_get_ordering_value(self):
         o = NamedOrderingFilter(
             fields={
@@ -28,7 +32,6 @@ class FilterTestCase(APITestCaseBase):
 
 
 class ProductFilterTestCase(APITestCaseBase):
-
     def test_get_all(self):
         r = self.client.get(reverse("product-list"))
         data = r.json()
@@ -55,32 +58,22 @@ class ProductFilterTestCase(APITestCaseBase):
         r = self.client.get(reverse("product-list"), {"in_stock": True})
         data = r.json()
         result = data["results"]
-        self.assertTrue(
-            all(
-                map(
-                    lambda x: x["in_stock"],
-                    result,
-                )
-            )
-        )
+        self.assertTrue(all(v["in_stock"] for v in result))
         r = self.client.get(reverse("product-list"), {"in_stock": False})
         data = r.json()
         result = data["results"]
-        self.assertFalse(
-            any(
-                map(
-                    lambda x: x["in_stock"],
-                    result,
-                )
-            )
-        )
+        self.assertFalse(any(v["in_stock"] for v in result))
 
     def test_min_max_price(self):
-        r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": 500})
+        r = self.client.get(
+            reverse("product-list"), {"min_price": 10, "max_price": 500}
+        )
         data = r.json()
         self.assertEqual(r.status_code, HTTP_200_OK)
         self.assertTrue(len(data["results"]) > 0)
-        r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": -500})
+        r = self.client.get(
+            reverse("product-list"), {"min_price": 10, "max_price": -500}
+        )
         self.assertEqual(r.status_code, HTTP_200_OK)
         self.assertEqual(0, len(r.json()["results"]))
         r = self.client.get(reverse("product-list"), {"min_price": 10, "max_price": 0})
@@ -89,7 +82,6 @@ class ProductFilterTestCase(APITestCaseBase):
 
 
 class ProductTestCase(APITestCaseBase):
-
     @classmethod
     def setUpTestData(cls):
         cls.data = {
@@ -98,7 +90,7 @@ class ProductTestCase(APITestCaseBase):
             "price": 20.10,
             "quantity": 5,
             "main_image": 1,
-            "images": [1, 2, 3]
+            "images": [1, 2, 3],
         }
         cls.username = "demo"
         cls.password = "demo1234"
@@ -109,9 +101,7 @@ class ProductTestCase(APITestCaseBase):
     def test_access_denied(self):
         r = self.client.post(reverse("product-list"), self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
-        r = self.client.patch(reverse("product-detail", {1}), {
-            "name": "another name"
-        })
+        r = self.client.patch(reverse("product-detail", {1}), {"name": "another name"})
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
         r = self.client.put(reverse("product-list"), self.data)
         self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
@@ -144,22 +134,26 @@ class ProductTestCase(APITestCaseBase):
         self.client.login(username=self.username, password=self.password)
         r = self.client.get(reverse("product-detail", {1}))
 
-        data_patch = {
-            "images": [4, 5, 6]
-        }
+        data_patch = {"images": [4, 5, 6]}
         data_put = r.json()
         data_put["images"] = data_patch["images"]
 
         r = self.client.put(
-            reverse("product-detail", {1}), json.dumps(data_patch), content_type="application/json"
+            reverse("product-detail", {1}),
+            json.dumps(data_patch),
+            content_type="application/json",
         )
         self.assertEqual(r.status_code, HTTP_400_BAD_REQUEST)
 
         r_put = self.client.put(
-            reverse("product-detail", {1}), json.dumps(data_put), content_type="application/json"
+            reverse("product-detail", {1}),
+            json.dumps(data_put),
+            content_type="application/json",
         )
         r_patch = self.client.patch(
-            reverse("product-detail", {1}), json.dumps(data_patch), content_type="application/json"
+            reverse("product-detail", {1}),
+            json.dumps(data_patch),
+            content_type="application/json",
         )
         for r in [r_patch, r_put]:
             data = r.json()
@@ -172,7 +166,6 @@ class ProductTestCase(APITestCaseBase):
 
 
 class InventoryTestCase(APITestCaseBase):
-
     @classmethod
     def setUpTestData(cls):
         cls.username = "demo"
@@ -204,12 +197,8 @@ class InventoryTestCase(APITestCaseBase):
 
 
 class ModelsAPITestCase(APITestCaseBase):
-
     def test_inventory_created(self):
-        obj = Product(
-            name="abs_unique_name",
-            price=101
-        )
+        obj = Product(name="abs_unique_name", price=101)
         obj.save()
         self.assertNotEqual(obj.id, None)
         obj_inventory = ProductInventory.objects.get(product=obj)
