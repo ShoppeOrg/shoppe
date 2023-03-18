@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ShopItemComponent } from './components/shop-item/shop-item.component';
-
 import { ShopComponent } from './pages/shop/shop.component';
 
 const routes: Routes = [

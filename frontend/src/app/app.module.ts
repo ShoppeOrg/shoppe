@@ -9,7 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { MaterialModule } from './material.module';
 import { HttpInterceptorService } from './core/interceptors/http-interceptor.service';
-import {SharedModule} from './shared/shared.module';
+import { SharedModule } from './shared/shared.module';
+
+
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,8 +24,11 @@ import {SharedModule} from './shared/shared.module';
     MaterialModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    
   ],
+
+
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })

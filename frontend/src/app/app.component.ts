@@ -8,6 +8,7 @@ import { IconsService } from './shared/services/icons.service';
 })
 export class AppComponent {
   constructor(private readonly iconService: IconsService) {
-    this.iconService.addIcons();
+    
   }
+
 }
