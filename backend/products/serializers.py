@@ -1,17 +1,17 @@
-from .models import Product, ProductInventory
-from rest_framework.serializers import (
-    ModelSerializer, HyperlinkedModelSerializer, IntegerField, SlugRelatedField, PrimaryKeyRelatedField
-)
 from pictures.models import Picture
+from rest_framework.serializers import HyperlinkedModelSerializer
+from rest_framework.serializers import IntegerField
+from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import PrimaryKeyRelatedField
+from rest_framework.serializers import SlugRelatedField
+
+from .models import Product
+from .models import ProductInventory
 
 
 class ProductListSerializer(HyperlinkedModelSerializer):
     quantity = IntegerField(source="inventory.quantity")
-    main_image = SlugRelatedField(
-        many=False,
-        read_only=True,
-        slug_field="url"
-    )
+    main_image = SlugRelatedField(many=False, read_only=True, slug_field="url")
 
     class Meta:
         model = Product
@@ -38,10 +38,7 @@ class ProductDetailSerializer(ModelSerializer):
         required=False,
     )
     images = SlugRelatedField(
-        many=True,
-        read_only=True,
-        slug_field="url",
-        required=False
+        many=True, read_only=True, slug_field="url", required=False
     )
 
     class Meta:
@@ -56,7 +53,7 @@ class ProductDetailSerializer(ModelSerializer):
             "images",
             "description",
             "created_at",
-            "updated_at"
+            "updated_at",
         ]
         read_only_fields = ["created_at", "updated_at"]
 
@@ -68,10 +65,7 @@ class ProductCreateSerializer(ModelSerializer):
         queryset=Picture.objects.all(),
         allow_null=True,
     )
-    images = PrimaryKeyRelatedField(
-        many=True,
-        queryset=Picture.objects.all()
-    )
+    images = PrimaryKeyRelatedField(many=True, queryset=Picture.objects.all())
 
     class Meta:
         model = Product
@@ -106,7 +100,6 @@ class ProductCreateSerializer(ModelSerializer):
 
 
 class ProductInventorySerializer(ModelSerializer):
-
     class Meta:
         model = ProductInventory
         fields = ["product_id", "quantity", "sold_qty", "created_at", "updated_at"]

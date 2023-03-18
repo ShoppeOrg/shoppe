@@ -1,17 +1,23 @@
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import ForeignKey, DateTimeField, CharField, DecimalField, IntegerField, TextField, CASCADE
 from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
+from django.db import models
+from django.db.models import CASCADE
+from django.db.models import CharField
+from django.db.models import DateTimeField
+from django.db.models import DecimalField
+from django.db.models import ForeignKey
+from django.db.models import IntegerField
+from django.db.models import TextField
 
 
 class Product(models.Model):
     name = CharField(max_length=150, unique=True)
-    price = DecimalField(max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)])
+    price = DecimalField(
+        max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)]
+    )
     main_image = models.ForeignKey(
-        to="pictures.Picture",
-        null=True,
-        blank=True,
-        on_delete=models.PROTECT
+        to="pictures.Picture", null=True, blank=True, on_delete=models.PROTECT
     )
     images = models.ManyToManyField(
         to="pictures.Picture",
@@ -41,7 +47,6 @@ class Product(models.Model):
 
 
 class ProductInventory(models.Model):
-
     product = models.OneToOneField(
         to=Product,
         on_delete=models.CASCADE,
@@ -55,16 +60,12 @@ class ProductInventory(models.Model):
 
     class Meta:
         db_table = "products_product_inventory"
-        ordering = ['-updated_at']
+        ordering = ["-updated_at"]
 
     def __repr__(self):
         return f"<Inventory of {self}>"
 
 
 class Review(models.Model):
-
-    user = ForeignKey(
-        to=get_user_model(),
-        on_delete=CASCADE
-    )
+    user = ForeignKey(to=get_user_model(), on_delete=CASCADE)
     rating = IntegerField(validators=[MinValueValidator(0), MaxValueValidator(6)])

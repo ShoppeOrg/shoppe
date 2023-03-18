@@ -1,12 +1,15 @@
-from rest_framework.test import APITestCase
-from rest_framework.reverse import reverse
-from rest_framework.status import HTTP_201_CREATED, HTTP_401_UNAUTHORIZED, HTTP_200_OK
 from django.contrib.auth import get_user_model
-from .models import Article, ArticleCategory
+from rest_framework.reverse import reverse
+from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_201_CREATED
+from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.test import APITestCase
+
+from .models import Article
+from .models import ArticleCategory
 
 
 class APITestCaseBase(APITestCase):
-
     fixtures = ["fixture.json"]
 
     def setUp(self):
@@ -15,7 +18,6 @@ class APITestCaseBase(APITestCase):
 
 
 class ArticleTestCase(APITestCaseBase):
-
     def setUp(self):
         super().setUp()
         self.admin = get_user_model().objects.get(username="demo")
@@ -24,7 +26,7 @@ class ArticleTestCase(APITestCaseBase):
             "title": "My title",
             "slug": "test_title",
             "author": 1,
-            "categories": [ "summer", "gold", "gift"]
+            "categories": ["summer", "gold", "gift"],
         }
 
     def test_create_article_denied(self):
@@ -32,7 +34,9 @@ class ArticleTestCase(APITestCaseBase):
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_publish_article_failed(self):
-        response = self.client.post(reverse("article_publish", kwargs={"pk": self.slug}))
+        response = self.client.post(
+            reverse("article_publish", kwargs={"pk": self.slug})
+        )
         self.assertEqual(response.status_code, HTTP_401_UNAUTHORIZED)
 
     def test_article_detail_view(self):
@@ -45,17 +49,16 @@ class ArticleTestCase(APITestCaseBase):
         self.assertEqual(response.status_code, HTTP_201_CREATED)
         article = Article.objects.get(slug=self.slug)
         self.assertNotEqual(article, None)
-        response = self.client.post(reverse("article_publish", kwargs={"pk": self.slug}))
+        response = self.client.post(
+            reverse("article_publish", kwargs={"pk": self.slug})
+        )
         self.assertEqual(response.status_code, HTTP_200_OK)
 
 
 class CategoryTestCase(APITestCaseBase):
-
     def setUp(self):
         super().setUp()
-        self.data = {
-            "name": "my category"
-        }
+        self.data = {"name": "my category"}
 
     def test_get_all_denied(self):
         r = self.client.get(reverse("article_categories"))
@@ -74,14 +77,13 @@ class CategoryTestCase(APITestCaseBase):
 
 
 class ArticleFilterTestCase(APITestCaseBase):
-
     def setUp(self):
         super().setUp()
         article = Article.objects.create(
             title="my_unique_test_title",
             slug="my_unique_test_title",
             is_published=True,
-            author_id=1
+            author_id=1,
         )
         winter = ArticleCategory.objects.get(name="winter")
         for_him = ArticleCategory.objects.get(name="for him")
@@ -97,14 +99,7 @@ class ArticleFilterTestCase(APITestCaseBase):
         self.assertNotIn("slug", first)
         self.assertNotIn("is_published", first)
         self.assertIn("categories", first)
-        self.assertTrue(
-            all(
-                map(
-                    lambda x: bool(x["published_at"]),
-                    result,
-                )
-            )
-        )
+        self.assertTrue(all(v["published_at"] for v in result))
 
     def test_is_published_false(self):
         r = self.client.get(reverse("article-list"), {"is_published": False})
@@ -112,7 +107,9 @@ class ArticleFilterTestCase(APITestCaseBase):
         self.assertEqual(0, data["count"])
 
     def test_categories(self):
-        r = self.client.get(reverse("article-list"), {"categories": ["winter", "for him"]})
+        r = self.client.get(
+            reverse("article-list"), {"categories": ["winter", "for him"]}
+        )
         self.assertEqual(r.status_code, HTTP_200_OK)
         data = r.json()
         self.assertNotEqual(0, data["count"])
@@ -133,11 +130,4 @@ class ArticleFilterTestCase(APITestCaseBase):
         self.assertIn("scheduled_at", first)
         self.assertIn("is_published", first)
         self.assertIn("slug", first)
-        self.assertTrue(
-            all(
-                map(
-                    lambda x: not bool(x["is_published"]),
-                    result,
-                )
-            )
-        )
+        self.assertTrue(all(not v["is_published"] for v in result))
