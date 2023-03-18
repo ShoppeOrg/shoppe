@@ -1,9 +1,10 @@
-from rest_framework.serializers import ModelSerializer, ImageField
-from.models import Picture
+from rest_framework.serializers import ImageField
+from rest_framework.serializers import ModelSerializer
+
+from .models import Picture
 
 
 class PictureSerializer(ModelSerializer):
-
     class Meta:
         model = Picture
         fields = ["title", "picture", "uploaded_at"]
@@ -18,7 +19,8 @@ class PictureSerializer(ModelSerializer):
     def to_representation(self, instance):
         result = super().to_representation(instance)
         return {
+            "id": instance.id,
             "title": result["title"],
-            "ulr": result["picture"],
-            "uploaded_at": result["uploaded_at"]
+            "url": result["picture"],
+            "uploaded_at": result["uploaded_at"],
         }
