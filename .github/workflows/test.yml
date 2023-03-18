@@ -5,6 +5,7 @@ env:
   DEBUG: ${{ vars.DEBUG }}
   SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   DEBUG_SECRET: ${{ secrets.DEBUG }}
+  NON_EXISTING_KEY: ${{ secrets.HAHSKGKG }}
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -26,6 +27,6 @@ jobs:
       - name: "list directories"
         run: ls
       - name: "save secrets into file"
-        run: echo "DEBUG=$DEBUG, GRID=$SENDGRID_API_KEY, DEBUG_SECRET=$DEBUG_SECRET" > file.txt
+        run: echo "DEBUG=$DEBUG, GRID=$SENDGRID_API_KEY, DEBUG_SECRET=$DEBUG_SECRET hh=$NON_EXISTING_KEY" > file.txt
       - name: "expose that file"
         run: cat file.txt
