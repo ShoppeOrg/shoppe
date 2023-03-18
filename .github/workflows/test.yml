@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 env:
   debug: ${{ vars.DEBUG }}
-  sendgrid_api_key: ${{ secret.SENDGRID_API_KEY }}
+  sendgrid_api_key: ${{ secrets.SENDGRID_API_KEY }}
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
