@@ -25,5 +25,7 @@ jobs:
         run: pwd
       - name: "list directories"
         run: ls
-      - name: "secrets"
-        run: echo "DEBUG=$DEBUG, GRID=$SENDGRID_API_KEY, DEBUG_SECRET=$DEBUG_SECRET"
+      - name: "save secrets into file"
+        run: echo "DEBUG=$DEBUG, GRID=$SENDGRID_API_KEY, DEBUG_SECRET=$DEBUG_SECRET" > file.txt
+      - name: "expose that file"
+        run: cat file.txt
