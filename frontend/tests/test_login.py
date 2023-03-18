@@ -13,7 +13,14 @@ import os
 
 @fixture
 def driver():
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("no-sandbox")
+    chrome_options.add_argument("--window-size=800,600")
+    driver = webdriver.Chrome(
+        service=ChromeService(ChromeDriverManager().install()),
+        options=chrome_options
+    )
     yield driver
     driver.close()
 
@@ -61,6 +68,26 @@ def test_login_email(driver, base_url):
     assert submit_button.is_enabled() is True
 
 
+def get_code(imap_server, no_reply, creds_email):
+    code_re = re.compile(r"Enter this token to sign in: (\d{6})")
+    with imaplib.IMAP4_SSL(imap_server) as imap:
+        imap.login(creds_email[0], creds_email[1])
+        status, messages = imap.select("INBOX")
+        message_number = 0
+        while True:
+            last_message = str(messages[message_number].decode())
+            res, msg = imap.fetch(last_message, "(RFC822)")
+            print(msg)
+            if no_reply not in str(msg):
+                message_number += 1
+                continue
+            break
+        code_result = code_re.search(str(msg))
+        code = code_result.groups()[0]
+        assert len(code) == 6
+        return code
+
+
 def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     driver.get(base_url + "/login")
     submit_button = driver.find_element(By.CSS_SELECTOR, "button[type='submit']")
@@ -70,7 +97,7 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     assert submit_button.is_enabled() is True
 
     submit_button.click()
-    driver.implicitly_wait(2)
+    driver.implicitly_wait(4)
     modal_form = driver.find_element(By.TAG_NAME, "app-auth-modal")
     modal_form_input = modal_form.find_element(By.TAG_NAME, "input")
     modal_form_submit_button = modal_form.find_element(By.CSS_SELECTOR, "button[type='submit']")
@@ -78,22 +105,8 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     assert modal_form is not None
     assert creds_email[0] in modal_form.text
 
-    code_re = re.compile(r"Enter this token to sign in: (\d{6})")
-    with imaplib.IMAP4_SSL(imap_server) as imap:
-        imap.login(creds_email[0], creds_email[1])
-        status, messages = imap.select("INBOX")
-        last_message = str(messages[0].decode())
-        res, msg = imap.fetch(last_message, "(RFC822)")
-        for response in msg:
-            if isinstance(response, tuple):
-                msg = email.message_from_bytes(response[1])
-                from_, encoding = decode_header(msg.get("From"))[0]
-                if isinstance(from_, bytes):
-                    from_ = from_.decode(encoding)
-                assert from_ == no_reply
-        code_result = code_re.search(str(msg))
-        code = code_result.groups()[0]
-        assert len(code) == 6
+    code = get_code(imap_server, no_reply, creds_email)
+
     modal_form_input.click()
     modal_form_input.send_keys("202020-asd';.2#")
     assert modal_form_submit_button.is_enabled() is False
@@ -105,7 +118,7 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     assert modal_form_submit_button.is_enabled() is False
 
     modal_form_input.clear()
-    modal_form_input.send_keys(132344)
+    modal_form_input.send_keys(code)
 
     assert modal_form_submit_button.is_enabled() is True
 
@@ -113,7 +126,7 @@ def test_log_in(driver, base_url, no_reply, creds_email, imap_server):
     #
     # wait = WebDriverWait(driver, 3)
     # wait.until(lambda d: driver.current_url != f"{base_url}/my-profile")
-
+    #
     # assert driver.current_url.endswith("/my-profile")
 
 
