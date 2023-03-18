@@ -6,7 +6,7 @@
 
 ### Use the script
 But, be aware of having migrated data models and installed virual environment `venv`.
-More [above](#if-you-running-for-first-time-use-these) 
+More [above](#if-you-running-for-first-time-use-these)
 
 ```
 source run.sh
@@ -17,7 +17,7 @@ source run.sh
 First activate environment variables that are stored inside of `.env` file
 
 ```
-set -a 
+set -a
 source .env
 set +a
 ```
@@ -36,10 +36,8 @@ If you already have virtual environment installed, consider the following steps
 - run the server
 ```
 source ./venv/bin/activate
-set -a 
+set -a
 source .env
 set +a
 python3 manage.py runserver
 ```
-
-
