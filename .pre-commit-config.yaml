@@ -15,6 +15,16 @@ repos:
       - id: reorder-python-imports
         args:
           - --py37-plus
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: ''
+    hooks:
+      - id: eslint
+        additional_dependencies:
+          - eslint@4.15.0
+          - eslint-config-google@0.7.1
+          - eslint-loader@1.6.1
+          - angular-eslint
+          - babel-eslint@6.1.2
 
   - repo: https://github.com/psf/black
     rev: 23.1.0
