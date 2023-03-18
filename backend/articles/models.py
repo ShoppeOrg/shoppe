@@ -1,13 +1,17 @@
 from api.settings import AUTH_USER_MODEL
 from django.core.validators import validate_slug
-from django.db.models import (
-    Model, CharField, TextField, DateTimeField, ManyToManyField, ForeignKey, BooleanField, PROTECT
-)
+from django.db.models import BooleanField
+from django.db.models import CharField
+from django.db.models import DateTimeField
+from django.db.models import ForeignKey
+from django.db.models import ManyToManyField
+from django.db.models import Model
+from django.db.models import PROTECT
+from django.db.models import TextField
 from django.utils import timezone
 
 
 class ArticleCategory(Model):
-
     name = CharField(primary_key=True, unique=True, max_length=50)
 
     class Meta:
@@ -28,15 +32,10 @@ class ArticleCategory(Model):
 
 
 class Article(Model):
-
     title = CharField(max_length=255)
     slug = CharField(primary_key=True, max_length=260, validators=[validate_slug])
     data = TextField(default="")
-    author = ForeignKey(
-        to=AUTH_USER_MODEL,
-        on_delete=PROTECT,
-        blank=False
-    )
+    author = ForeignKey(to=AUTH_USER_MODEL, on_delete=PROTECT, blank=False)
     categories = ManyToManyField(
         to=ArticleCategory,
         related_name="articles",
