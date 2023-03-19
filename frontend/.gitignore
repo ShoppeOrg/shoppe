@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+*/venv
+.pytest_cache
+.env
+*/.env
+./tests/.env
+tests/.env

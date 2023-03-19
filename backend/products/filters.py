@@ -1,8 +1,10 @@
-from django_filters.rest_framework import FilterSet, NumberFilter, BooleanFilter, OrderingFilter
+from django_filters.rest_framework import BooleanFilter
+from django_filters.rest_framework import FilterSet
+from django_filters.rest_framework import NumberFilter
+from django_filters.rest_framework import OrderingFilter
 
 
 class NamedOrderingFilter(OrderingFilter):
-
     def get_ordering_value(self, param):
         param, ending = param.split(".")
         prefix = "-" if ending == "desc" else ""
@@ -10,7 +12,6 @@ class NamedOrderingFilter(OrderingFilter):
 
 
 class ProductFilter(FilterSet):
-
     min_price = NumberFilter(field_name="price", lookup_expr="gte")
     max_price = NumberFilter(field_name="price", lookup_expr="lte")
     in_stock = BooleanFilter(field_name="inventory__quantity", method="filter_in_stock")
@@ -26,7 +27,6 @@ class ProductFilter(FilterSet):
             ("price.desc", "by Price (DESC)"),
             ("recent.desc", "by Recent added"),
         ),
-
     )
 
     def filter_in_stock(self, queryset, name, value):
