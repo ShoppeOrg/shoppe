@@ -5,6 +5,7 @@ import { IconsService } from '../../../../shared/services/icons.service';
 import { ActivatedRoute } from '@angular/router';
 import { ShopService } from '../../services/shop.service';
 import { IShopItem } from '../../interfaces/IShopItem';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-shop-details',
@@ -13,6 +14,8 @@ import { IShopItem } from '../../interfaces/IShopItem';
 })
 export class ShopDetailsComponent implements OnInit {
   public form: FormGroup;
+
+  shopItem!: Observable<IShopItem>;
 
   constructor(
     private fb: FormBuilder,
@@ -28,9 +31,7 @@ export class ShopDetailsComponent implements OnInit {
     this.route.params.subscribe(() => {
       const id = this.route.snapshot.paramMap.get('id');
       if (!!id) {
-        this.shopService.getProduct(+id).subscribe((shopItem: IShopItem) => {
-          console.log('shopItem', shopItem);
-        });
+        this.shopItem = this.shopService.getProduct(id);
       }
     });
   }

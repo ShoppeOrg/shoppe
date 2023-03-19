@@ -25,7 +25,7 @@ export class ShopService {
       );
   }
 
-  getProduct(id: number): Observable<IShopItem> {
+  getProduct(id: string): Observable<IShopItem> {
     return this.http.get<IShopItem>(`${environment.api}/products/${id}`).pipe(
       catchError(() => {
         let errorMessage = 'An unknown error occurred!';
