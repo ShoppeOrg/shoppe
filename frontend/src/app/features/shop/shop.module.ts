@@ -10,6 +10,7 @@ import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { ShopItemComponent } from './components/shop-item/shop-item.component';
 import { MaterialModule } from '../../material.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ShopDetailsComponent } from './pages/shop-details/shop-details.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ShopFilterComponent,
     ShopListComponent,
     ShopItemComponent,
+    ShopDetailsComponent,
   ],
   imports: [
     CommonModule,
