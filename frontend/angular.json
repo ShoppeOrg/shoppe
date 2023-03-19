@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "shoppe"
+  "defaultProject": "shoppe",
+  "cli": {
+    "analytics": false
+  }
 }
