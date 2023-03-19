@@ -5,6 +5,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 import { IShopData } from '../interfaces/IShopData';
 import { IQuery } from '../interfaces/IQuery';
 import { environment } from '../../../../environments/environment';
+import { IShopItem } from '../interfaces/IShopItem';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +23,14 @@ export class ShopService {
           return throwError(() => errorMessage);
         }),
       );
+  }
+
+  getProduct(id: number): Observable<IShopItem> {
+    return this.http.get<IShopItem>(`${environment.api}/products/${id}`).pipe(
+      catchError(() => {
+        let errorMessage = 'An unknown error occurred!';
+        return throwError(() => errorMessage);
+      }),
+    );
   }
 }
