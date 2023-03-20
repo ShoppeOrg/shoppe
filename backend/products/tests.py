@@ -7,6 +7,7 @@ from rest_framework.status import HTTP_200_OK
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.status import HTTP_405_METHOD_NOT_ALLOWED
 from rest_framework.test import APITestCase
 
 from .filters import NamedOrderingFilter
@@ -221,3 +222,31 @@ class ModelsAPITestCase(APITestCaseBase):
             obj_inventory.sold_qty = -100
             obj.clean_fields()
             obj_inventory.save()
+
+
+class ReviewAPITestCase(APITestCaseBase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.valid_data = {
+            "user": 1,
+            "product": 1,
+            "rating": 2,
+            "description": "not a number",
+        }
+        # TODO: obtain valid auth token
+
+    def test_not_authorized(self):
+        r = self.client.post(reverse("product_review"), self.valid_data)
+        self.assertEqual(r.status_code, HTTP_400_BAD_REQUEST, r.content)
+
+    def test_GET_method_not_allowed(self):
+        r = self.client.post(reverse("product_review"), self.valid_data)
+        self.assertEqual(r.status_code, HTTP_405_METHOD_NOT_ALLOWED, r.content)
+
+    def test_create_success(self):
+        r = self.client.post(
+            reverse("product_review"),
+            self.valid_data
+            # TODO: send token
+        )
+        self.assertEqual(r.status_code, HTTP_201_CREATED, r.content)
