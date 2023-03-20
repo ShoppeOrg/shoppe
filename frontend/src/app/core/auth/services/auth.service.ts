@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError } from 'rxjs';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ComponentType } from '@angular/cdk/overlay';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -9,7 +9,6 @@ import { environment } from '../../../../environments/environment';
 import { modalWidth, modalHeight } from '../../../shared/constants';
 import { ICodeData } from '../interfaces/ICodeData';
 import { IToken } from '../interfaces/IToken';
-import { AuthModalComponent } from '../modals/auth-modal/auth-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -62,15 +61,12 @@ export class AuthService {
     );
   }
 
-  private setToken(token: string): void {
+  private setToken(token: string) {
     this.cookieService.deleteAll();
     this.cookieService.set('auth-token', token);
   }
 
-  openModal(
-    component: ComponentType<AuthModalComponent>,
-    email: string
-  ): MatDialogRef<AuthModalComponent> {
+  openModal(component: ComponentType<any>, email: string) {
     const modalConfig = new MatDialogConfig();
     modalConfig.autoFocus = false;
     modalConfig.width = modalWidth.xs;
@@ -79,7 +75,7 @@ export class AuthService {
     return this.dialog.open(component, modalConfig);
   }
 
-  closeModal(): void {
+  closeModal() {
     this.dialog.closeAll();
   }
 }
