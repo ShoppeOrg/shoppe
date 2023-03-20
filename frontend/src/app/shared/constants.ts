@@ -1,4 +1,4 @@
-export const icons = ['email','facebook', 'instagram', 'like', 'linkedin','logo','twitter'];
+export const icons = ['facebook', 'instagram', 'linkedin', 'logo', 'twitter'];
 
 export const modalWidth = {
   xs: '450px',
