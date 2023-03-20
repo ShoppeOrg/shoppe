@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models import BooleanField
 from django.db.models import CASCADE
 from django.db.models import CharField
 from django.db.models import DateTimeField
@@ -68,4 +69,11 @@ class ProductInventory(models.Model):
 
 class Review(models.Model):
     user = ForeignKey(to=get_user_model(), on_delete=CASCADE)
-    rating = IntegerField(validators=[MinValueValidator(0), MaxValueValidator(6)])
+    products = models.ForeignKey(to=Product, on_delete=CASCADE)
+    rating = IntegerField(
+        validators=[MinValueValidator(0), MaxValueValidator(6)], blank=False
+    )
+    comment = TextField(max_length=400, null=False, blank=False)
+    is_published = BooleanField(default=False)
+    published_at = DateTimeField()
+    created_at = DateTimeField(auto_now_add=True)
