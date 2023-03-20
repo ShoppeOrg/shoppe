@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 import { IFormData } from '../../interfaces/IFormData';
 
@@ -13,7 +13,7 @@ export class CustomFormComponent implements OnInit {
 
   @Input() name!: string;
   @Input() placeholder!: string;
-  @Input() pattern!: RegExp;
+  @Input() pattern!: RegExp ;
   @Input() formAction!: string;
   @Output() formSubmit = new EventEmitter<IFormData>();
 
