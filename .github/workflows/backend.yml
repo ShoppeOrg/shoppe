@@ -1,0 +1,41 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+env:
+  DEBUG: True
+  SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+  PASSWORDLESS_EMAIL_NOREPLY_ADDRESS: ${{ secrets.PASSWORDLESS_EMAIL_NOREPLY_ADDRESS }}
+  IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+  EMAIL_TEST_PASSWORD: ${{ secrets.EMAIL_TEST_PASSWORD }}
+  EMAIL_TEST_LOGIN: ${{ secrets.EMAIL_TEST_LOGIN }}
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+jobs:
+  test_backend:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Move to the backend root directory
+      run: cd backend
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python manage.py test
+
