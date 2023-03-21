@@ -32,7 +32,7 @@ class ProductListSerializer(HyperlinkedModelSerializer):
 
 
 class ReviewSerializer(ModelSerializer):
-    username = CharField(source="user.username")
+    username = CharField(source="user.username", read_only=True, required=False)
 
     class Meta:
         model = Review
@@ -41,7 +41,7 @@ class ReviewSerializer(ModelSerializer):
             "username",
             "product",
             "rating",
-            "description",
+            "comment",
             "is_published",
             "created_at",
         ]
@@ -56,7 +56,7 @@ class ReviewListSerializer(ModelSerializer):
             "user",
             "product",
             "rating",
-            "description",
+            "comment",
             "is_published",
             "published_at",
             "created_at",
@@ -95,6 +95,7 @@ class ProductDetailSerializer(ModelSerializer):
             "in_stock",
             "main_image",
             "images",
+            "reviews",
             "description",
             "created_at",
             "updated_at",
