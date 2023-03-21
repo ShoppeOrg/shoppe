@@ -1,0 +1,29 @@
+<section class="shop-list">
+  <ng-container *ngIf="!!products.length; else  no_data">
+    <div
+      class="shop-list__container"
+      infinite-scroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="300"
+      [infiniteScrollDisabled]='shouldInfiniteScrollDisable()'
+      (scrolled)="getMoreProducts()">
+      <app-shop-item class="shop-list__item" routerLink="{{product.id}}" *ngFor="let product of products" [productItem]="product">
+      </app-shop-item>
+      <p>{{products[0].id}}</p>
+    </div>
+
+
+    <button
+      class="shop-list__btn"
+      [ngClass]="disableScroll ? '' : 'shop-list__btn--hidden'"
+      mat-button
+      (click)="enableScroll()">
+      Load All
+    </button>
+  </ng-container>
+
+  <ng-template #no_data>
+    <p>No data</p>
+  </ng-template>
+
+</section>

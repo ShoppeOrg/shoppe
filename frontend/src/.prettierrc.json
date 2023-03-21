@@ -1,25 +1,11 @@
 {
-  "singleQuote": true,
   "tabWidth": 2,
-  "bracketSpacing": true,
-  "printWidth": 100,
-  "arrowParens": "avoid",
-  "jsxBracketSameLine": true,
-  "insertPragma": false,
+  "useTabs": false,
+  "singleQuote": true,
   "semi": true,
-  "trailingComma": "none",
-  "overrides": [
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "html"
-      }
-    },
-    {
-      "files": "*.component.html",
-      "options": {
-        "parser": "angular"
-      }
-    }
-  ]
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "trailingComma": "all",
+  "bracketSameLine": true,
+  "printWidth": 80
 }
