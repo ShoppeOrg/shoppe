@@ -1,4 +1,5 @@
 from rest_framework.generics import CreateAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticated
@@ -12,6 +13,8 @@ from .serializers import ProductCreateSerializer
 from .serializers import ProductDetailSerializer
 from .serializers import ProductInventorySerializer
 from .serializers import ProductListSerializer
+from .serializers import ReviewListSerializer
+from .serializers import ReviewPublishSerializer
 from .serializers import ReviewSerializer
 
 
@@ -39,7 +42,21 @@ class ProductInventoryRetrieveUpdateAPIVIew(RetrieveUpdateAPIView):
     serializer_class = ProductInventorySerializer
 
 
-class ReviewCreateAPIView(CreateAPIView):
+class ReviewListCreateAPIView(ListCreateAPIView):
     queryset = Review.objects.all()
-    permission_classes = (IsAuthenticated,)
-    serializer_class = ReviewSerializer
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return (IsAdminUser(),)
+        return (IsAuthenticated(),)
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return ReviewListSerializer
+        return ReviewSerializer
+
+
+class ReviewPublishAPIView(CreateAPIView):
+    queryset = Review.objects.all()
+    permission_classes = [IsAdminUser]
+    serializer_class = ReviewPublishSerializer
