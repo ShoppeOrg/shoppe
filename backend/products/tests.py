@@ -1,6 +1,7 @@
 import json
 
 from django.core.exceptions import ValidationError
+from drfpasswordless.utils import create_callback_token_for_user
 from pictures.models import Picture
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
@@ -232,7 +233,7 @@ class ReviewAPITestCase(APITestCaseBase):
             "user": 1,
             "product": 1,
             "rating": 2,
-            "description": "not a number",
+            "comment": "not a number",
         }
         Review.objects.create(
             user_id=1, product_id=1, rating=3, description="Not bad.", is_published=True
@@ -244,7 +245,7 @@ class ReviewAPITestCase(APITestCaseBase):
             description="Amazing!",
             is_published=True,
         )
-        # TODO: obtain valid auth token
+        cls.token = "b0097509c392078fde5062bdd2c3ef6e98ca9af9"
 
     def test_not_authorized(self):
         r = self.client.post(reverse("product_review"), self.valid_data)
@@ -257,8 +258,8 @@ class ReviewAPITestCase(APITestCaseBase):
     def test_create_success(self):
         r = self.client.post(
             reverse("product_review"),
-            self.valid_data
-            # TODO: send token
+            self.valid_data,
+            AUTHORIZATION=f"Token {self.token}",
         )
         self.assertEqual(r.status_code, HTTP_201_CREATED, r.content)
         self.client.login(username="demo", password="demo1234")
@@ -273,7 +274,7 @@ class ReviewAPITestCase(APITestCaseBase):
         self.assertNotEqual(0, len(data["reviews"]))
         self.assertTrue(review["is_published"] for review in data["reviews"])
         review = data["reviews"][0]
-        for key in ["username", "rating", "description", "is_published", "created_at"]:
+        for key in ["username", "rating", "comment", "is_published", "created_at"]:
             self.assertIn(key, review)
 
     def test_publish_review(self):
@@ -293,7 +294,9 @@ class ReviewAPITestCase(APITestCaseBase):
         r = self.client.get(reverse("product_review"))
         self.assertEqual(r.status_code, HTTP_200_OK)
         r = self.client.get(
-            reverse("product_review"),
-            # TODO: send token
+            reverse("product_review"), AUTHORIZATION=f"Token {self.token}"
         )
         self.assertEqual(r.status_code, HTTP_403_FORBIDDEN)
+
+    def test_user_and_auth_token_are_the_same(self):
+        raise NotImplementedError()
