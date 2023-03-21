@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8">
     <title>Shoppe Login Token</title>
 </head>
-<body>
-    <h2>Use this code to log in: {{ callback_token }}</h2>
-    <!-- DO NOT DELETE {{ callback_token }} -->
-    <!-- IT IS USED FOR TEMPLATE RENDERING -->
-    <!-- WHILE COMMITTING CODE REMOVE THESE COMMENTS -->
-    <p>If you need help write us.</p>
+<body style="font-family: 'Roboto', sans-serif;
+" >
+    <h1 style="color:rgb(77, 132, 196);  font-weight: 400;  font-size: 50px;">Security code</h1>
+    <h2 style="font-weight: lighter;  font-size: 16px;" >Use this code to log in: <span style="font-weight: bold; font-size: 16px;">{{ callback_token }}</span></h2>
+    <p style="font-size: 16px;">If you didn't request this code, you can safely ignore this email. Someone else might have typed your email address by mistake.</p>
+    <p style="font-size: 16px;">Thanks,<br>The Shoppe account team</p>  
+
 </body>
 </html>
