@@ -7,7 +7,7 @@ from rest_framework.status import HTTP_200_OK
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.status import HTTP_401_UNAUTHORIZED
-from rest_framework.status import HTTP_405_METHOD_NOT_ALLOWED
+from rest_framework.status import HTTP_403_FORBIDDEN
 from rest_framework.test import APITestCase
 
 from .filters import NamedOrderingFilter
@@ -292,3 +292,8 @@ class ReviewAPITestCase(APITestCaseBase):
         self.client.login(username="demo", password="demo1234")
         r = self.client.get(reverse("product_review"))
         self.assertEqual(r.status_code, HTTP_200_OK)
+        r = self.client.get(
+            reverse("product_review"),
+            # TODO: send token
+        )
+        self.assertEqual(r.status_code, HTTP_403_FORBIDDEN)
