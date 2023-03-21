@@ -69,7 +69,7 @@ class ProductInventory(models.Model):
 
 class Review(models.Model):
     user = ForeignKey(to=get_user_model(), on_delete=CASCADE)
-    products = models.ForeignKey(to=Product, on_delete=CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=CASCADE, related_name="reviews")
     rating = IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(6)], blank=False
     )
