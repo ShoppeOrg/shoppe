@@ -1,0 +1,11 @@
+.layout {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 6rem;
+  &__aside {
+    width: 25%;
+  }
+  &__main {
+    width: 75%;
+  }
+}

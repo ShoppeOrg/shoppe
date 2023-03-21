@@ -1,0 +1,42 @@
+<form [formGroup]="filterForm" class="form">
+  <mat-form-field class="form__field">
+    <input
+      class="form__input"
+      formControlName="search"
+      matInput
+      type="text"
+      placeholder="Search..." />
+    <button class="form__icon-wrapper" mat-icon-button matSuffix>
+      <mat-icon class="form__icon">search</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field class="form__field">
+    <mat-label>Sort by</mat-label>
+    <mat-select formControlName="order_by">
+      <mat-option value="popular.desc">Popularity(DESC)</mat-option>
+      <mat-option value="price.asc">Price</mat-option>
+      <mat-option value="price.desc">Price (DESC)</mat-option>
+      <mat-option value="recent.desc">Recent</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-slider class="form__slider" [min]="minPrice" [max]="maxPrice">
+    <input formControlName="min_price" matSliderStartThumb />
+    <input formControlName="max_price" matSliderEndThumb />
+  </mat-slider>
+
+  <p class="form__price">
+    Price:
+    {{ filterForm.get('min_price')?.value | currency: 'USD':'symbol':'1.0-0' }}
+    -
+    {{ filterForm.get('max_price')?.value | currency: 'USD':'symbol':'1.0-0' }}
+  </p>
+
+  <mat-slide-toggle
+    class="form__toggle"
+    color="primary"
+    formControlName="in_stock"
+    >In Stock</mat-slide-toggle
+  >
+</form>
