@@ -36,9 +36,38 @@ class ReviewSerializer(ModelSerializer):
 
     class Meta:
         model = Review
-        fields = ["user", "username", "product", "rating", "description"]
-        read_only_fields = ["username"]
+        fields = [
+            "user",
+            "username",
+            "product",
+            "rating",
+            "description",
+            "is_published",
+            "created_at",
+        ]
+        read_only_fields = ["username", "is_published", "created_at"]
         write_only_fields = ["user", "product"]
+
+
+class ReviewListSerializer(ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            "user",
+            "product",
+            "rating",
+            "description",
+            "is_published",
+            "published_at",
+            "created_at",
+        ]
+
+
+class ReviewPublishSerializer(ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ["is_published"]
+        write_only_fields = ["is_published"]
 
 
 class ProductDetailSerializer(ModelSerializer):
@@ -52,7 +81,9 @@ class ProductDetailSerializer(ModelSerializer):
     images = SlugRelatedField(
         many=True, read_only=True, slug_field="url", required=False
     )
-    reviews = ReviewSerializer(many=True, read_only=True)
+    reviews = ReviewSerializer(
+        Review.objects.filter(is_published=True), many=True, read_only=True
+    )
 
     class Meta:
         model = Product
