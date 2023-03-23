@@ -37,7 +37,6 @@ class ReviewSerializer(ModelSerializer):
     class Meta:
         model = Review
         fields = [
-            "user",
             "username",
             "product",
             "rating",
@@ -46,7 +45,6 @@ class ReviewSerializer(ModelSerializer):
             "created_at",
         ]
         read_only_fields = ["username", "is_published", "created_at"]
-        write_only_fields = ["user", "product"]
 
 
 class ReviewListSerializer(ModelSerializer):
