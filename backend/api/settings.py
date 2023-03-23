@@ -67,6 +67,7 @@ PASSWORDLESS_AUTH = {
         "PASSWORDLESS_EMAIL_NOREPLY_ADDRESS"
     ),
     "PASSWORDLESS_EMAIL_TOKEN_HTML_TEMPLATE_NAME": "email_callback_token_template.html",
+    "PASSWORDLESS_AUTH_TOKEN_SERIALIZER": "user.serializers.TokenResponseSerializer",
 }
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
