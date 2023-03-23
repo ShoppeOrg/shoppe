@@ -10,6 +10,7 @@ from django.db.models import DecimalField
 from django.db.models import ForeignKey
 from django.db.models import IntegerField
 from django.db.models import TextField
+from django.utils import timezone
 
 
 class Product(models.Model):
@@ -71,9 +72,14 @@ class Review(models.Model):
     user = ForeignKey(to=get_user_model(), on_delete=CASCADE)
     product = models.ForeignKey(to=Product, on_delete=CASCADE, related_name="reviews")
     rating = IntegerField(
-        validators=[MinValueValidator(0), MaxValueValidator(6)], blank=False
+        validators=[MinValueValidator(1), MaxValueValidator(5)], blank=False
     )
     comment = TextField(max_length=400, null=False, blank=False)
     is_published = BooleanField(default=False)
-    published_at = DateTimeField()
+    published_at = DateTimeField(null=True)
     created_at = DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        if self.is_published:
+            self.published_at = timezone.now()
+        return super().save(*args, **kwargs)

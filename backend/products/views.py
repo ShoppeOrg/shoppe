@@ -55,6 +55,9 @@ class ReviewListCreateAPIView(ListCreateAPIView):
             return ReviewListSerializer
         return ReviewSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 
 class ReviewPublishAPIView(CreateAPIView):
     queryset = Review.objects.all()
