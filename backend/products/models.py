@@ -79,6 +79,9 @@ class Review(models.Model):
     published_at = DateTimeField(null=True)
     created_at = DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ["-created_at"]
+
     def save(self, *args, **kwargs):
         if self.is_published:
             self.published_at = timezone.now()

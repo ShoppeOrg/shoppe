@@ -1,8 +1,12 @@
+from django.db.models import ObjectDoesNotExist
 from rest_framework.generics import CreateAPIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAdminUser
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.status import HTTP_404_NOT_FOUND
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from .filters import ProductFilter
@@ -59,7 +63,19 @@ class ReviewListCreateAPIView(ListCreateAPIView):
         serializer.save(user=self.request.user)
 
 
-class ReviewPublishAPIView(CreateAPIView):
+class ReviewPublishAPIView(APIView):
     queryset = Review.objects.all()
     permission_classes = [IsAdminUser]
     serializer_class = ReviewPublishSerializer
+
+    def post(self, request, pk=None):
+        try:
+            product_review = Review.objects.get(pk=pk)
+            product_review.is_published = True
+            product_review.save()
+        except ObjectDoesNotExist:
+            return Response(
+                {"detail": {"info": "Review with given id was not found", "pk": pk}},
+                status=HTTP_404_NOT_FOUND,
+            )
+        return Response({"detail": "Review has been published."}, status=200)
