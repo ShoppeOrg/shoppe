@@ -19,7 +19,7 @@ class Product(models.Model):
         max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)]
     )
     main_image = models.ForeignKey(
-        to="pictures.Picture", null=True, blank=True, on_delete=models.PROTECT
+        to="pictures.Picture", null=True, blank=True, on_delete=models.DO_NOTHING
     )
     images = models.ManyToManyField(
         to="pictures.Picture",
