@@ -22,7 +22,7 @@ class Product(models.Model):
         to="pictures.Picture", null=True, blank=True, on_delete=models.SET_NULL
     )
     images = models.ManyToManyField(
-        to="pictures.Picture", related_name="products", db_constraint=False
+        to="pictures.Picture", related_name="products", db_constraint=False, blank=True
     )
     description = TextField(default="")
     created_at = DateTimeField(auto_now_add=True)
@@ -45,6 +45,9 @@ class Product(models.Model):
     @property
     def in_stock(self):
         return self.inventory.quantity != 0
+
+    def display_price(self):
+        return f"{self.price}$"
 
 
 class ProductInventory(models.Model):
