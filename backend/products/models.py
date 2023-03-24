@@ -19,11 +19,10 @@ class Product(models.Model):
         max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)]
     )
     main_image = models.ForeignKey(
-        to="pictures.Picture", null=True, blank=True, on_delete=models.DO_NOTHING
+        to="pictures.Picture", null=True, blank=True, on_delete=models.SET_NULL
     )
     images = models.ManyToManyField(
-        to="pictures.Picture",
-        related_name="products",
+        to="pictures.Picture", related_name="products", db_constraint=False
     )
     description = TextField(default="")
     created_at = DateTimeField(auto_now_add=True)

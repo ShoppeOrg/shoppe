@@ -36,4 +36,4 @@ class Picture(Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.picture.name
+        return self.title
