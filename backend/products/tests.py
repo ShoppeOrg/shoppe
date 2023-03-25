@@ -1,17 +1,24 @@
 import json
 
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from pictures.models import Picture
+from rest_framework.authtoken.models import Token
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.status import HTTP_400_BAD_REQUEST
 from rest_framework.status import HTTP_401_UNAUTHORIZED
+from rest_framework.status import HTTP_403_FORBIDDEN
+from rest_framework.test import APIRequestFactory
 from rest_framework.test import APITestCase
+from rest_framework.test import force_authenticate
 
 from .filters import NamedOrderingFilter
 from .models import Product
 from .models import ProductInventory
+from .models import Review
+from .views import ReviewListCreateAPIView
 
 
 class APITestCaseBase(APITestCase):
@@ -86,7 +93,7 @@ class ProductTestCase(APITestCaseBase):
     def setUpTestData(cls):
         cls.data = {
             "name": "some test name",
-            "description": "some interesting description",
+            "comment": "some interesting description",
             "price": 20.10,
             "quantity": 5,
             "main_image": 1,
@@ -221,3 +228,81 @@ class ModelsAPITestCase(APITestCaseBase):
             obj_inventory.sold_qty = -100
             obj.clean_fields()
             obj_inventory.save()
+
+
+class ReviewAPITestCase(APITestCaseBase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.valid_data = {
+            "product": 1,
+            "rating": 2,
+            "comment": "not a number",
+        }
+        cls.user = get_user_model().objects.filter(is_staff=False).first()
+        cls.token = Token.objects.get_or_create(user=cls.user)
+        Review.objects.create(
+            user_id=1, product_id=1, rating=3, comment="Not bad.", is_published=True
+        )
+        Review.objects.create(
+            user_id=2,
+            product_id=1,
+            rating=5,
+            comment="Amazing!",
+            is_published=True,
+        )
+
+    def setUp(self):
+        self.factory = APIRequestFactory()
+
+    def test_POST_not_authorized(self):
+        r = self.client.post(reverse("product_review"), self.valid_data)
+        self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED, r.content)
+
+    def test_GET_method_not_authorized(self):
+        r = self.client.get(reverse("product_review"))
+        self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED, r.content)
+
+    def test_create_success(self):
+        request = self.factory.post(reverse("product_review"), self.valid_data)
+        force_authenticate(request, user=self.user, token=self.token)
+        r = ReviewListCreateAPIView.as_view()(request)
+        self.assertEqual(r.status_code, HTTP_201_CREATED)
+        self.client.login(username="demo", password="demo1234")
+        r = self.client.post(reverse("product_review"), self.valid_data)
+        self.assertEqual(r.status_code, HTTP_201_CREATED, r.content)
+
+    def test_reviews_in_product(self):
+        r = self.client.get(reverse("product-detail", {1}))
+        self.assertEqual(r.status_code, HTTP_200_OK, r.content)
+        data = r.json()
+        self.assertIn("reviews", data)
+        self.assertNotEqual(0, len(data["reviews"]))
+        self.assertTrue(review["is_published"] for review in data["reviews"])
+        review = data["reviews"][0]
+        for key in ["username", "rating", "comment", "is_published", "created_at"]:
+            self.assertIn(key, review)
+
+    def test_publish_review(self):
+        data = self.valid_data
+        data["user"] = self.user
+        data["product"] = Product.objects.get(pk=data["product"])
+        review = Review.objects.create(**data)
+        self.assertFalse(review.is_published)
+        r = self.client.post(reverse("product_review_publish", {review.id}))
+        self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
+        self.client.login(username="demo", password="demo1234")
+        r = self.client.post(reverse("product_review_publish", {review.id}))
+        self.assertEqual(r.status_code, HTTP_200_OK)
+        review = Review.objects.get(pk=review.pk)
+        self.assertTrue(review.is_published)
+
+    def test_list_reviews(self):
+        r = self.client.get(reverse("product_review"))
+        self.assertEqual(r.status_code, HTTP_401_UNAUTHORIZED)
+        request = self.factory.get(reverse("product_review"))
+        force_authenticate(request, user=self.user, token=self.token)
+        r = ReviewListCreateAPIView.as_view()(request)
+        self.assertEqual(r.status_code, HTTP_403_FORBIDDEN)
+        self.client.login(username="demo", password="demo1234")
+        r = self.client.get(reverse("product_review"))
+        self.assertEqual(r.status_code, HTTP_200_OK)
