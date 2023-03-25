@@ -29,10 +29,9 @@ class ProductViewSet(ModelViewSet):
     def get_serializer_class(self):
         if self.action in ("create", "update", "partial_update"):
             return ProductCreateSerializer
-        if self.action == "list":
-            return ProductListSerializer
         if self.action in ("retrieve", "delete"):
             return ProductDetailSerializer
+        return ProductListSerializer
 
     def get_permissions(self):
         if self.action not in ("list", "retrieve"):
