@@ -6,6 +6,7 @@ from django.db.models import CharField
 from django.db.models import DateTimeField
 from django.db.models import ImageField
 from django.db.models import Model
+from django.utils.safestring import mark_safe
 
 
 class Picture(Model):
@@ -23,6 +24,11 @@ class Picture(Model):
     @property
     def url(self):
         return self.picture.url
+
+    def image_tag(self):  # new
+        return mark_safe(
+            '<img src="/images/%s" width="150" height="150" />' % self.picture
+        )
 
     def save(self, *args, **kwargs):
         _, ext = self.picture.name.split(".")
