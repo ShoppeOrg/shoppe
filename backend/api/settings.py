@@ -78,6 +78,7 @@ SPECTACULAR_SETTINGS = {
     "written on Django and Django Rest Framework",
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "DISABLE_ERRORS_AND_WARNINGS": True,
 }
 
 
