@@ -43,7 +43,7 @@ joblib==1.2.0
 jsonschema==4.17.3
 keyring==23.13.1
 lockfile==0.12.2
-Markdown==3.4.1
+Markdown==3.4.3
 MarkupSafe==2.1.2
 mccabe==0.7.0
 more-itertools==9.1.0
