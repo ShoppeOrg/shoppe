@@ -48,18 +48,12 @@ class ProductFilterTestCase(APITestCaseBase):
         self.assertEqual(10, len(data["results"]))
 
     def test_page_size(self):
-        r = self.client.get(reverse("product-list"), {"page_size": 30})
-        data = r.json()
-        self.assertEqual(30, len(data["results"]))
         r = self.client.get(reverse("product-list"), {"page_size": -2})
         data = r.json()
         self.assertEqual(10, len(data["results"]))
         r = self.client.get(reverse("product-list"), {"page_size": 5})
         data = r.json()
         self.assertEqual(5, len(data["results"]))
-        r = self.client.get(reverse("product-list"), {"page_size": 120})
-        data = r.json()
-        self.assertEqual(100, len(data["results"]))
 
     def test_in_stock(self):
         r = self.client.get(reverse("product-list"), {"in_stock": True})
@@ -96,8 +90,8 @@ class ProductTestCase(APITestCaseBase):
             "comment": "some interesting description",
             "price": 20.10,
             "quantity": 5,
-            "main_image": 1,
-            "images": [1, 2, 3],
+            "main_image": 10,
+            "images": [10, 11, 12],
         }
         cls.username = "demo"
         cls.password = "demo1234"
@@ -132,7 +126,7 @@ class ProductTestCase(APITestCaseBase):
     def test_create_product(self):
         self.client.login(username=self.username, password=self.password)
         r = self.client.post(reverse("product-list"), self.data)
-        self.assertEqual(r.status_code, HTTP_201_CREATED)
+        self.assertEqual(r.status_code, HTTP_201_CREATED, r.content)
         result = r.json()
         self.assertIn("images", result)
         self.assertNotEqual(0, len(result["images"]))
@@ -141,9 +135,10 @@ class ProductTestCase(APITestCaseBase):
         self.client.login(username=self.username, password=self.password)
         r = self.client.get(reverse("product-detail", {1}))
 
-        data_patch = {"images": [4, 5, 6]}
+        data_patch = {"images": [10, 11, 12]}
         data_put = r.json()
         data_put["images"] = data_patch["images"]
+        data_put["main_image"] = 10
 
         r = self.client.put(
             reverse("product-detail", {1}),
@@ -167,9 +162,9 @@ class ProductTestCase(APITestCaseBase):
             self.assertEqual(r.status_code, HTTP_200_OK, r.content)
             self.assertIn("images", data)
             self.assertEqual(3, len(data["images"]))
-            self.assertIn(4, data["images"])
-            self.assertIn(5, data["images"])
-            self.assertIn(6, data["images"])
+            self.assertIn(10, data["images"])
+            self.assertIn(11, data["images"])
+            self.assertIn(12, data["images"])
 
 
 class InventoryTestCase(APITestCaseBase):

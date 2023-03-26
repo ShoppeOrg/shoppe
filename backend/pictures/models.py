@@ -10,7 +10,7 @@ from django.utils.safestring import mark_safe
 
 
 class Picture(Model):
-    title = CharField(max_length=150, default="", blank=True)
+    title = CharField(max_length=150, unique=True)
     picture = ImageField(
         max_length=150,
         upload_to="uploaded/%Y/%m",
@@ -36,4 +36,4 @@ class Picture(Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.picture.name
+        return f"{self.id}. {self.title}"

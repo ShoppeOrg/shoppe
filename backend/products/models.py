@@ -19,11 +19,10 @@ class Product(models.Model):
         max_digits=10, decimal_places=2, default=0, validators=[MinValueValidator(0)]
     )
     main_image = models.ForeignKey(
-        to="pictures.Picture", null=True, blank=True, on_delete=models.DO_NOTHING
+        to="pictures.Picture", null=True, blank=True, on_delete=models.SET_NULL
     )
     images = models.ManyToManyField(
-        to="pictures.Picture",
-        related_name="products",
+        to="pictures.Picture", related_name="products", db_constraint=False, blank=True
     )
     description = TextField(default="")
     created_at = DateTimeField(auto_now_add=True)
@@ -44,8 +43,16 @@ class Product(models.Model):
         obj.save()
 
     @property
+    def rating(self):
+        count = self.reviews.count()
+        return sum(review.rating for review in self.reviews.all()) / count
+
+    @property
     def in_stock(self):
         return self.inventory.quantity != 0
+
+    def display_price(self):
+        return f"{self.price}$"
 
 
 class ProductInventory(models.Model):
@@ -86,3 +93,6 @@ class Review(models.Model):
         if self.is_published:
             self.published_at = timezone.now()
         return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"product: {self.product_id}, rt.: {self.rating}"
