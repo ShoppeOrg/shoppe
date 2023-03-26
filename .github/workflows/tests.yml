@@ -35,13 +35,13 @@ jobs:
     - name: Run Tests
       run: |
         python3 manage.py test
-        
+
   frontend:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./frontend
-    
+        
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js 18.x
@@ -58,4 +58,4 @@ jobs:
       run: npm run build --if-present
     - name: Run Tests
       run: echo "Run tests. This step was skipped as no test were found."
-      
+ 
