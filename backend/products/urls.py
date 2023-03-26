@@ -1,10 +1,12 @@
 from django.urls import path
 from rest_framework.routers import DefaultRouter
 
+from .views import MostRelatedAPIView
 from .views import ProductInventoryRetrieveUpdateAPIVIew
 from .views import ProductViewSet
 from .views import ReviewListCreateAPIView
 from .views import ReviewPublishAPIView
+
 
 router = DefaultRouter()
 router.register(r"products", ProductViewSet, basename="product")
@@ -15,6 +17,7 @@ urlpatterns = [
         ReviewPublishAPIView.as_view(),
         name="product_review_publish",
     ),
+    path("products/related/", MostRelatedAPIView.as_view(), name="product_related"),
     path(
         "products/<int:pk>/inventory/",
         ProductInventoryRetrieveUpdateAPIVIew.as_view(),

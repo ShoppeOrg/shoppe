@@ -1,5 +1,6 @@
 from django.db.models import ObjectDoesNotExist
 from rest_framework.generics import CreateAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.generics import ListCreateAPIView
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import IsAdminUser
@@ -8,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_404_NOT_FOUND
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
+from sklearn.metrics.pairwise import paired_euclidean_distances
 
 from .filters import ProductFilter
 from .models import Product
@@ -84,3 +86,30 @@ class ReviewPublishAPIView(APIView):
                 status=HTTP_404_NOT_FOUND,
             )
         return Response({"detail": "Review has been published."}, status=200)
+
+
+class MostRelatedAPIView(ListAPIView):
+    serializer_class = ProductListSerializer
+
+    def get_queryset(self):
+        product_id = self.request.query_params["id"]
+        product = Product.objects.select_related("inventory").get(pk=product_id)
+        all_products = Product.objects.select_related("inventory").exclude(
+            pk=product_id
+        )
+        related_products = all_products.exclude(inventory__quantity__lte=0)
+        if related_products.count() < 3:
+            return all_products[:3]
+        most_related_map = {}
+        for each_product in all_products:
+            most_related_map[each_product.id] = paired_euclidean_distances(
+                [[each_product.price, each_product.inventory.sold_qty]],
+                [[product.price, product.inventory.sold_qty]],
+            )[0]
+        most_related = sorted(most_related_map.items(), key=lambda x: x[1])[:3]
+        return all_products.filter(id__in=[pk for pk, rate in most_related])
+
+    def list(self, request):
+        if "id" not in request.query_params and request.query_params["id"] is not None:
+            return Response("Missing required query parameter 'id'", status=400)
+        return super().list(request)
