@@ -9,6 +9,7 @@ Shoppe is a online jewerly store.
 - [Run server](#run-server)
 - [Admin](#admin)
 - [Loading data](#loading-data)
+- [Documentation](#documentation)
 - [For geeks](#for-geeks)
   * [run.sh](#runsh)
 ## database scheme
@@ -93,6 +94,11 @@ CAUTION!!!
 
 This command will flush your database. Any changes that you made before will be unsaved.
 
+## Documentation
+```
+    http://localhost:8000/docs
+```
+(requires internet connection)
 ## For geeks
 ### run.sh
 
