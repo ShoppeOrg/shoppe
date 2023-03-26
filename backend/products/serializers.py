@@ -1,5 +1,6 @@
 from pictures.models import Picture
 from rest_framework.serializers import CharField
+from rest_framework.serializers import FloatField
 from rest_framework.serializers import HyperlinkedModelSerializer
 from rest_framework.serializers import IntegerField
 from rest_framework.serializers import ModelSerializer
@@ -89,6 +90,7 @@ class ProductDetailSerializer(ModelSerializer):
             "id",
             "name",
             "price",
+            "rating",
             "quantity",
             "in_stock",
             "main_image",
