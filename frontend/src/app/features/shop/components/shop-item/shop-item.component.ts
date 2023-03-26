@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IShopItem } from '../../interfaces/IShopItem';
+import { IShopItem } from '../../../../shared/interfaces/IShopItem';
 
 @Component({
   selector: 'app-shop-item',

@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 
-import { IShopData } from '../interfaces/IShopData';
+import { IShopData } from '../../../shared/interfaces/IShopData';
 import { IQuery } from '../interfaces/IQuery';
 import { environment } from '../../../../environments/environment';
-import { IShopItem } from '../interfaces/IShopItem';
+import { IShopItem } from '../../../shared/interfaces/IShopItem';
 
 @Injectable({
   providedIn: 'root',
