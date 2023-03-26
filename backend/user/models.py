@@ -1,3 +1,5 @@
+from functools import partial
+
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from random_username.generate import UsernameGenerator
@@ -6,7 +8,7 @@ from random_username.generate import UsernameGenerator
 class User(AbstractUser):
     username = CharField(
         max_length=150,
-        default=UsernameGenerator().generate_username(num_digits=3),
+        default=partial(UsernameGenerator().generate_username, num_digits=3),
         unique=True,
     )
 

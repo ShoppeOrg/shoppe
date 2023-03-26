@@ -23,8 +23,14 @@ from .serializers import ReviewSerializer
 
 
 class ProductViewSet(ModelViewSet):
-    queryset = Product.objects.select_related("inventory")
     filterset_class = ProductFilter
+
+    def get_queryset(self):
+        if self.action == "retrieve":
+            return Product.objects.select_related(
+                "inventory", "main_image"
+            ).prefetch_related("reviews", "reviews__user", "images")
+        return Product.objects.select_related("inventory", "main_image")
 
     def get_serializer_class(self):
         if self.action in ("create", "update", "partial_update"):
