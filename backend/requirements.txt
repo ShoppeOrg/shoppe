@@ -79,7 +79,7 @@ pytest==7.2.2
 pytest-base-url==2.0.0
 python-dateutil==2.8.2
 python-dotenv==1.0.0
-pytz==2022.7.1
+pytz==2023.2
 pytzdata==2020.1
 PyYAML==6.0
 git+https://github.com/OleksandrPozden/random_username.git@43cc9989192d88e132799084b0a768796c58d603
