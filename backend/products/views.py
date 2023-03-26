@@ -23,7 +23,6 @@ from .serializers import ReviewSerializer
 
 
 class ProductViewSet(ModelViewSet):
-    # queryset = Product.objects.select_related("inventory")
     filterset_class = ProductFilter
 
     def get_queryset(self):
