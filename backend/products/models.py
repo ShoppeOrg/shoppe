@@ -43,6 +43,11 @@ class Product(models.Model):
         obj.save()
 
     @property
+    def rating(self):
+        count = self.reviews.count()
+        return sum(review.rating for review in self.reviews.all()) / count
+
+    @property
     def in_stock(self):
         return self.inventory.quantity != 0
 
@@ -88,3 +93,6 @@ class Review(models.Model):
         if self.is_published:
             self.published_at = timezone.now()
         return super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"product: {self.product_id}, rt.: {self.rating}"
