@@ -301,3 +301,22 @@ class ReviewAPITestCase(APITestCaseBase):
         self.client.login(username="demo", password="demo1234")
         r = self.client.get(reverse("product_review"))
         self.assertEqual(r.status_code, HTTP_200_OK)
+
+
+class ProductMostRelatedTestCase(APITestCaseBase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.obj = Product.objects.create(price=10, name="1", description="3")
+        cls.sibling1 = Product.objects.create(price=10.1, name="2", description="3f")
+        cls.sibling2 = Product.objects.create(price=10.0, name="j", description="m")
+        cls.sibling3 = Product.objects.create(price=9.9, name="l", description="d")
+        cls.siblings = [cls.sibling1, cls.sibling2, cls.sibling3]
+
+    def test_related(self):
+        r = self.client.get(reverse("product_related"), {"id": self.obj.id})
+        self.assertEqual(r.status_code, HTTP_200_OK, r.content)
+        result = r.json()["results"]
+        result_ids = [item["id"] for item in result]
+        self.assertNotIn(self.obj.id, result_ids)
+        for sibling in self.siblings:
+            self.assertIn(sibling.id, result_ids)
