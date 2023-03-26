@@ -1,0 +1,8 @@
+<div>
+  <p>{{ cartItem.name }}</p>
+  <p>{{ cartItem.price }}</p>
+  <button (click)="removeFromCart()">Remove</button>
+  <input min="1" [(ngModel)]="cartItem.amount" type="number" value="1" />
+</div>
+
+

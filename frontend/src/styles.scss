@@ -63,6 +63,15 @@ a {
   color: inherit;
 }
 
+[class*='__container'] {
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @media screen and (min-width: 1248px) {
+    max-width: 1248px;
+  }
+}
+
 .mat-mdc-form-field {
   .mat-mdc-text-field-wrapper {
     padding-left: 2px;

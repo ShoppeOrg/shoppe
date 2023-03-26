@@ -8,4 +8,5 @@ export interface IShopItem {
   quantity: number;
   updated_at: Date;
   url: string;
+  amount: number;
 }

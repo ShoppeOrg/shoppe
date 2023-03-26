@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ShopRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './pages/shop/shop.component';
@@ -9,7 +10,6 @@ import { ShopFilterComponent } from './components/shop-filter/shop-filter.compon
 import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { ShopItemComponent } from './components/shop-item/shop-item.component';
 import { MaterialModule } from '../../material.module';
-import {ReactiveFormsModule} from '@angular/forms';
 import { ShopDetailsComponent } from './pages/shop-details/shop-details.component';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { ShopDetailsComponent } from './pages/shop-details/shop-details.componen
     SharedModule,
     MaterialModule,
     InfiniteScrollModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
 })

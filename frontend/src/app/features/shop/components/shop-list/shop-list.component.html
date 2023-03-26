@@ -1,17 +1,19 @@
 <section class="shop-list">
-  <ng-container *ngIf="!!products.length; else  no_data">
+  <ng-container *ngIf="!!products.length; else no_data">
     <div
-      class="shop-list__container"
+      class="shop-list__wrapper"
       infinite-scroll
       [infiniteScrollDistance]="1"
       [infiniteScrollThrottle]="300"
-      [infiniteScrollDisabled]='shouldInfiniteScrollDisable()'
+      [infiniteScrollDisabled]="shouldInfiniteScrollDisable()"
       (scrolled)="getMoreProducts()">
-      <app-shop-item class="shop-list__item" routerLink="{{product.id}}" *ngFor="let product of products" [productItem]="product">
+      <app-shop-item
+        class="shop-list__item"
+        routerLink="{{ product.id }}"
+        *ngFor="let product of products"
+        [productItem]="product">
       </app-shop-item>
-      <p>{{products[0].id}}</p>
     </div>
-
 
     <button
       class="shop-list__btn"
@@ -25,5 +27,4 @@
   <ng-template #no_data>
     <p>No data</p>
   </ng-template>
-
 </section>
