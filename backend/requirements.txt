@@ -24,7 +24,7 @@ drfpasswordless==1.5.8
 dulwich==0.21.3
 editables==0.3
 exceptiongroup==1.1.0
-filelock==3.10.0
+filelock==3.10.6
 flake8==6.0.0
 Flask==2.2.3
 h11==0.14.0
