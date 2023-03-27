@@ -4,7 +4,7 @@ Shoppe is a online jewerly store.
 # [backend](https://github.com/ShoppeOrg/shoppe/tree/main/backend/README.md)
 - [database scheme](#database-scheme)
 - [Prerequisites](#prerequisites)
-  * [Install dependecies](#install-dependecies)
+  * [Install dependencies](#install-dependecies)
   * [Run migrations](#run-migrations)
 - [Run server](#run-server)
 - [Admin](#admin)
@@ -12,8 +12,11 @@ Shoppe is a online jewerly store.
 - [Documentation](#documentation)
 - [For geeks](#for-geeks)
   * [run.sh](#runsh)
+- [Troubleshooting](#troubleshooting)
+  * [runserver](#runserver)
 ## database scheme
-![database scheme of shoppe app](https://github.com/ShoppeOrg/shoppe/blob/db-scheme/Shoppe.png)
+![Shoppe (1)](https://user-images.githubusercontent.com/95351527/228049543-17139ff4-81e5-4779-9758-284b9f69f014.png)
+
 ## Prerequisites
 
 - move to `backend` root folder
@@ -38,7 +41,7 @@ Shoppe is a online jewerly store.
     python3 -m venv venv
 ```
 
-### Install dependecies
+### Install dependencies
 Usually, you do need install them everytime but depends on the updates, sometimes you need to return to this step
 
 ```python
@@ -81,7 +84,7 @@ To sign in admin panel as a staff use thi credentials
 If you want experience full-featured admin panel with full access use this credentials instead:
 ```
     username: demo
-    password: demo
+    password: demo1234
 ```
 Aware of the [loading fixture](#loading-data) (data), unless you didn't, sign-in will be unavailable!
 
@@ -109,3 +112,12 @@ This command will flush your database. Any changes that you made before will be 
     set +a
     python3 manage.py runserver
 ```
+## Troubleshooting
+### Runserver
+Errors arrise when run `python3 manage.py runserver` or `source run.sh`
+<img width="568" alt="image" src="https://user-images.githubusercontent.com/95351527/228045033-d9ca8e90-ced0-4dd1-97f2-2528b86b690f.png">
+
+SOLUTION:
+
+Run migrations. See [how](#run-migrations).
+
