@@ -320,3 +320,7 @@ class ProductMostRelatedTestCase(APITestCaseBase):
         self.assertNotIn(self.obj.id, result_ids)
         for sibling in self.siblings:
             self.assertIn(sibling.id, result_ids)
+
+    def test_related_id_not_in_query_param(self):
+        r = self.client.get(reverse("product_related"))
+        self.assertEqual(r.status_code, 400, r.content)
