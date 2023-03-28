@@ -110,6 +110,8 @@ class MostRelatedAPIView(ListAPIView):
         return all_products.filter(id__in=[pk for pk, rate in most_related])
 
     def list(self, request):
-        if "id" not in request.query_params and request.query_params["id"] is not None:
-            return Response("Missing required query parameter 'id'", status=400)
+        if request.query_params.get("id") is None:
+            return Response(
+                {"detail": "Missing required query parameter 'id'"}, status=400
+            )
         return super().list(request)
