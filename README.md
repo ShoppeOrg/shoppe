@@ -2,6 +2,7 @@
 Shoppe is a online jewerly store.
 # [frontend](https://github.com/ShoppeOrg/shoppe/tree/main/frontend/README.md)
 # [backend](https://github.com/ShoppeOrg/shoppe/tree/main/backend/README.md)
+Table of contents:
 * [database scheme](#database-scheme)
 * [Prerequisites](#prerequisites)
   + [Install dependencies](#install-dependencies)
@@ -66,7 +67,7 @@ Usually, you do need run them everytime but depends on the updates, sometimes yo
 
 Export **all** environment variables from .env file and run
 ```python
-    python3 manage.py
+    python3 manage.py runserver
 ```
 OR
 
