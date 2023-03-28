@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+import { NgxMaterialRatingModule } from 'ngx-material-rating';
+import { FormsModule } from '@angular/forms';
+
+
 
 import { ShopRoutingModule } from './shop-routing.module';
 import { ShopComponent } from './pages/shop/shop.component';
@@ -19,6 +25,7 @@ import { ShopDetailsComponent } from './pages/shop-details/shop-details.componen
     ShopListComponent,
     ShopItemComponent,
     ShopDetailsComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,11 @@ import { ShopDetailsComponent } from './pages/shop-details/shop-details.componen
     SharedModule,
     MaterialModule,
     InfiniteScrollModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CarouselModule,
+    FormsModule,
+    NgxMaterialRatingModule,
+
   ],
   providers: [],
 })

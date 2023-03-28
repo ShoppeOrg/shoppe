@@ -1,24 +1,34 @@
 
 <main class="main" *ngIf='(shopItem | async) as item'>
   <section class="shope-header">
-    <div class="box">
-      <section class="shope-header-img-aside">
-        <div class="container">
-        </div>
-      </section>
-
-
       <section class="shope-header-slider">
         <div class="container">
           <div  class="shope-header-slider__list">
-            <img src="assets/images/earrings.png">
+              <owl-carousel-o [options]="customOptions"
+              class="carousel__wrapper--visible"
+              >
+                <ng-template carouselSlide>
+                  <img class="shope-header-slider__img" src ="./assets/images/slider-earings.jpg">
+                </ng-template>  
+                <ng-template carouselSlide>
+                  <img class="shope-header-slider__img" src ="./assets/images/slider-earings.jpg">
+                </ng-template>  
+                <ng-template carouselSlide>
+                  <img class="shope-header-slider__img" src ="./assets/images/slider-earings.jpg">
+                </ng-template> 
+                <ng-template carouselSlide>
+                  <img class="shope-header-slider__img" src ="./assets/images/slider-earings.jpg">
+                </ng-template>  
+                <ng-template carouselSlide>
+                  <img class="shope-header-slider__img" src ="./assets/images/slider-earings.jpg">
+                </ng-template> 
+              </owl-carousel-o>
           </div>
-
         </div>
       </section>
 
       <section class="shope-header-product">
-        <div class="container">
+        <div class="container">          
           <section class="shope-header-product__container">
             <article class="shope-header-product__info-headline-price">
               <h3>{{item.name}}</h3>
@@ -27,7 +37,11 @@
 
             <article class="shope-header-product__rating">
               <div class="shope-header-product__rating-stars">
-                <img src="./assets/icons/Stars_rating.svg">
+                <ng-container *ngFor="let rating of ratings; index as i">
+                  <ngx-material-rating [color]="rating.color" [disabled]="rating.disabled || false" [dense]="rating.dense || false"
+                  [readonly]="rating.readonly || false" [(ngModel)]="ratings[i].value" [max]="5">
+                  </ngx-material-rating>
+                </ng-container>              
               </div>
             </article>
 
@@ -93,7 +107,6 @@
         </div>
       </section>
 
-    </div>
   </section>
 
   <section class="shoppe-body">
@@ -103,9 +116,9 @@
       <article class="shoppe-body__selction-line">
       </article>
 
+    <article class="mat-tab-group-wrapper">
       <mat-tab class="shoppe-body__item" label="Description">
         <p class="shoppe-body__item-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. Nunc sed porta augue. Morbi porta tempor odio, in molestie diam bibendum sed.</p>
-
         <ul class="shoppe-body__item-list">
           <li>-Lorem ipsum</li>
           <li>-dolor sit amet, consectetur adipiscing elit</li>
@@ -113,7 +126,8 @@
           <li>-vitae luctus velit. Morbi in finibus</li>
         </ul>
       </mat-tab>
-
+    </article>
+    <article class="mat-tab-group-wrapper">
 
       <mat-tab class="shoppe-body__item" label="Aditional information">
         <table class="shoppe-body__table">
@@ -139,11 +153,14 @@
           </tr>
         </table>
       </mat-tab>
+    </article>
 
+    <article class="mat-tab-group-wrapper">
 
       <mat-tab class="shoppe-body__item" label="Reviews(0)">
         <p class="shoppe-body__item-paragraph"> Ізі хуйня</p>
       </mat-tab>
+    </article>
     </mat-tab-group>
 
 
@@ -155,30 +172,64 @@
       <p>Similar Items</p>
     </article>
 
-       </div>
-       <div class="shoppe-footer__name">
-         <a href="#"> Hal Earrings</a>
-       </div>
-       <div class="shoppe-footer__price">
-         <p>$ 25,00</p>
-       </div>
-     </article>
+      <article class="shoppe-footer__column-goods">
+          <article class="shoppe-footer__item">
+              <div class="shoppe-footer__good-container">
+                <div class="shoppe-footer__good-hover-container">
+                <a href="#"class="shoppe-footer__img">
+                  <img src="./assets/images/similar-items-1.jpg">
+                </a>
+                <div class="shoppe-footer__overlay">
+                  <a class="shoppe-footer__overlay-text"href="#">SELECT OPTION</a> 
+                </div>
+              </div>
+            </div>
+              <div class="shoppe-footer__name">
+                  <a href="#">Ollie Earrings</a>
+              </div>
+              <div class="shoppe-footer__price">
+                  <p>$ 30,00</p>
+              </div>
+          </article>
 
-     <article class="shoppe-footer__item">
-       <div class="shoppe-footer__goods-container">
-         <a href="#"class="shoppe-footer__img">
-           <img src="./assets/images/products-footer-3.jpg">
-         </a>
-         <div class="shoppe-footer__overlay">
-           <a class="shoppe-footer__overlay-text"href="#">SELECT OPTION</a> 
-        </div>
-     </div>
+          <article class="shoppe-footer__item">
+            <div class="shoppe-footer__good-container">
+              <div class="shoppe-footer__good-hover-container">
+                  <a href="#"class="shoppe-footer__img">
+                    <img src="./assets/images/similar-items-2.jpg">
+                  </a>
+                  <div class="shoppe-footer__overlay">
+                    <a class="shoppe-footer__overlay-text"href="#">SELECT OPTION</a> 
+                  </div>
+             </div>
+          </div>
             <div class="shoppe-footer__name">
-               <a href="#">Kaede Hair Pin Set Of 3</a>        </div>-->
-     <div class="shoppe-footer__price">
-        <p>$ 30,00</p>
-     </div>
-     </article>
-  </article> 
+                <a href="#">Hal Earrings</a>
+            </div>
+            <div class="shoppe-footer__price">
+                <p>$ 25,00</p>
+            </div>
+          </article>
+
+          <article class="shoppe-footer__item">
+            <div class="shoppe-footer__good-container">
+              <div class="shoppe-footer__good-hover-container">
+
+              <a href="#"class="shoppe-footer__img">
+                <img src="./assets/images/similar-items-3.jpg">
+              </a>
+              <div class="shoppe-footer__overlay">
+                <a class="shoppe-footer__overlay-text"href="#">SELECT OPTION</a> 
+              </div>
+          </div>
+        </div>
+            <div class="shoppe-footer__name">
+                <a href="#">Kaede Hair Pin Set Of 3</a>
+            </div>
+            <div class="shoppe-footer__price">
+                <p>$ 30,00</p>
+            </div>
+          </article>
+      </article>
   </section>
 </main>

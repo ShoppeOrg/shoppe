@@ -1,27 +1,39 @@
-.main {
-}
-.shope-header {
-}
-.box {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 130px;
+.main{
   font-family: 'DM Sans', sans-serif;
+  overflow: hidden;
 }
 .container {
   max-width: 1248px;
 }
 
+.shope-header {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 130px;
+
+}
 .shope-header-slider {
+  max-width: 540px;
+  display:block;
+
+  width: 100%;
+  height: 100%;
+
   &__list {
-    display: flex;
+    
+  }
+
+  &__img {
+    display:flex;
+    flex-basis: 540px;
   }
 }
+
 
 .shope-header-product {
   &__container {
     min-width: 486px;
-    padding: 0px 96px 0px 62px;
+    margin-right:96px
   }
 
   &__info-headline-price h3 {
@@ -52,24 +64,6 @@
     font-size: 16px;
     padding-left: 14px;
   }
-
-  /* ::ng-deep label.star {
-                  padding: 0 5px ;
-                  font-size: 20px ;
-                  color:rgb(194, 194, 194);
-
-                  &::before {
-                        content:"\f005"  ;
-
-                  }
-                  &:hover{
-                        transform: rotate(0deg) scale(1.2) ;
-                  }
-
-
-              }
-           */
-
   &__description {
     max-width: 484px;
     padding-top: 22px;
@@ -165,6 +159,9 @@
   }
 }
 
+
+/*shoppe-header__top*/
+
 /*shoppe-body*/
 
 .shoppe-body {
@@ -172,6 +169,7 @@
   &__list {
     display: flex;
     text-align: start;
+    
   }
 
   &__item {
@@ -180,6 +178,7 @@
     line-height: 26px;
     min-width: 193px;
     color: #707070;
+
   }
   &__link:hover {
     padding-bottom: 39px;
@@ -234,12 +233,10 @@
 
 .shoppe-footer {
   margin-top: 100px;
-
+  margin-bottom: 270px;
   &__title {
     font-weight: 400;
     font-size: 26px;
-    line-height: 35px;
-
     margin-bottom: 47px;
   }
 
@@ -251,37 +248,43 @@
   &__item {
   }
 
-  &__goods-container {
+  &__good-container {
     position: relative;
     width: 100%;
     overflow: hidden;
+    margin-bottom: 24px;
   }
-  &__goods-container:hover &__overlay {
+  &__good-container:hover &__overlay {
     opacity: 1;
   }
 
-  &__img {
-    display: block;
-    width: 100%;
-    height: auto;
-    transition: all 0.2s;
-    -o-transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-  }
-  &__img:hover {
-    transform: scale(1.05);
-    -o-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-  }
+
+		&__good-hover-container {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: all 0.2s;
+      -o-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -moz-transition: all 0.2s;
+  
+		}
+    &__good-hover-container:hover {
+
+      transform: scale(1.03);
+      -o-transform: scale(1.03);
+      -moz-transform: scale(1.03);
+      -webkit-transform: scale(1.03);
+    }
+    
 
   &__overlay {
+    
     position: absolute;
     bottom: 0;
-    background: rgba(255, 255, 255, 0.6); /* Black see-through */
+    background:rgba($color: #EFEFEF, $alpha: 0.9);
     width: 100%;
-    transition: 0.3s ease;
+    transition: 0.5s ease;
     opacity: 0;
     color: rgb(0, 0, 0);
     font-size: 20px;
@@ -289,21 +292,35 @@
     padding: 20px;
     text-align: center;
     text-transform: uppercase;
+
+  }
+
+  &__overlay:hover {
+    background:rgba($color: #F9F9F9, $alpha: 0.8);
   }
 
   &__name {
     font-weight: 400;
     font-size: 20px;
     line-height: 26px;
-    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+  &__name:hover {
+    color: #a18a68;
   }
 
   &__price {
     font-weight: 500;
     font-size: 20px;
     line-height: 26px;
-    text-transform: capitalize;
     color: #a18a68;
-    margin-top: 20px;
   }
 }
+
+.shoppe-body__list{
+  display: flexl;
+  flex-grow: 0;
+
+}
+
+
