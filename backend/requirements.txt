@@ -56,7 +56,7 @@ pathspec==0.11.1
 pendulum==2.1.2
 pexpect==4.8.0
 pgcli==3.5.0
-pgspecial==2.0.1
+pgspecial==2.1.0
 Pillow==9.4.0
 pkginfo==1.9.6
 platformdirs==2.6.2
