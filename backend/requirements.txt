@@ -59,7 +59,7 @@ pgcli==3.5.0
 pgspecial==2.0.1
 Pillow==9.4.0
 pkginfo==1.9.6
-platformdirs==2.6.2
+platformdirs==3.2.0
 pluggy==1.0.0
 poetry==1.4.1
 poetry-core==1.5.2
