@@ -75,7 +75,7 @@ Admin page is located with url `http://localhost:8000/admin`
 To sign in admin panel as a staff use thi credentials
 ```
     username: staff
-    password: staff1234
+    password: staf1234
 ```
 
 If you want experience full-featured admin panel with full access use this credentials instead:
