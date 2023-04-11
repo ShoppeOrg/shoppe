@@ -158,5 +158,3 @@ cython_debug/
 media/
 
 .vscode/
-
-.DS_Store

@@ -4,8 +4,7 @@ import { ShopService } from '../../services/shop.service';
 import { IQuery } from '../../interfaces/IQuery';
 import { map } from 'rxjs';
 import { FilterShopService } from '../../services/filter-shop.service';
-import { IShopItem } from '../../../../shared/interfaces/IShopItem';
-import { ShopItem } from '../../../../shared/classes/ShopItem';
+import { IShopItem } from '../../interfaces/IShopItem';
 
 @Component({
   selector: 'app-shop-list',
@@ -51,21 +50,9 @@ export class ShopListComponent implements OnInit {
       )
       .subscribe(res => {
         if (searchQuery.filterChanged) {
+
           this.disableScroll = true;
-          this.products = res.map(
-            item =>
-              new ShopItem(
-                item.created_at,
-                item.description,
-                item.id,
-                item.in_stock,
-                item.name,
-                item.price,
-                item.quantity,
-                item.updated_at,
-                item.url,
-              ),
-          );
+          this.products = res;
           return;
         }
         this.products = [...this.products, ...res];

@@ -1,5 +1,5 @@
+
 <main class="main" *ngIf='(shopItem | async) as item'>
-  <div class="main__container">
   <section class="shope-header">
     <div class="box">
       <section class="shope-header-img-aside">
@@ -38,10 +38,8 @@
             </article>
 
             <article class="shope-header-product__quantity-number">
-              <button class="shope-header-product__button-add-to-cart" (click)="addToCart(item)"><span>ADD TO CART</span></button>
+              <button class="shope-header-product__button-add-to-cart"><span>ADD TO CART</span></button>
             </article>
-
-            <input min="1" [(ngModel)]="item.amount" type="number" value="1" />
 
             <article class="shope-header-product__social-list">
 
@@ -183,5 +181,4 @@
      </div>
      </article>
   </section>
-  </div>
 </main>
