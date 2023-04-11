@@ -9,7 +9,6 @@
       (scrolled)="getMoreProducts()">
       <app-shop-item class="shop-list__item" routerLink="{{product.id}}" *ngFor="let product of products" [productItem]="product">
       </app-shop-item>
-      <p>{{products[0].id}}</p>
     </div>
 
 
