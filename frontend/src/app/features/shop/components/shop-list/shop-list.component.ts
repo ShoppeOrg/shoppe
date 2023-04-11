@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { map, ReplaySubject, takeUntil } from 'rxjs';
 
 import { ShopService } from '../../services/shop.service';
 import { IQuery } from '../../interfaces/IQuery';
-import { map } from 'rxjs';
 import { FilterShopService } from '../../services/filter-shop.service';
 import { IShopItem } from '../../../../shared/interfaces/IShopItem';
 import { ShopItem } from '../../../../shared/classes/ShopItem';
@@ -12,26 +12,33 @@ import { ShopItem } from '../../../../shared/classes/ShopItem';
   templateUrl: './shop-list.component.html',
   styleUrls: ['./shop-list.component.scss'],
 })
-export class ShopListComponent implements OnInit {
+export class ShopListComponent implements OnInit, OnDestroy {
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
+
   disableScroll = true;
   products: Array<IShopItem> = [];
   count!: number;
-
-  searchQuery: IQuery = {
-    page_size: 12,
-    page: 1,
-    filterChanged: false,
-  };
+  searchQuery: IQuery;
 
   constructor(
     private shopService: ShopService,
     private filterShopService: FilterShopService,
-  ) {}
+  ) {
+    this.searchQuery = { ...this.filterShopService.initialQuery };
+  }
 
   ngOnInit(): void {
-    this.filterShopService.productsSubject.subscribe((data: IQuery) => {
-      this.getProducts(data);
-    });
+    this.filterShopService.productsSubject
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((data: IQuery) => {
+        this.getProducts(data);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+    this.filterShopService.setQuery({ ...this.filterShopService.initialQuery });
   }
 
   getMoreProducts(): void {
@@ -64,6 +71,8 @@ export class ShopListComponent implements OnInit {
                 item.quantity,
                 item.updated_at,
                 item.url,
+                item.amount,
+                item.main_image,
               ),
           );
           return;
