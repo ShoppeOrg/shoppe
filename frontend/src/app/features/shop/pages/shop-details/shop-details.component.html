@@ -1,4 +1,4 @@
-<main class="main" *ngIf="shopItem | async as item">
+<main class="main" *ngIf="shopItem$ | async as item">
   <div class="main__container">
     <section class="shope-header">
       <div class="box">
@@ -9,7 +9,7 @@
         <section class="shope-header-slider">
           <div class="container">
             <div class="shope-header-slider__list">
-              <img src="assets/images/earrings.png" />
+              <img [src]="'http://localhost:8000' + item.main_image" />
             </div>
           </div>
         </section>
@@ -24,7 +24,7 @@
 
               <article class="shope-header-product__rating">
                 <div class="shope-header-product__rating-stars">
-                  <img [src]="'http://localhost:8000' + item.main_image" />
+                  <img src="./assets/icons/Stars_rating.svg" />
                 </div>
               </article>
 
@@ -182,29 +182,22 @@
         <p>Similar Items</p>
       </article>
 
-      <article>
-        <div class="shoppe-footer__name">
-          <a href="#"> Hal Earrings</a>
-        </div>
-        <div class="shoppe-footer__price">
-          <p>$ 25,00</p>
-        </div>
-      </article>
-
-      <article class="shoppe-footer__item">
+      <article
+        class="shoppe-footer__item"
+        *ngFor="let similarItem of (similarItems$ | async)?.results">
         <div class="shoppe-footer__goods-container">
           <a href="#" class="shoppe-footer__img">
-            <img src="./assets/images/products-footer-3.jpg" />
+            <img [src]="similarItem.main_image" />
           </a>
           <div class="shoppe-footer__overlay">
             <a class="shoppe-footer__overlay-text" href="#">SELECT OPTION</a>
           </div>
         </div>
         <div class="shoppe-footer__name">
-          <a href="#">Kaede Hair Pin Set Of 3</a>
+          <a href="#">{{ similarItem.name }}</a>
         </div>
         <div class="shoppe-footer__price">
-          <p>$ 30,00</p>
+          <p>{{ similarItem.price }}</p>
         </div>
       </article>
     </section>
