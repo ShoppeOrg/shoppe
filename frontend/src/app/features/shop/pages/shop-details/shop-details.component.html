@@ -205,7 +205,8 @@
 
         <article class="mat-tab-group-wrapper">
           <mat-tab class="shoppe-body__item" label="Reviews(0)">
-            <div class="shoppe-body__item-message-reviews">
+           
+            <div class="shoppe-body__item-dosent-message-reviews-container">
               <p class="shoppe-body__item-heading">Reviews</p>
               <p class="shoppe-body__item-message">
                 <span class="shoppe-body__item-message-icon"
@@ -214,6 +215,61 @@
                 There are no reviews yet.
               </p>
             </div>
+
+            <p class="shoppe-body__item-heading">
+              2 Reviews for lira earings
+            </p>
+            <div class="shoppe-body__item-message-reviews-container">
+        
+              <p class="shoppe-body__item-message-name">
+                Scarlet withch<span>6 May, 2020</span>
+              </p>
+              <div class="shoppe-body__item-message-rating-stars">
+                <ng-container *ngFor="let rating of ratings; index as i">
+                  <ngx-material-rating
+                    [color]="rating.color"
+                    [disabled]="rating.disabled || false"
+                    [dense]="rating.dense || false"
+                    [readonly]="rating.readonly || false"
+                    [(ngModel)]="ratings[i].value"
+                    [max]="5">
+                  </ngx-material-rating>
+                </ng-container>
+              </div>
+              <p class="shoppe-body__item-message-comment">
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia, looked up
+                one of the more obscure Latin words, consectetur, from a Lorem
+                Ipsum passage, and going through the cites of the word in
+                classical literature, discovered the undoubtable source. 
+              </p>
+              <div class="shoppe-body__item-message-line"></div>
+            </div>
+
+            <div class="shoppe-body__item-message-reviews-container">       
+              <p class="shoppe-body__item-message-name">
+                Sasha Pozden<span>15 May, 1990</span>
+              </p>
+              <div class="shoppe-body__item-message-rating-stars">
+                <ng-container *ngFor="let rating of ratings; index as i">
+                  <ngx-material-rating
+                    [color]="rating.color"
+                    [disabled]="rating.disabled || false"
+                    [dense]="rating.dense || false"
+                    [readonly]="rating.readonly || false"
+                    [(ngModel)]="ratings[i].value"
+                    [max]="5">
+                  </ngx-material-rating>
+                </ng-container>
+              </div>
+              <p class="shoppe-body__item-message-comment">
+                I have beautiful avatars on my telegram.
+              </p>
+              <div class="shoppe-body__item-message-line"></div>
+            </div>
+
           </mat-tab>
         </article>
       </mat-tab-group>
