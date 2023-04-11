@@ -11,6 +11,13 @@
       </div>
       <p>Total: {{ total | currency }}</p>
     </div>
-    <button [disabled]="arraysAreIdentical(cartItems,prevCartItems)" (click)="updateCart()">Update Cart</button>
+    <button
+      *ngIf="!!cartItems.length"
+      [disabled]="arraysAreIdentical(cartItems, prevCartItems)"
+      (click)="updateCart()">
+      Update Cart
+    </button>
+    <button (click)="checkout()">PROCEED TO CHECKOUT</button>
+
   </div>
 </section>

@@ -9,4 +9,5 @@ export interface IShopItem {
   updated_at: Date;
   url: string;
   amount: number;
+  main_image: string;
 }

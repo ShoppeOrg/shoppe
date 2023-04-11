@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { CartService } from '../../../../shared/services/cart.service';
 import { IShopItem } from '../../../../shared/interfaces/IShopItem';
@@ -12,22 +14,24 @@ export class CartComponent implements OnInit {
   cartItems: Array<IShopItem> = [];
   prevCartItems: Array<IShopItem> = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.cartService.loadCart();
+    this.getCartItems();
+  }
+
+  getCartItems(): void {
     this.cartItems = this.cartService.getProducts();
     this.prevCartItems = JSON.parse(JSON.stringify(this.cartItems));
   }
 
-  get total() {
-    return this.cartItems.reduce(
-      (sum, product) => ({
-        quantity: 1,
-        price: sum.price + product.amount * +product.price,
-      }),
-      { quantity: 1, price: 0 },
-    ).price;
+  get total(): number {
+    return this.cartService.getTotal();
   }
 
   arraysAreIdentical(arr1: IShopItem[], arr2: IShopItem[]): boolean {
@@ -39,5 +43,10 @@ export class CartComponent implements OnInit {
 
   updateCart(): void {
     this.cartService.updateCart(this.cartItems);
+    this.getCartItems();
+  }
+
+  checkout(): void {
+    this.router.navigate(['checkout'], { relativeTo: this.route });
   }
 }

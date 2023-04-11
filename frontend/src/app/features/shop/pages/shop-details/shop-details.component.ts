@@ -7,6 +7,7 @@ import { ShopService } from '../../services/shop.service';
 import { IShopItem } from '../../../../shared/interfaces/IShopItem';
 import { Observable, tap } from 'rxjs';
 import { CartService } from '../../../../shared/services/cart.service';
+import { IShopData } from '../../../../shared/interfaces/IShopData';
 
 @Component({
   selector: 'app-shop-details',
@@ -15,8 +16,9 @@ import { CartService } from '../../../../shared/services/cart.service';
 })
 export class ShopDetailsComponent implements OnInit {
   public form: FormGroup;
+  similarItems$!: Observable<IShopData>;
 
-  shopItem!: Observable<IShopItem>;
+  shopItem$!: Observable<IShopItem>;
 
   constructor(
     private fb: FormBuilder,
@@ -33,9 +35,11 @@ export class ShopDetailsComponent implements OnInit {
     this.route.params.subscribe(() => {
       const id = this.route.snapshot.paramMap.get('id');
       if (!!id) {
-        this.shopItem = this.shopService
+        this.shopItem$ = this.shopService
           .getProduct(id)
           .pipe(tap(item => (item.amount = 1)));
+
+        this.similarItems$ = this.shopService.getSimilarItems(id);
       }
     });
   }
