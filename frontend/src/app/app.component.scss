@@ -3,4 +3,15 @@
   max-width: 1278px;
   margin: 0 auto;
   padding: 0 15px;
+  @media screen and (max-width: 814px) {
+    width: 373px;
+  }
+
+  @media screen and (min-width: 815px) and (max-width: 1309px) {
+    width: 816px;
+  }
+
+  @media screen and (min-width: 1278px) {
+    width: 1278px;
+  }
 }

@@ -39,7 +39,6 @@
     <section class="shoppe-header-product">
       <div class="container">
         <section class="shoppe-header-product__container">
-
           <article>
             <h3 class="shoppe-header-product__headline">{{ item.name }}</h3>
             <p class="shoppe-header-product__price">
@@ -115,13 +114,24 @@
           <article class="shoppe-header-product__object-information">
             <ul class="shoppe-header-product__object-information-list">
               <li class="shoppe-header-product__object-information-item">
-                <p class="shoppe-header-product__object-information-text">SKU:</p>
-                <a class="shoppe-header-product__object-information-link-number" href="#">12</a>
+                <p class="shoppe-header-product__object-information-text">
+                  SKU:
+                </p>
+                <a
+                  class="shoppe-header-product__object-information-link-number"
+                  href="#"
+                  >12</a
+                >
               </li>
               <li class="shoppe-header-product__object-information-item">
-                <p class="shoppe-header-product__object-information-text">Categories:</p>
-                <a class="shoppe-header-product__object-information-link-number" href="#"
-                  >Fashion Style</a>
+                <p class="shoppe-header-product__object-information-text">
+                  Categories:
+                </p>
+                <a
+                  class="shoppe-header-product__object-information-link-number"
+                  href="#"
+                  >Fashion Style</a
+                >
               </li>
             </ul>
           </article>
@@ -131,136 +141,155 @@
   </section>
 
   <section class="shoppe-body">
-    <mat-tab-group
-      class="shoppe-body__list"
-      mat-align-tabs="start"
-      animationDuration="0ms">
-      <article class="shoppe-body__selction-line"></article>
+    <div class="container">
+      <mat-tab-group
+        class="shoppe-body__list"
+        mat-align-tabs="start"
+        animationDuration="0ms">
+        <article class="shoppe-body__section-line"></article>
 
-      <article class="mat-tab-group-wrapper">
-        <mat-tab class="shoppe-body__item" label="Description">
-          <p class="shoppe-body__item-paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            placerat, augue a volutpat hendrerit, sapien tortor faucibus augue,
-            a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis
-            consequat sed eu felis. Nunc sed porta augue. Morbi porta tempor
-            odio, in molestie diam bibendum sed.
-          </p>
-          <ul class="shoppe-body__item-list">
-            <li>-Lorem ipsum</li>
-            <li>-dolor sit amet, consectetur adipiscing elit</li>
-            <li>-Sed ac ultrices elit</li>
-            <li>-vitae luctus velit. Morbi in finibus</li>
-          </ul>
-        </mat-tab>
-      </article>
-      <article class="mat-tab-group-wrapper">
-        <mat-tab class="shoppe-body__item" label="Aditional information">
-          <table class="shoppe-body__table">
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row">Weight</th>
-              <td class="shoppe-body__table-row-value">3 kg</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Dimensions
-              </th>
-              <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Color
-              </th>
-              <td class="shoppe-body__table-row-value">Gold, Silver</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Material
-              </th>
-              <td class="shoppe-body__table-row-value">Gold, Silver</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                All Materials used to building
-              </th>
-              <td class="shoppe-body__table-row-value">
-                First Value, Second Value, Third Value
-              </td>
-            </tr>
-          </table>
-        </mat-tab>
-      </article>
+        <article class="mat-tab-group-wrapper">
+          <mat-tab class="shoppe-body__item" label="Description">
+            <p class="shoppe-body__item-paragraph">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              placerat, augue a volutpat hendrerit, sapien tortor faucibus
+              augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
+              facilisis consequat sed eu felis. Nunc sed porta augue. Morbi
+              porta tempor odio, in molestie diam bibendum sed.
+            </p>
+            <ul class="shoppe-body__item-list">
+              <li>-Lorem ipsum</li>
+              <li>-dolor sit amet, consectetur adipiscing elit</li>
+              <li>-Sed ac ultrices elit</li>
+              <li>-vitae luctus velit. Morbi in finibus</li>
+            </ul>
+          </mat-tab>
+        </article>
 
-      <article class="mat-tab-group-wrapper">
-        <mat-tab class="shoppe-body__item" label="Reviews(0)">
-          <p class="shoppe-body__item-paragraph">Ізі хуйня</p>
-        </mat-tab>
-      </article>
-    </mat-tab-group>
+        <article class="mat-tab-group-wrapper">
+          <mat-tab class="shoppe-body__item" label="Aditional information">
+            <table class="shoppe-body__table">
+              <tr>
+                <th class="shoppe-body__table-row-name" scope="row">Weight</th>
+                <td class="shoppe-body__table-row-value">3 kg</td>
+              </tr>
+              <tr>
+                <th class="shoppe-body__table-row-name" scope="row" scope="row">
+                  Dimensions
+                </th>
+                <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
+              </tr>
+              <tr>
+                <th class="shoppe-body__table-row-name" scope="row" scope="row">
+                  Color
+                </th>
+                <td class="shoppe-body__table-row-value">Gold, Silver</td>
+              </tr>
+              <tr>
+                <th class="shoppe-body__table-row-name" scope="row" scope="row">
+                  Material
+                </th>
+                <td class="shoppe-body__table-row-value">Gold, Silver</td>
+              </tr>
+              <tr>
+                <th class="shoppe-body__table-row-name" scope="row" scope="row">
+                  All Materials used to building
+                </th>
+                <td class="shoppe-body__table-row-value">
+                  First Value, Second Value, Third Value
+                </td>
+              </tr>
+            </table>
+          </mat-tab>
+        </article>
+
+        <article class="mat-tab-group-wrapper">
+          <mat-tab class="shoppe-body__item" label="Reviews(0)">
+            <div class="shoppe-body__item-message-reviews">
+              <p class="shoppe-body__item-heading">Reviews</p>
+              <p class="shoppe-body__item-message">
+                <span class="shoppe-body__item-message-icon"
+                  ><img src="./assets/icons/alert-square.svg" />
+                </span>
+                There are no reviews yet.
+              </p>
+            </div>
+          </mat-tab>
+        </article>
+      </mat-tab-group>
+    </div>
   </section>
 
   <section class="shoppe-footer">
-    <article class="shoppe-footer__title">
-      <p>Similar Items</p>
-    </article>
-
-    <article class="shoppe-footer__column-goods">
-      <article class="shoppe-footer__item">
-        <div class="shoppe-footer__good-container">
-          <div class="shoppe-footer__good-hover-container">
-            <a href="#" class="shoppe-footer__img">
-              <img src="./assets/images/similar-items-1.jpg" />
-            </a>
-            <div class="shoppe-footer__overlay">
-              <a class="shoppe-footer__overlay-text" href="#">SELECT OPTION</a>
-            </div>
-          </div>
-        </div>
-        <div class="shoppe-footer__name">
-          <a href="#">Ollie Earrings</a>
-        </div>
-        <div class="shoppe-footer__price">
-          <p>$ 30,00</p>
-        </div>
+    <div class="container">
+      <article class="shoppe-footer__title">
+        <p>Similar Items</p>
       </article>
 
-      <article class="shoppe-footer__item">
-        <div class="shoppe-footer__good-container">
-          <div class="shoppe-footer__good-hover-container">
-            <a href="#" class="shoppe-footer__img">
-              <img src="./assets/images/similar-items-2.jpg" />
-            </a>
-            <div class="shoppe-footer__overlay">
-              <a class="shoppe-footer__overlay-text" href="#">SELECT OPTION</a>
+      <article class="shoppe-footer__column-goods">
+        <article class="shoppe-footer__item">
+          <div class="shoppe-footer__good-container">
+            <div class="shoppe-footer__good-hover-container">
+              <a href="#" class="shoppe-footer__img">
+                <img src="./assets/images/similar-items-1.jpg" />
+              </a>
+              <div class="shoppe-footer__overlay">
+                <a class="shoppe-footer__overlay-text" href="#"
+                  >SELECT OPTION</a
+                >
+              </div>
             </div>
           </div>
-        </div>
-        <div class="shoppe-footer__name">
-          <a href="#">Hal Earrings</a>
-        </div>
-        <div class="shoppe-footer__price">
-          <p>$ 25,00</p>
-        </div>
-      </article>
+          <div class="shoppe-footer__name">
+            <a href="#">Ollie Earrings</a>
+          </div>
+          <div class="shoppe-footer__price">
+            <p>$ 30,00</p>
+          </div>
+        </article>
 
-      <article class="shoppe-footer__item">
-        <div class="shoppe-footer__good-container">
-          <div class="shoppe-footer__good-hover-container">
-            <a href="#" class="shoppe-footer__img">
-              <img src="./assets/images/similar-items-3.jpg" />
-            </a>
-            <div class="shoppe-footer__overlay">
-              <a class="shoppe-footer__overlay-text" href="#">SELECT OPTION</a>
+        <article class="shoppe-footer__item">
+          <div class="shoppe-footer__good-container">
+            <div class="shoppe-footer__good-hover-container">
+              <a href="#" class="shoppe-footer__img">
+                <img src="./assets/images/similar-items-2.jpg" />
+              </a>
+              <div class="shoppe-footer__overlay">
+                <a class="shoppe-footer__overlay-text" href="#"
+                  >SELECT OPTION</a
+                >
+              </div>
             </div>
           </div>
-        </div>
-        <div class="shoppe-footer__name">
-          <a href="#">Kaede Hair Pin Set Of 3</a>
-        </div>
-        <div class="shoppe-footer__price">
-          <p>$ 30,00</p>
-        </div>
+          <div class="shoppe-footer__name">
+            <a href="#">Hal Earrings</a>
+          </div>
+          <div class="shoppe-footer__price">
+            <p>$ 25,00</p>
+          </div>
+        </article>
+
+        <article class="shoppe-footer__item">
+          <div class="shoppe-footer__good-container">
+            <div class="shoppe-footer__good-hover-container">
+              <a href="#" class="shoppe-footer__img">
+                <img src="./assets/images/similar-items-3.jpg" />
+              </a>
+              <div class="shoppe-footer__overlay">
+                <a class="shoppe-footer__overlay-text" href="#"
+                  >SELECT OPTION</a
+                >
+              </div>
+            </div>
+          </div>
+          <div class="shoppe-footer__name">
+            <a href="#">Kaede Hair Pin Set Of 3</a>
+          </div>
+          <div class="shoppe-footer__price">
+            <p>$ 30,00</p>
+          </div>
+        </article>
       </article>
-    </article>
+    </div>
   </section>
 </main>
