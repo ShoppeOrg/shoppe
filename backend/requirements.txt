@@ -83,7 +83,7 @@ pytz==2023.2
 pytzdata==2020.1
 PyYAML==6.0
 git+https://github.com/OleksandrPozden/random_username.git@43cc9989192d88e132799084b0a768796c58d603
-rapidfuzz==2.13.7
+rapidfuzz==2.15.1
 requests==2.28.2
 requests-toolbelt==0.10.1
 scikit-learn==1.2.2
