@@ -31,7 +31,7 @@ class Picture(Model):
         )
 
     def save(self, *args, **kwargs):
-        _, ext = self.picture.name.split(".")
+        *_, ext = self.picture.name.split(".")
         self.picture.name = f"{uuid4()}.{ext}"
         super().save(*args, **kwargs)
 
