@@ -9,7 +9,35 @@
         <section class="shope-header-slider">
           <div class="container">
             <div class="shope-header-slider__list">
-              <img [src]="'http://localhost:8000' + item.main_image" />
+              <owl-carousel-o
+                [options]="customOptions"
+                class="carousel__wrapper--visible">
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+              </owl-carousel-o>
             </div>
           </div>
         </section>
@@ -113,68 +141,129 @@
     </section>
 
     <section class="shoppe-body">
-      <mat-tab-group
-        class="shoppe-body__list"
-        mat-align-tabs="start"
-        animationDuration="0ms">
-        <article class="shoppe-body__selction-line"></article>
+      <div class="container">
+        <mat-tab-group
+          class="shoppe-body__list"
+          mat-align-tabs="start"
+          animationDuration="0ms">
+          <article class="shoppe-body__section-line"></article>
 
-        <mat-tab class="shoppe-body__item" label="Description">
-          <p class="shoppe-body__item-paragraph">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            placerat, augue a volutpat hendrerit, sapien tortor faucibus augue,
-            a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis
-            consequat sed eu felis. Nunc sed porta augue. Morbi porta tempor
-            odio, in molestie diam bibendum sed.
-          </p>
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Description">
+              <p class="shoppe-body__item-paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                placerat, augue a volutpat hendrerit, sapien tortor faucibus
+                augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
+                facilisis consequat sed eu felis. Nunc sed porta augue. Morbi
+                porta tempor odio, in molestie diam bibendum sed.
+              </p>
+              <ul class="shoppe-body__item-list">
+                <li>-Lorem ipsum</li>
+                <li>-dolor sit amet, consectetur adipiscing elit</li>
+                <li>-Sed ac ultrices elit</li>
+                <li>-vitae luctus velit. Morbi in finibus</li>
+              </ul>
+            </mat-tab>
+          </article>
 
-          <ul class="shoppe-body__item-list">
-            <li>-Lorem ipsum</li>
-            <li>-dolor sit amet, consectetur adipiscing elit</li>
-            <li>-Sed ac ultrices elit</li>
-            <li>-vitae luctus velit. Morbi in finibus</li>
-          </ul>
-        </mat-tab>
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Aditional information">
+              <table class="shoppe-body__table">
+                <tr>
+                  <th class="shoppe-body__table-row-name" scope="row">
+                    Weight
+                  </th>
+                  <td class="shoppe-body__table-row-value">3 kg</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Dimensions
+                  </th>
+                  <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Color
+                  </th>
+                  <td class="shoppe-body__table-row-value">Gold, Silver</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Material
+                  </th>
+                  <td class="shoppe-body__table-row-value">Gold, Silver</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    All Materials used to building
+                  </th>
+                  <td class="shoppe-body__table-row-value">
+                    First Value, Second Value, Third Value
+                  </td>
+                </tr>
+              </table>
+            </mat-tab>
+          </article>
 
-        <mat-tab class="shoppe-body__item" label="Aditional information">
-          <table class="shoppe-body__table">
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row">Weight</th>
-              <td class="shoppe-body__table-row-value">3 kg</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Dimensions
-              </th>
-              <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Color
-              </th>
-              <td class="shoppe-body__table-row-value">Gold, Silver</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                Material
-              </th>
-              <td class="shoppe-body__table-row-value">Gold, Silver</td>
-            </tr>
-            <tr>
-              <th class="shoppe-body__table-row-name" scope="row" scope="row">
-                All Materials used to building
-              </th>
-              <td class="shoppe-body__table-row-value">
-                First Value, Second Value, Third Value
-              </td>
-            </tr>
-          </table>
-        </mat-tab>
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Reviews(0)">
+              <div class="shoppe-body__item-dosent-message-reviews-container">
+                <p class="shoppe-body__item-heading">Reviews</p>
+                <p class="shoppe-body__item-message">
+                  <span class="shoppe-body__item-message-icon"
+                    ><img src="./assets/icons/alert-square.svg" />
+                  </span>
+                  There are no reviews yet.
+                </p>
+              </div>
 
-        <mat-tab class="shoppe-body__item" label="Reviews(0)">
-          <p class="shoppe-body__item-paragraph">Ізі хуйня</p>
-        </mat-tab>
-      </mat-tab-group>
+              <p class="shoppe-body__item-heading">
+                2 Reviews for lira earings
+              </p>
+              <div class="shoppe-body__item-message-reviews-container">
+                <p class="shoppe-body__item-message-name">
+                  Scarlet withch<span>6 May, 2020</span>
+                </p>
+                <div class="shoppe-body__item-message-rating-stars"></div>
+                <p class="shoppe-body__item-message-comment">
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur,
+                  from a Lorem Ipsum passage, and going through the cites of the
+                  word in classical literature, discovered the undoubtable
+                  source.
+                </p>
+                <div class="shoppe-body__item-message-line"></div>
+              </div>
+
+              <div class="shoppe-body__item-message-reviews-container">
+                <p class="shoppe-body__item-message-name">
+                  Sasha Pozden<span>15 May, 1990</span>
+                </p>
+                <div class="shoppe-body__item-message-rating-stars"></div>
+                <p class="shoppe-body__item-message-comment">
+                  I have beautiful avatars on my telegram.
+                </p>
+                <div class="shoppe-body__item-message-line"></div>
+              </div>
+            </mat-tab>
+          </article>
+        </mat-tab-group>
+      </div>
     </section>
 
     <section class="shoppe-footer">
