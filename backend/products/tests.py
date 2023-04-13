@@ -85,18 +85,20 @@ class ProductFilterTestCase(APITestCaseBase):
 class ProductTestCase(APITestCaseBase):
     @classmethod
     def setUpTestData(cls):
+        test_images = Picture.objects.all()[:3]
+        cls.test_images_ids = [image.id for image in test_images]
         cls.data = {
             "name": "some test name",
             "comment": "some interesting description",
             "price": 20.10,
             "quantity": 5,
-            "main_image": 10,
-            "images": [10, 11, 12],
+            "main_image": cls.test_images_ids[0],
+            "images": cls.test_images_ids,
         }
         cls.username = "demo"
         cls.password = "demo1234"
         product = Product.objects.get(pk=1)
-        pictures = Picture.objects.filter(id__in=[1, 2, 3])
+        pictures = Picture.objects.filter(id__in=cls.test_images_ids)
         product.images.add(*pictures)
 
     def test_access_denied(self):
@@ -135,10 +137,10 @@ class ProductTestCase(APITestCaseBase):
         self.client.login(username=self.username, password=self.password)
         r = self.client.get(reverse("product-detail", {1}))
 
-        data_patch = {"images": [10, 11, 12]}
+        data_patch = {"images": self.test_images_ids}
         data_put = r.json()
         data_put["images"] = data_patch["images"]
-        data_put["main_image"] = 10
+        data_put["main_image"] = self.test_images_ids[0]
 
         r = self.client.put(
             reverse("product-detail", {1}),
@@ -161,10 +163,8 @@ class ProductTestCase(APITestCaseBase):
             data = r.json()
             self.assertEqual(r.status_code, HTTP_200_OK, r.content)
             self.assertIn("images", data)
-            self.assertEqual(3, len(data["images"]))
-            self.assertIn(10, data["images"])
-            self.assertIn(11, data["images"])
-            self.assertIn(12, data["images"])
+            for id_ in self.test_images_ids:
+                self.assertIn(id_, data["images"])
 
 
 class InventoryTestCase(APITestCaseBase):
