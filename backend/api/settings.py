@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "drfpasswordless",
+    "drf_spectacular",
     "rest_framework",
     "rest_framework.authtoken",
     "user",
@@ -59,6 +60,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
     "DEFAULT_PAGINATION_CLASS": "api.core.pagination.ExtendedPageNumberPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 PASSWORDLESS_AUTH = {
@@ -67,7 +69,18 @@ PASSWORDLESS_AUTH = {
         "PASSWORDLESS_EMAIL_NOREPLY_ADDRESS"
     ),
     "PASSWORDLESS_EMAIL_TOKEN_HTML_TEMPLATE_NAME": "email_callback_token_template.html",
+    "PASSWORDLESS_AUTH_TOKEN_SERIALIZER": "user.serializers.TokenResponseSerializer",
 }
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Shoppe API",
+    "DESCRIPTION": "This is full descriptive documentation of Shoppe API "
+    "written on Django and Django Rest Framework",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    "DISABLE_ERRORS_AND_WARNINGS": True,
+}
+
 
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -139,6 +152,6 @@ MEDIA_URL = "/images/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-ALLOWED_FILE_EXTENSIONS = ["jpg", "png"]
+ALLOWED_FILE_EXTENSIONS = ["jpg", "jpeg", "png"]
 
 AUTH_USER_MODEL = "user.User"

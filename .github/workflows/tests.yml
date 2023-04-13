@@ -1,0 +1,61 @@
+name: Integration tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+
+env:
+  DEBUG: True
+  SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+  PASSWORDLESS_EMAIL_NOREPLY_ADDRESS: ${{ secrets.PASSWORDLESS_EMAIL_NOREPLY_ADDRESS }}
+  IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
+  EMAIL_TEST_PASSWORD: ${{ secrets.EMAIL_TEST_PASSWORD }}
+  EMAIL_TEST_LOGIN: ${{ secrets.EMAIL_TEST_LOGIN }}
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.11.2
+      uses: actions/setup-python@v3
+      with:
+        python-version: 3.11.2
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Tests
+      run: |
+        python3 manage.py test
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+        
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: 'npm'
+        cache-dependency-path: ./frontend/package-lock.json
+    - name: Install Dependencies
+      run: |
+        npm ci
+        npm install -g @angular/cli@latest
+    - name: Build Project
+      run: npm run build --if-present
+    - name: Run Tests
+      run: echo "Run tests. This step was skipped as no test were found."
+ 
