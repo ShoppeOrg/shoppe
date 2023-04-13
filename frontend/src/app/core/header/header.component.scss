@@ -1,10 +1,13 @@
 @import '../../../styles/_variables.scss';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid $tertiary-color;
+  &__container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $tertiary-color;
+  }
+
   &__logo {
     flex-basis: 25%;
     max-width: 25%;

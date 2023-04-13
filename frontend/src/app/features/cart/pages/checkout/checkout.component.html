@@ -1,0 +1,13 @@
+<section class="checkout">
+  <div class="checkout__container">
+    <div class="checkout__header">
+      <h2 class="checkout__title">Checkout</h2>
+    </div>
+  </div>
+  <div class="order">
+    <div class="order__item" *ngFor="let item of cartItems">
+      {{ item.name }} - {{ item.price | currency }} (x{{item.amount}})
+    </div>
+    <div>Total - {{ total | currency }}</div>
+  </div>
+</section>

@@ -8,7 +8,7 @@ import { IQuery } from '../interfaces/IQuery';
 export class FilterShopService {
   initialQuery: IQuery = {
     page: 1,
-    page_size: 12,
+    page_size: 21,
     filterChanged: false
   };
   productsSubject = new BehaviorSubject(this.initialQuery);
