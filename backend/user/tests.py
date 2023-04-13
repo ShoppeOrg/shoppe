@@ -49,7 +49,6 @@ class AuthTestCase(APITestCase):
         cls.user = get_user_model().objects.filter(is_staff=False).first()
 
     def test_auth_token_response(self):
-        print("hello?", self.user)
         callback_token = CallbackToken.objects.create(
             user=self.user, to_alias_type="EMAIL", to_alias=self.user.email, type="AUTH"
         )
