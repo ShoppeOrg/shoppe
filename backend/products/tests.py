@@ -315,7 +315,7 @@ class ProductMostRelatedTestCase(APITestCaseBase):
     def test_related(self):
         r = self.client.get(reverse("product_related"), {"id": self.obj.id})
         self.assertEqual(r.status_code, HTTP_200_OK, r.content)
-        result = r.json()["results"]
+        result = r.json()
         result_ids = [item["id"] for item in result]
         self.assertNotIn(self.obj.id, result_ids)
         for sibling in self.siblings:
