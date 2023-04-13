@@ -25,9 +25,10 @@ class Picture(Model):
     def url(self):
         return self.picture.url
 
-    def image_tag(self):  # new
+    def image_preview(self):  # new
         return mark_safe(
-            '<img src="/images/%s" width="150" height="150" />' % self.picture
+            '<a href="%s"><img src="%s" width="150" height="150" /></a>'
+            % (self.picture.url, self.picture.url)
         )
 
     def save(self, *args, **kwargs):

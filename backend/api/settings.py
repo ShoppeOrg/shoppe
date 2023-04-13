@@ -110,12 +110,14 @@ TEMPLATES = [
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
+
 
 WSGI_APPLICATION = "api.wsgi.application"
 

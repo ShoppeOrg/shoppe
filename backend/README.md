@@ -24,6 +24,8 @@ Table of content
     DJANGO_SECRET_KEY=
     DJANGO_DEBUG=
     PASSWORDLESS_EMAIL_NOREPLY_ADDRESS=
+    GOOGLE_APPLICATION_CREDENTIALS=
+    GS_BUCKET_NAME=
 ```
 (Ask an administrator for the values)
 
