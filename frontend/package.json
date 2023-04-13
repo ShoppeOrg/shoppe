@@ -24,6 +24,7 @@
     "core-js": "^2.5.7",
     "ngx-cookie-service": "^15.0.0",
     "ngx-infinite-scroll": "^15.0.0",
+    "ngx-owl-carousel-o": "^15.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
