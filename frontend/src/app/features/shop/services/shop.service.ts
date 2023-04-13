@@ -33,4 +33,16 @@ export class ShopService {
       }),
     );
   }
+
+  getSimilarItems(id: string): Observable<IShopData> {
+    const params = { id };
+    return this.http
+      .get<IShopData>(`${environment.api}/products/related/`, { params })
+      .pipe(
+        catchError(() => {
+          let errorMessage = 'An unknown error occurred!';
+          return throwError(() => errorMessage);
+        }),
+      );
+  }
 }

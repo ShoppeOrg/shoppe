@@ -9,7 +9,7 @@ import { ShopFilterComponent } from './components/shop-filter/shop-filter.compon
 import { ShopListComponent } from './components/shop-list/shop-list.component';
 import { ShopItemComponent } from './components/shop-item/shop-item.component';
 import { MaterialModule } from '../../material.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ShopDetailsComponent } from './pages/shop-details/shop-details.component';
 
 @NgModule({
@@ -20,14 +20,15 @@ import { ShopDetailsComponent } from './pages/shop-details/shop-details.componen
     ShopItemComponent,
     ShopDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    ShopRoutingModule,
-    SharedModule,
-    MaterialModule,
-    InfiniteScrollModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        ShopRoutingModule,
+        SharedModule,
+        MaterialModule,
+        InfiniteScrollModule,
+        ReactiveFormsModule,
+        FormsModule
+    ],
   providers: [],
 })
 export class ShopModule {}

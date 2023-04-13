@@ -18,6 +18,8 @@ export class CartService {
   }
 
   addToCart(shopItem: IShopItem): void {
+    this.loadCart();
+    console.log('cart', this.shopList)
     const selectedItemIndex = this.findShopItemIndex(shopItem);
     if (selectedItemIndex > -1) {
       this.shopList[selectedItemIndex] = {
@@ -52,5 +54,15 @@ export class CartService {
 
   updateCart(shopList: Array<IShopItem>): void {
     localStorage.setItem('cart_items', JSON.stringify(shopList));
+  }
+
+  getTotal(): number {
+    return this.shopList.reduce(
+      (sum, product) => ({
+        quantity: 1,
+        price: sum.price + product.amount * +product.price,
+      }),
+      { quantity: 1, price: 0 },
+    ).price;
   }
 }

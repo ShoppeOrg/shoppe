@@ -1,0 +1,10 @@
+.checkout{
+  height:100vh;
+  &__title{
+    margin-top: 4rem;
+    text-align:center;
+    font-weight: 500;
+    font-size: 2rem;
+    line-height: 1.3;
+  }
+}
