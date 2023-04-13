@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from django.core.files import File
+from django.test import override_settings
 from pictures.models import Picture
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
@@ -10,6 +11,16 @@ from rest_framework.status import HTTP_401_UNAUTHORIZED
 from rest_framework.test import APITestCase
 
 
+@override_settings(
+    STORAGES={
+        "default": {
+            "BACKEND": "django.core.files.storage.InMemoryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
+)
 class APITestCaseBase(APITestCase):
     fixtures = ["fixture.json"]
 
