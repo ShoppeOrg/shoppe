@@ -14,6 +14,7 @@ env:
   EMAIL_TEST_PASSWORD: ${{ secrets.EMAIL_TEST_PASSWORD }}
   EMAIL_TEST_LOGIN: ${{ secrets.EMAIL_TEST_LOGIN }}
   DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+  GS_BUCKET_NAME: ${{ secrets.GS_BUCKET_NAME }}
 
 jobs:
   backend:
