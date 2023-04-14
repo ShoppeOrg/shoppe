@@ -20,13 +20,13 @@ $shoppe-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $shoppe-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $shoppe-primary,
-      accent: $shoppe-accent,
-      warn: $shoppe-warn,
-    ),
-  )
+    (
+      color: (
+        primary: $shoppe-primary,
+        accent: $shoppe-accent,
+        warn: $shoppe-warn,
+      ),
+    )
 );
 
 // Include theme styles for core and each component used in your app.
@@ -87,7 +87,7 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
 
 .mdc-text-field--filled .mdc-line-ripple:after,
 .mdc-text-field--filled:not(.mdc-text-field--invalid):hover
-  .mdc-line-ripple:before,
+.mdc-line-ripple:before,
 .mdc-text-field--filled:not(.mdc-text-field--invalid) .mdc-line-ripple:before {
   border-width: 1px;
   border-bottom-color: $tertiary-color;
@@ -96,7 +96,7 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
 .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(
     .mdc-text-field--textarea
   )
-  .mat-mdc-form-field-infix {
+.mat-mdc-form-field-infix {
   padding-bottom: 8px;
   padding-top: 0;
 }
@@ -113,7 +113,7 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
 }
 
 .mdc-text-field--invalid:not(.mdc-text-field--disabled)
-  .mdc-line-ripple:before {
+.mdc-line-ripple:before {
   border-bottom-color: $error-color;
 }
 
@@ -163,9 +163,9 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   height: 3px !important;
   top: calc(
     (
-        var(--mdc-slider-inactive-track-height, 4px) -
-          var(--mdc-slider-active-track-height, 3px)
-      ) / 2
+    var(--mdc-slider-inactive-track-height, 4px) -
+    var(--mdc-slider-active-track-height, 3px)
+    ) / 2
   ) !important;
 }
 
@@ -173,4 +173,26 @@ mat-form-field .mdc-text-field--filled:not(.mdc-text-field--disabled) {
   border-radius: 0 !important;
   width: 2px !important;
   border-width: 2px !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+> .mat-mdc-tab-header
+.mat-mdc-tab {
+  flex-grow: 0 !important;
+  margin-right: 96px;
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label,
+.mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active
+.mdc-tab__text-label {
+  color: rgb(0, 0, 0) !important;
+}
+
+.mat-mdc-tab:not(.mat-mdc-tab-disabled) .mdc-tab-indicator__content--underline,
+.mat-mdc-tab-link:not(.mat-mdc-tab-disabled)
+.mdc-tab-indicator__content--underline {
+  border-color: var(
+      --mdc-tab-indicator-active-indicator-color,
+      rgb(0, 0, 0)
+  ) !important;
 }
