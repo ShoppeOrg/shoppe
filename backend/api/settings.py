@@ -108,14 +108,12 @@ TEMPLATES = [
     },
 ]
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.gcloud.GoogleCloudStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-    },
-}
+DEFAULT_FILE_STORAGE = (
+    "django.core.files.storage.InMemoryStorage"
+    if os.getenv("TESTING", False)
+    else "storages.backends.gcloud.GoogleCloudStorage"
+)
+
 GS_BUCKET_NAME = os.environ.get("GS_BUCKET_NAME")
 
 
