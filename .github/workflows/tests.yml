@@ -8,6 +8,7 @@ on:
 
 env:
   DEBUG: True
+  TESTING: True
   SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
   PASSWORDLESS_EMAIL_NOREPLY_ADDRESS: ${{ secrets.PASSWORDLESS_EMAIL_NOREPLY_ADDRESS }}
   IMAP_SERVER: ${{ secrets.IMAP_SERVER }}
@@ -15,7 +16,6 @@ env:
   EMAIL_TEST_LOGIN: ${{ secrets.EMAIL_TEST_LOGIN }}
   DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
   GS_BUCKET_NAME: ${{ secrets.GS_BUCKET_NAME }}
-  TESTING: ${{ secrets.TESTING }}
 
 jobs:
   backend:
