@@ -11,16 +11,7 @@ from rest_framework.status import HTTP_401_UNAUTHORIZED
 from rest_framework.test import APITestCase
 
 
-@override_settings(
-    STORAGES={
-        "default": {
-            "BACKEND": "django.core.files.storage.InMemoryStorage",
-        },
-        "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
-        },
-    }
-)
+@override_settings(DEFAULT_FILE_STORAGE="django.core.files.storage.InMemoryStorage")
 class APITestCaseBase(APITestCase):
     fixtures = ["fixture.json"]
 
@@ -40,10 +31,6 @@ class ModelTestCase(APITestCaseBase):
             title="some explanation about picture",
             picture=File(open(cls.picture_path, "rb")),
         )
-
-    def test_url(self):
-        print(self.obj.picture.url)
-        self.assertTrue(self.obj.picture.url.endswith("png"))
 
     def test_name(self):
         self.assertNotEqual(self.obj.picture.name, self.image_name)

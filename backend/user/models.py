@@ -1,15 +1,15 @@
 from functools import partial
 
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import UserManager
 from django.db.models import CharField
-from django.db.models import Manager
 from random_username.generate import UsernameGenerator
 
 
 random_name = partial(UsernameGenerator().generate_username, num_digits=3)
 
 
-class UserManager(Manager):
+class UserManager(UserManager):
     def create(self, *args, **kwargs):
         if "username" not in kwargs:
             kwargs["username"] = random_name()
@@ -17,7 +17,7 @@ class UserManager(Manager):
 
 
 class User(AbstractUser):
-    objects = UserManager()
+    # objects = UserManager()
 
     username = CharField(
         max_length=150,
