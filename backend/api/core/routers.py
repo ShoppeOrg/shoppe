@@ -17,7 +17,7 @@ class GeoCityRouter:
 
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         if db == "geocity":
-            return app_label == "city"
+            return app_label == "cities"
         if app_label == "cities":
-            return db != "geocity"
+            return db == "geocity"
         return True
