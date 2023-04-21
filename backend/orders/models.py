@@ -19,3 +19,11 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     quantity = models.IntegerField(validators=[MinValueValidator(1)])
+
+
+class Address(models.Model):
+    user = models.ForeignKey(
+        get_user_model(), on_delete=models.SET_NULL, default=None, blank=True, null=True
+    )
+    # city = models.ForeignKey
+    # region = models.ForeignKey
