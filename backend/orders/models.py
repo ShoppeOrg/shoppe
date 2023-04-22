@@ -1,9 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator
+from django.core.validators import RegexValidator
 from django.db import models
 from products.models import Product
 
 from .statuses import OrderStatus
+
+
+class PhoneNumberValidator(RegexValidator):
+    regex = r"^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
 
 
 class Order(models.Model):
@@ -23,7 +28,11 @@ class OrderProduct(models.Model):
 
 class Address(models.Model):
     user = models.ForeignKey(
-        get_user_model(), on_delete=models.SET_NULL, default=None, blank=True, null=True
+        get_user_model(), on_delete=models.SET_NULL, blank=True, null=True
     )
-    # city = models.ForeignKey
-    # region = models.ForeignKey
+    phone_number = models.CharField(validators=[PhoneNumberValidator()])
+    city = models.CharField(max_length=255)
+    region = models.CharField(max_length=255)
+    address = models.CharField(max_length=512)
+    building = models.CharField(max_length=4)
+    flat_number = models.CharField(max_length=5, blank=True, null=True)
