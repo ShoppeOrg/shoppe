@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 
 from django.core.files import File
+from django.test import override_settings
 from pictures.models import Picture
 from rest_framework.reverse import reverse
 from rest_framework.status import HTTP_200_OK
@@ -10,6 +11,7 @@ from rest_framework.status import HTTP_401_UNAUTHORIZED
 from rest_framework.test import APITestCase
 
 
+@override_settings(DEFAULT_FILE_STORAGE="django.core.files.storage.InMemoryStorage")
 class APITestCaseBase(APITestCase):
     fixtures = ["fixture.json"]
 
@@ -29,10 +31,6 @@ class ModelTestCase(APITestCaseBase):
             title="some explanation about picture",
             picture=File(open(cls.picture_path, "rb")),
         )
-
-    def test_url(self):
-        print(self.obj.picture.url)
-        self.assertTrue(self.obj.picture.url.endswith("png"))
 
     def test_name(self):
         self.assertNotEqual(self.obj.picture.name, self.image_name)

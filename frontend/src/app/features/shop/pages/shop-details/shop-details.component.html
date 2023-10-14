@@ -1,184 +1,294 @@
+<main class="main" *ngIf="shopItem$ | async as item">
+  <div class="main__container">
+    <section class="shope-header">
+      <div class="box">
+        <section class="shope-header-img-aside">
+          <div class="container"></div>
+        </section>
 
-<main class="main" *ngIf='(shopItem | async) as item'>
-  <section class="shope-header">
-    <div class="box">
-      <section class="shope-header-img-aside">
-        <div class="container">
-        </div>
-      </section>
-
-
-      <section class="shope-header-slider">
-        <div class="container">
-          <div  class="shope-header-slider__list">
-            <img src="assets/images/earrings.png">
+        <section class="shope-header-slider">
+          <div class="container">
+            <div class="shope-header-slider__list">
+              <owl-carousel-o
+                [options]="customOptions"
+                class="carousel__wrapper--visible">
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+                <ng-template carouselSlide>
+                  <img
+                    class="shoppe-header-slider__img"
+                    [src]="'http://localhost:8000' + item.main_image" />
+                </ng-template>
+              </owl-carousel-o>
+            </div>
           </div>
+        </section>
 
-        </div>
-      </section>
+        <section class="shope-header-product">
+          <div class="container">
+            <section class="shope-header-product__container">
+              <article class="shope-header-product__info-headline-price">
+                <h3>{{ item.name }}</h3>
+                <p>{{ item.price | currency }}</p>
+              </article>
 
-      <section class="shope-header-product">
-        <div class="container">
-          <section class="shope-header-product__container">
-            <article class="shope-header-product__info-headline-price">
-              <h3>{{item.name}}</h3>
-              <p>{{item.price | currency}}</p>
-            </article>
+              <article class="shope-header-product__rating">
+                <div class="shope-header-product__rating-stars">
+                  <img src="./assets/icons/Stars_rating.svg" />
+                </div>
+              </article>
 
-            <article class="shope-header-product__rating">
-              <div class="shope-header-product__rating-stars">
-                <img src="./assets/icons/Stars_rating.svg">
-              </div>
-            </article>
+              <article class="shope-header-product__description">
+                <p>
+                  {{ item.description }}
+                </p>
+              </article>
 
-            <article class="shope-header-product__description">
-              <p>
-                {{item.description}}
+              <article class="shope-header-product__quantity-number">
+                <button
+                  class="shope-header-product__button-add-to-cart"
+                  (click)="addToCart(item)">
+                  <span>ADD TO CART</span>
+                </button>
+              </article>
+
+              <input
+                min="1"
+                [(ngModel)]="item.amount"
+                type="number"
+                value="1" />
+
+              <article class="shope-header-product__social-list">
+                <ul>
+                  <li class="social-list__item">
+                    <a href="#">
+                      <mat-icon
+                        class="social-list__icon"
+                        svgIcon="like"></mat-icon>
+                    </a>
+                  </li>
+                  <li class="social-list__item">
+                    <span></span>
+                  </li>
+
+                  <li class="social-list__item">
+                    <a href="#">
+                      <mat-icon
+                        class="social-list__icon"
+                        svgIcon="email"></mat-icon>
+                    </a>
+                  </li>
+                  <li class="social-list__item">
+                    <a href="#">
+                      <mat-icon
+                        class="social-list__icon"
+                        svgIcon="facebook"></mat-icon>
+                    </a>
+                  </li>
+                  <li class="social-list__item">
+                    <a href="#">
+                      <mat-icon
+                        class="social-list__icon"
+                        svgIcon="instagram"></mat-icon>
+                    </a>
+                  </li>
+                  <li class="social-list__item">
+                    <a href="#">
+                      <mat-icon
+                        class="social-list__icon"
+                        svgIcon="twitter"></mat-icon>
+                    </a>
+                  </li>
+                </ul>
+              </article>
+
+              <article class="shope-header-product__object-information">
+                <ul class="object-information__list">
+                  <li class="object-information__link">
+                    <p>SKU:</p>
+                    <p class="object-information__number">12</p>
+                  </li>
+                  <li class="object-information__link">
+                    <p>Categories:</p>
+                    <a class="object-information__link-number" href="#"
+                      >Fashion Style</a
+                    >
+                  </li>
+                </ul>
+              </article>
+            </section>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="shoppe-body">
+      <div class="container">
+        <mat-tab-group
+          class="shoppe-body__list"
+          mat-align-tabs="start"
+          animationDuration="0ms">
+          <article class="shoppe-body__section-line"></article>
+
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Description">
+              <p class="shoppe-body__item-paragraph">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                placerat, augue a volutpat hendrerit, sapien tortor faucibus
+                augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
+                facilisis consequat sed eu felis. Nunc sed porta augue. Morbi
+                porta tempor odio, in molestie diam bibendum sed.
               </p>
-            </article>
-
-            <article class="shope-header-product__quantity-number">
-              <button class="shope-header-product__button-add-to-cart"><span>ADD TO CART</span></button>
-            </article>
-
-            <article class="shope-header-product__social-list">
-
-              <ul>
-                <li class="social-list__item">
-                  <a href="#">
-                    <mat-icon class="social-list__icon" svgIcon="like"></mat-icon>
-                  </a>
-                </li>
-                <li class="social-list__item">
-                  <span></span>
-                </li>
-
-                <li class="social-list__item">
-                  <a href="#">
-                    <mat-icon class="social-list__icon" svgIcon="email"></mat-icon>
-                  </a>
-                </li>
-                <li class="social-list__item">
-                  <a href="#">
-                    <mat-icon class="social-list__icon" svgIcon="facebook"></mat-icon>
-                  </a>
-                </li>
-                <li class="social-list__item">
-                  <a href="#">
-                    <mat-icon class="social-list__icon" svgIcon="instagram"></mat-icon>
-                  </a>
-                </li>
-                <li class="social-list__item">
-                  <a href="#">
-                    <mat-icon class="social-list__icon" svgIcon="twitter"></mat-icon>
-                  </a>
-                </li>
+              <ul class="shoppe-body__item-list">
+                <li>-Lorem ipsum</li>
+                <li>-dolor sit amet, consectetur adipiscing elit</li>
+                <li>-Sed ac ultrices elit</li>
+                <li>-vitae luctus velit. Morbi in finibus</li>
               </ul>
-            </article>
+            </mat-tab>
+          </article>
 
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Aditional information">
+              <table class="shoppe-body__table">
+                <tr>
+                  <th class="shoppe-body__table-row-name" scope="row">
+                    Weight
+                  </th>
+                  <td class="shoppe-body__table-row-value">3 kg</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Dimensions
+                  </th>
+                  <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Color
+                  </th>
+                  <td class="shoppe-body__table-row-value">Gold, Silver</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    Material
+                  </th>
+                  <td class="shoppe-body__table-row-value">Gold, Silver</td>
+                </tr>
+                <tr>
+                  <th
+                    class="shoppe-body__table-row-name"
+                    scope="row"
+                    scope="row">
+                    All Materials used to building
+                  </th>
+                  <td class="shoppe-body__table-row-value">
+                    First Value, Second Value, Third Value
+                  </td>
+                </tr>
+              </table>
+            </mat-tab>
+          </article>
 
-            <article class="shope-header-product__object-information">
-              <ul class="object-information__list">
-                <li class="object-information__link">
-                  <p>SKU:</p>
-                  <p class="object-information__number">12</p>
-                </li>
-                <li class="object-information__link">
-                  <p>Categories:</p>
-                  <a class="object-information__link-number" href="#">Fashion Style</a>
-                </li>
-              </ul>
-            </article>
-          </section>
-        </div>
-      </section>
+          <article class="mat-tab-group-wrapper">
+            <mat-tab class="shoppe-body__item" label="Reviews(0)">
+              <div class="shoppe-body__item-dosent-message-reviews-container">
+                <p class="shoppe-body__item-heading">Reviews</p>
+                <p class="shoppe-body__item-message">
+                  <span class="shoppe-body__item-message-icon"
+                    ><img src="./assets/icons/alert-square.svg" />
+                  </span>
+                  There are no reviews yet.
+                </p>
+              </div>
 
-    </div>
-  </section>
+              <p class="shoppe-body__item-heading">
+                2 Reviews for lira earings
+              </p>
+              <div class="shoppe-body__item-message-reviews-container">
+                <p class="shoppe-body__item-message-name">
+                  Scarlet withch<span>6 May, 2020</span>
+                </p>
+                <div class="shoppe-body__item-message-rating-stars"></div>
+                <p class="shoppe-body__item-message-comment">
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur,
+                  from a Lorem Ipsum passage, and going through the cites of the
+                  word in classical literature, discovered the undoubtable
+                  source.
+                </p>
+                <div class="shoppe-body__item-message-line"></div>
+              </div>
 
-  <section class="shoppe-body">
+              <div class="shoppe-body__item-message-reviews-container">
+                <p class="shoppe-body__item-message-name">
+                  Sasha Pozden<span>15 May, 1990</span>
+                </p>
+                <div class="shoppe-body__item-message-rating-stars"></div>
+                <p class="shoppe-body__item-message-comment">
+                  I have beautiful avatars on my telegram.
+                </p>
+                <div class="shoppe-body__item-message-line"></div>
+              </div>
+            </mat-tab>
+          </article>
+        </mat-tab-group>
+      </div>
+    </section>
 
-    <mat-tab-group class="shoppe-body__list" mat-align-tabs="start" animationDuration="0ms">
-
-      <article class="shoppe-body__selction-line">
+    <section class="shoppe-footer">
+      <article class="shoppe-footer__title">
+        <p>Similar Items</p>
       </article>
 
-      <mat-tab class="shoppe-body__item" label="Description">
-        <p class="shoppe-body__item-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis consequat sed eu felis. Nunc sed porta augue. Morbi porta tempor odio, in molestie diam bibendum sed.</p>
-
-        <ul class="shoppe-body__item-list">
-          <li>-Lorem ipsum</li>
-          <li>-dolor sit amet, consectetur adipiscing elit</li>
-          <li>-Sed ac ultrices elit</li>
-          <li>-vitae luctus velit. Morbi in finibus</li>
-        </ul>
-      </mat-tab>
-
-
-      <mat-tab class="shoppe-body__item" label="Aditional information">
-        <table class="shoppe-body__table">
-          <tr>
-            <th class="shoppe-body__table-row-name"scope="row">Weight</th>
-            <td class="shoppe-body__table-row-value">3 kg</td>
-          </tr>
-          <tr>
-            <th class="shoppe-body__table-row-name"scope="row" scope="row">Dimensions</th>
-            <td class="shoppe-body__table-row-value">1 × 1 × 1 cm</td>
-          </tr>
-          <tr>
-            <th class="shoppe-body__table-row-name"scope="row" scope="row">Color</th>
-            <td class="shoppe-body__table-row-value">Gold, Silver</td>
-          </tr>
-          <tr>
-            <th class="shoppe-body__table-row-name"scope="row" scope="row">Material</th>
-            <td class="shoppe-body__table-row-value">Gold, Silver</td>
-          </tr>
-          <tr>
-            <th class="shoppe-body__table-row-name"scope="row" scope="row">All Materials used to building</th>
-            <td class="shoppe-body__table-row-value">First Value, Second Value, Third Value</td>
-          </tr>
-        </table>
-      </mat-tab>
-
-
-      <mat-tab class="shoppe-body__item" label="Reviews(0)">
-        <p class="shoppe-body__item-paragraph"> Ізі хуйня</p>
-      </mat-tab>
-    </mat-tab-group>
-
-
-
-  </section>
-
-  <section class="shoppe-footer">
-    <article class="shoppe-footer__title">
-      <p>Similar Items</p>
-    </article>
-
-     <article>
-       <div class="shoppe-footer__name">
-         <a href="#"> Hal Earrings</a>
-       </div>
-       <div class="shoppe-footer__price">
-         <p>$ 25,00</p>
-       </div>
-     </article>
-
-     <article class="shoppe-footer__item">
-       <div class="shoppe-footer__goods-container">
-         <a href="#"class="shoppe-footer__img">
-           <img src="./assets/images/products-footer-3.jpg">
-         </a>
-         <div class="shoppe-footer__overlay">
-           <a class="shoppe-footer__overlay-text"href="#">SELECT OPTION</a>
-         </div>
-       </div>
-            <div class="shoppe-footer__name">
-               <a href="#">Kaede Hair Pin Set Of 3</a>
-            </div>
-     <div class="shoppe-footer__price">
-        <p>$ 30,00</p>
-     </div>
-     </article>
-  </section>
+      <article
+        class="shoppe-footer__item"
+        *ngFor="let similarItem of (similarItems$ | async)?.results">
+        <div class="shoppe-footer__goods-container">
+          <a href="#" class="shoppe-footer__img">
+            <img [src]="similarItem.main_image" />
+          </a>
+          <div class="shoppe-footer__overlay">
+            <a class="shoppe-footer__overlay-text" href="#">SELECT OPTION</a>
+          </div>
+        </div>
+        <div class="shoppe-footer__name">
+          <a href="#">{{ similarItem.name }}</a>
+        </div>
+        <div class="shoppe-footer__price">
+          <p>{{ similarItem.price }}</p>
+        </div>
+      </article>
+    </section>
+  </div>
 </main>

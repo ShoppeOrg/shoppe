@@ -34,6 +34,8 @@ Table of contents:
     DJANGO_SECRET_KEY=
     DJANGO_DEBUG=
     PASSWORDLESS_EMAIL_NOREPLY_ADDRESS=
+    GOOGLE_APPLICATION_CREDENTIALS=
+    GS_BUCKET_NAME=
 ```
 (Ask an administrator for the values)
 
@@ -58,8 +60,12 @@ Usually, you do need install them everytime but depends on the updates, sometime
 Migrations are Django’s way of propagating changes you make to your models (adding a field, deleting a model, etc.) into your database schema.
 Usually, you do need run them everytime but depends on the updates, sometimes you need to return to this step.
 
+Here two commands. You should **run** them **both** as they serve two different DB's (*default* and *geocity*).
 ```python
-    python3 manage.py migrate
+    python3 manage.py migrate --database=default
+```
+```python
+    python3 manage.py migrate --database=geocity
 ```
 
 ## Run server
@@ -85,7 +91,7 @@ Admin page is located with url `http://localhost:8000/admin`
 To sign in admin panel as a staff use thi credentials
 ```
     username: staff
-    password: staff1234
+    password: staf1234
 ```
 
 If you want experience full-featured admin panel with full access use this credentials instead:
@@ -96,13 +102,25 @@ If you want experience full-featured admin panel with full access use this crede
 Aware of the [loading fixture](#loading-data) (data), unless you didn't, sign-in will be unavailable!
 
 ## Loading data
-Normally, you need to do this only once.
+Normally, you need to do this only once. Notice here two commands:
+- The first command populates *default* DB with product, review, articles, etc.
+- The second command populates *geocity* DB with all geographical-related data. If something went wrong, you
+should flush your DB to escape integrity issues.
+
+#### DEFAULT DB:
+⚠️ CAUTION!!!
+
+This command will flush your database. Any changes that you made before will be unsaved.
+
 ```
     python3 manage.py loaddata user/fixtures/fixture.json
 ```
-CAUTION!!!
 
-This command will flush your database. Any changes that you made before will be unsaved.
+#### GEOCITY DB:
+It may take some time. Be patient.
+```
+    python3 manage.py cities --import=all
+```
 
 ## Documentation
 ```

@@ -1,4 +1,8 @@
 from django.db.models import ObjectDoesNotExist
+from drf_spectacular.utils import extend_schema
+from drf_spectacular.utils import extend_schema_view
+from drf_spectacular.utils import OpenApiParameter
+from drf_spectacular.utils import OpenApiTypes
 from rest_framework.generics import CreateAPIView
 from rest_framework.generics import ListAPIView
 from rest_framework.generics import ListCreateAPIView
@@ -75,6 +79,7 @@ class ReviewPublishAPIView(APIView):
     permission_classes = [IsAdminUser]
     serializer_class = ReviewPublishSerializer
 
+    @extend_schema(description="Some description")
     def post(self, request, pk=None):
         try:
             product_review = Review.objects.get(pk=pk)
@@ -88,8 +93,20 @@ class ReviewPublishAPIView(APIView):
         return Response({"detail": "Review has been published."}, status=200)
 
 
+@extend_schema_view(
+    get=extend_schema(
+        description="Returns most related products to the given id of another product."
+        " Relations calculated using Euclidian matrix of distance.",
+        parameters=[
+            OpenApiParameter(
+                "id", OpenApiTypes.INT, OpenApiParameter.QUERY, required=True
+            ),
+        ],
+    )
+)
 class MostRelatedAPIView(ListAPIView):
     serializer_class = ProductListSerializer
+    pagination_class = None
 
     def get_queryset(self):
         product_id = self.request.query_params["id"]
@@ -109,7 +126,9 @@ class MostRelatedAPIView(ListAPIView):
         most_related = sorted(most_related_map.items(), key=lambda x: x[1])[:3]
         return all_products.filter(id__in=[pk for pk, rate in most_related])
 
-    def list(self, request):
-        if "id" not in request.query_params and request.query_params["id"] is not None:
-            return Response("Missing required query parameter 'id'", status=400)
+    def list(self, request, *args, **kwargs):
+        if request.query_params.get("id") is None:
+            return Response(
+                {"detail": "Missing required query parameter 'id'"}, status=400
+            )
         return super().list(request)

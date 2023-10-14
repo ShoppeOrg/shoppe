@@ -215,6 +215,14 @@
 },
 {
     "model": "sessions.session",
+    "pk": "e63gtlrwlzp42bpu9fzvu04bprcshimf",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAQRe_C2hAoQwGX7j0DGYZBqoYmpV0Z765NutDtf-_9l4i4rTVunZc4ZXEWWpx-t4T04LaDfMd2myXNbV2mJHdFHrTL65z5eTncv4OKvX7r4kNRDKAHsugUKYNobXAQgvfWlNEUAE4ucErkbRiUShr8WJCsY-PF-wPO0Ddd:1pn3rV:iXLdoR_hQjp8GTgmHYfiWFJp443-mKnQ-PuXzf_AlF8",
+        "expire_date": "2023-04-27T20:48:09.399Z"
+    }
+},
+{
+    "model": "sessions.session",
     "pk": "i7gdscw3oo2q2lmt9voqni65jf2heg5y",
     "fields": {
         "session_data": ".eJxVjMsOwiAQRf-FtSEww6O4dO83EGBAqgaS0q6M_65NutDtPefcF_NhW6vfRl78TOzMJDv9bjGkR247oHtot85Tb-syR74r_KCDXzvl5-Vw_w5qGPVbqwhOG6XBSSIAjVNCVSJMGZwSoHWwSGSsAKGMtSUHg1mKosEKjAnZ-wOqJDZ6:1pVfkj:2f88Z25hu2gEgaF05Z0UB_ywFV0d_iGdA4GKxFTP7jo",
@@ -255,6 +263,14 @@
 },
 {
     "model": "sessions.session",
+    "pk": "sakg3kc7fhbvht3nf8bpxk8agcgmdnml",
+    "fields": {
+        "session_data": ".eJxVjDkOwjAUBe_iGlleY4eSnjNYf7FxADlSnFSIu0OkFNC-mXkvkWBba9p6XtLE4iy0F6ffEYEeue2E79Bus6S5rcuEclfkQbu8zpyfl8P9O6jQ67fGUSs0SpMFwmIBC47sAqBi7ZQHN0SEWAJTtsZYdpnJOptDjIM34MX7AysIOKo:1pmyE4:KlL-Z47al7xXHwue2ICMYY9LRu0P3fPURUZbqkQMHyM",
+        "expire_date": "2023-04-27T14:47:04.010Z"
+    }
+},
+{
+    "model": "sessions.session",
     "pk": "vrqdxzxhtqna6lpumzat792ea1mracuj",
     "fields": {
         "session_data": ".eJxVjMsOwiAQRf-FtSEww6O4dO83EGBAqgaS0q6M_65NutDtPefcF_NhW6vfRl78TOzMJDv9bjGkR247oHtot85Tb-syR74r_KCDXzvl5-Vw_w5qGPVbqwhOG6XBSSIAjVNCVSJMGZwSoHWwSGSsAKGMtSUHg1mKosEKjAnZ-wOqJDZ6:1paZHZ:LeMaQDmLLFII8aRcWxBQYVl7pALu1hPH8F3xMWLH9S0",
@@ -272,8 +288,8 @@
 {
     "model": "user.user",
     "fields": {
-        "password": "pbkdf2_sha256$390000$VnWqv9DeNwc51ORc3FP3vR$HYUtvULv+PJP9X5o0USTJahw0d3M6jZyAEqRXxMHKB0=",
-        "last_login": "2023-03-26T08:21:52.783Z",
+        "password": "pbkdf2_sha256$600000$7JweRPvZHd8LwycbXAwXPp$o7S+J2ty/Qtb8WIsi1x51bkxfeS5V4zSkTD+iTwgeAA=",
+        "last_login": "2023-04-13T20:48:09.397Z",
         "is_superuser": true,
         "first_name": "",
         "last_name": "",
@@ -476,8 +492,8 @@
 {
     "model": "user.user",
     "fields": {
-        "password": "pbkdf2_sha256$390000$FM5wq1I6ZmLwwLKXlNZKrk$klYbpsyjjeu3KEt2IH5HfzZWWjMft62aTjQczULytZE=",
-        "last_login": "2023-03-26T09:45:16.949Z",
+        "password": "pbkdf2_sha256$600000$Uyxcg3J2TBcHZQYr6NLYSP$rib3cHRltfq9eIZFnCdtAuII3OWkFJfnvqI/WIMACho=",
+        "last_login": "2023-04-13T16:38:57.907Z",
         "is_superuser": false,
         "first_name": "",
         "last_name": "",
@@ -516,23 +532,50 @@
     }
 },
 {
+    "model": "user.user",
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-13T17:09:59.136Z",
+        "username": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "user.user",
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-04-13T17:34:19.635Z",
+        "username": "Hinnata",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
     "model": "products.product",
     "pk": 1,
     "fields": {
         "name": "Goldy",
         "price": "200.00",
-        "main_image": 15,
+        "main_image": null,
         "description": "Great gift for your girl",
         "created_at": "2023-02-21T14:47:26.249Z",
-        "updated_at": "2023-03-26T10:44:31.288Z",
-        "images": [
-            16,
-            15,
-            14,
-            13,
-            12,
-            10
-        ]
+        "updated_at": "2023-04-13T15:38:17.263Z",
+        "images": []
     }
 },
 {
@@ -567,7 +610,7 @@
     "fields": {
         "name": "Jewelerly thing",
         "price": "56.99",
-        "main_image": 9,
+        "main_image": null,
         "description": "That is only one here",
         "created_at": "2023-02-24T21:40:49.853Z",
         "updated_at": "2023-03-17T22:55:25.803Z",
@@ -580,14 +623,11 @@
     "fields": {
         "name": "te4st",
         "price": "41.99",
-        "main_image": 9,
+        "main_image": null,
         "description": "Test description",
         "created_at": "2023-02-25T08:57:39Z",
         "updated_at": "2023-03-24T16:57:09.535Z",
-        "images": [
-            11,
-            10
-        ]
+        "images": []
     }
 },
 {
@@ -635,15 +675,11 @@
     "fields": {
         "name": "Rose evening",
         "price": "212.00",
-        "main_image": 9,
+        "main_image": null,
         "description": "Curabitur consequat, lectus sit amet luctus vulputate, nisi sem semper erat, in consectetuer ipsum nunc id enim. Curabitur massa. Vestibulum accumsan neque et nunc. Quisque ornare tortor at risus. Nunc ac sem ut dolor dapibus gravida. Aliquam tincidunt, nunc ac mattis ornare, lectus ante dictum mi, ac mattis velit justo nec ante. Maecenas mi felis, adipiscing fringilla, porttitor vulputate, posuere vulputate, lacus. Cras interdum. Nunc sollicitudin commodo ipsum. Suspendisse non leo. Vivamus nibh dolor, nonummy ac, feugiat non, lobortis quis, pede. Suspendisse dui. Fusce diam nunc, ullamcorper eu, euismod ac, fermentum vel, mauris.",
         "created_at": "2022-02-26T06:58:10Z",
         "updated_at": "2023-03-26T10:01:12.174Z",
-        "images": [
-            15,
-            14,
-            9
-        ]
+        "images": []
     }
 },
 {
@@ -665,15 +701,11 @@
     "fields": {
         "name": "Nec Urna",
         "price": "4726.00",
-        "main_image": 16,
+        "main_image": null,
         "description": "primis in faucibus orci luctus et ultrices posuere cubilia Curae Phasellus ornare. Fusce mollis. Duis sit amet diam eu dolor",
         "created_at": "2022-02-26T08:03:43Z",
         "updated_at": "2023-03-26T10:01:58.546Z",
-        "images": [
-            13,
-            12,
-            11
-        ]
+        "images": []
     }
 },
 {
@@ -706,13 +738,16 @@
     "model": "products.product",
     "pk": 465,
     "fields": {
-        "name": "Fusce aliquet magna a",
+        "name": "Amazon Diamond Beauty",
         "price": "7118.00",
-        "main_image": null,
+        "main_image": 19,
         "description": "quis arcu vel quam dignissim pharetra. Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque scelerisque dui. Suspendisse ac metus vitae velit egestas lacinia. Sed congue, elit sed consequat auctor, nunc nulla vulputate dui, nec tempus mauris erat eget ipsum. Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam laoreet, libero",
         "created_at": "2022-02-25T14:44:04Z",
-        "updated_at": "2022-02-27T11:10:00Z",
-        "images": []
+        "updated_at": "2023-04-13T20:35:44.980Z",
+        "images": [
+            19,
+            18
+        ]
     }
 },
 {
@@ -734,20 +769,11 @@
     "fields": {
         "name": "Marine aqua ring",
         "price": "3742.00",
-        "main_image": 15,
+        "main_image": null,
         "description": "lobortis mauris. Suspendisse aliquet molestie tellus. Aenean",
         "created_at": "2022-02-26T04:41:43Z",
         "updated_at": "2023-03-26T10:01:41.893Z",
-        "images": [
-            16,
-            15,
-            14,
-            13,
-            12,
-            11,
-            10,
-            9
-        ]
+        "images": []
     }
 },
 {
@@ -808,17 +834,11 @@
     "fields": {
         "name": "Owl Night",
         "price": "8152.00",
-        "main_image": 15,
+        "main_image": null,
         "description": "sit amet orci. Ut sagittis lobortis mauris. Suspendisse aliquet molestie tellus. Aenean egestas hendrerit neque. In ornare sagittis felis. Donec tempor, est ac mattis semper, dui lectus rutrum urna, nec luctus felis purus ac tellus. Suspendisse sed dolor. Fusce mi lorem, vehicula et, rutrum eu, ultrices sit amet, risus. Donec nibh enim, gravida sit amet, dapibus id, blandit at, nisi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin vel nisl. Quisque fringilla euismod enim. Etiam gravida",
         "created_at": "2022-02-25T23:25:07Z",
         "updated_at": "2023-03-26T10:00:11.815Z",
-        "images": [
-            16,
-            15,
-            14,
-            13,
-            11
-        ]
+        "images": []
     }
 },
 {
@@ -827,17 +847,11 @@
     "fields": {
         "name": "Star diamont",
         "price": "8090.00",
-        "main_image": 15,
+        "main_image": null,
         "description": "Suspendisse sagittis. Nullam vitae diam. Proin dolor. Nulla semper tellus id nunc interdum feugiat. Sed nec metus facilisis lorem tristique aliquet. Phasellus fermentum convallis ligula. Donec luctus aliquet odio. Etiam ligula tortor, dictum eu, placerat eget, venenatis a, magna. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam",
         "created_at": "2022-02-26T06:45:08Z",
         "updated_at": "2023-03-26T10:02:21.409Z",
-        "images": [
-            16,
-            15,
-            14,
-            13,
-            12
-        ]
+        "images": []
     }
 },
 {
@@ -859,17 +873,21 @@
     "fields": {
         "name": "Luxury poop",
         "price": "1556.00",
-        "main_image": 16,
+        "main_image": null,
         "description": "Nam ac nulla. In tincidunt congue turpis. In condimentum. Donec at arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae Donec tincidunt. Donec vitae erat vel pede blandit congue. In scelerisque",
         "created_at": "2022-02-25T18:51:44Z",
         "updated_at": "2023-03-26T10:00:40.603Z",
-        "images": [
-            15,
-            14,
-            13,
-            12,
-            11
-        ]
+        "images": []
+    }
+},
+{
+    "model": "products.productinventory",
+    "pk": 465,
+    "fields": {
+        "quantity": 3,
+        "sold_qty": 2,
+        "created_at": "2023-02-25T20:14:51Z",
+        "updated_at": "2023-04-13T20:35:44.984Z"
     }
 },
 {
@@ -879,7 +897,7 @@
         "quantity": 2,
         "sold_qty": 15,
         "created_at": "2023-02-25T20:14:51Z",
-        "updated_at": "2023-03-26T10:44:31.292Z"
+        "updated_at": "2023-04-13T15:38:17.265Z"
     }
 },
 {
@@ -1038,16 +1056,6 @@
     "fields": {
         "quantity": 0,
         "sold_qty": 0,
-        "created_at": "2023-02-25T20:14:51Z",
-        "updated_at": "2023-02-25T20:14:51Z"
-    }
-},
-{
-    "model": "products.productinventory",
-    "pk": 465,
-    "fields": {
-        "quantity": 0,
-        "sold_qty": 2,
         "created_at": "2023-02-25T20:14:51Z",
         "updated_at": "2023-02-25T20:14:51Z"
     }
@@ -1510,74 +1518,20 @@
 },
 {
     "model": "pictures.picture",
-    "pk": 9,
+    "pk": 18,
     "fields": {
-        "title": "Test image name",
-        "picture": "uploaded/2023/03/4de8d360-d8bf-4804-9ab9-df78d05d7904.png",
-        "uploaded_at": "2023-03-10T22:04:37.073Z"
+        "title": "golden ring with diamonds",
+        "picture": "uploaded/2023/04/d3a03541-a5f5-4d0c-90c5-cdd1b16e6d58.png",
+        "uploaded_at": "2023-04-13T16:40:42.314Z"
     }
 },
 {
     "model": "pictures.picture",
-    "pk": 10,
+    "pk": 19,
     "fields": {
-        "title": "New image!",
-        "picture": "uploaded/2023/03/64fbd66e-42c8-43e0-8e97-abdc8a8bcfad.png",
-        "uploaded_at": "2023-03-10T22:06:11.396Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 11,
-    "fields": {
-        "title": "gold rings",
-        "picture": "uploaded/2023/03/cf1f5d18-97c6-41fc-be2f-b51c0c95f1e8.png",
-        "uploaded_at": "2023-03-26T09:46:10.418Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 12,
-    "fields": {
-        "title": "gold chains",
-        "picture": "uploaded/2023/03/60153cdf-e592-43cd-b986-d42bf4e2da93.png",
-        "uploaded_at": "2023-03-26T09:46:29.240Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 13,
-    "fields": {
-        "title": "golden white strips and balls",
-        "picture": "uploaded/2023/03/0f20833c-4a51-4e3e-945c-494e9a7d3c88.png",
-        "uploaded_at": "2023-03-26T09:46:48.667Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 14,
-    "fields": {
-        "title": "gold thing for hair",
-        "picture": "uploaded/2023/03/024f2f66-1cea-4085-95a5-646e094e6149.png",
-        "uploaded_at": "2023-03-26T09:47:10.397Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 15,
-    "fields": {
-        "title": "square amulet",
-        "picture": "uploaded/2023/03/a17acc22-7565-4e30-b8b5-5a13c0fb471b.png",
-        "uploaded_at": "2023-03-26T09:47:25.633Z"
-    }
-},
-{
-    "model": "pictures.picture",
-    "pk": 16,
-    "fields": {
-        "title": "chains from small golden balls",
-        "picture": "uploaded/2023/03/57f81748-18d1-4e88-a0e5-a18b2a04f36b.png",
-        "uploaded_at": "2023-03-26T09:47:57.251Z"
+        "title": "golden ring with big diamond",
+        "picture": "uploaded/2023/04/c08893eb-4456-4914-ba1a-726b423570a6.png",
+        "uploaded_at": "2023-04-13T16:41:05.452Z"
     }
 },
 {
@@ -2281,7 +2235,7 @@
         "is_active": true,
         "to_alias": "yurii@i.ua",
         "to_alias_type": "EMAIL",
-        "key": "829247",
+        "key": "368278",
         "type": "AUTH"
     }
 },
@@ -2326,7 +2280,7 @@
         "is_active": true,
         "to_alias": "pozden.dfg@gd.glg",
         "to_alias_type": "EMAIL",
-        "key": "165264",
+        "key": "692282",
         "type": "AUTH"
     }
 },
@@ -2551,7 +2505,7 @@
         "is_active": true,
         "to_alias": "oleksandr.pozden@yurilex.com",
         "to_alias_type": "EMAIL",
-        "key": "012358",
+        "key": "022829",
         "type": "AUTH"
     }
 },
@@ -3681,6 +3635,258 @@
         "object_repr": "Goldy",
         "action_flag": 2,
         "change_message": "[{\"changed\": {\"fields\": [\"Main image\", \"Images\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 52,
+    "fields": {
+        "action_time": "2023-04-13T15:37:11.658Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "17",
+        "object_repr": "17. new",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 53,
+    "fields": {
+        "action_time": "2023-04-13T15:38:17.268Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "products",
+            "product"
+        ],
+        "object_id": "1",
+        "object_repr": "Goldy",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Images\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 54,
+    "fields": {
+        "action_time": "2023-04-13T16:40:42.319Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "18",
+        "object_repr": "18. golden ring with diamonds",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 55,
+    "fields": {
+        "action_time": "2023-04-13T16:41:05.455Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "19",
+        "object_repr": "19. golden ring with big diamond",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 56,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.730Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "17",
+        "object_repr": "17. new",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 57,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.732Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "16",
+        "object_repr": "16. chains from small golden balls",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 58,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.733Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "15",
+        "object_repr": "15. square amulet",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 59,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.734Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "14",
+        "object_repr": "14. gold thing for hair",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 60,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.736Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "13",
+        "object_repr": "13. golden white strips and balls",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 61,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.736Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "12",
+        "object_repr": "12. gold chains",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 62,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.737Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "11",
+        "object_repr": "11. gold rings",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 63,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.738Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "10",
+        "object_repr": "10. New image!",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 64,
+    "fields": {
+        "action_time": "2023-04-13T20:34:39.739Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "pictures",
+            "picture"
+        ],
+        "object_id": "9",
+        "object_repr": "9. Test image name",
+        "action_flag": 3,
+        "change_message": ""
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 65,
+    "fields": {
+        "action_time": "2023-04-13T20:35:44.985Z",
+        "user": [
+            "staff"
+        ],
+        "content_type": [
+            "products",
+            "product"
+        ],
+        "object_id": "465",
+        "object_repr": "Amazon Diamond Beauty",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Name\", \"Main image\", \"Images\"]}}, {\"changed\": {\"name\": \"product inventory\", \"object\": \"ProductInventory object (465)\", \"fields\": [\"Quantity\"]}}]"
     }
 }
 ]
