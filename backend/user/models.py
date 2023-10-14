@@ -17,7 +17,7 @@ class UserManager(UserManager):
 
 
 class User(AbstractUser):
-    # objects = UserManager()
+    objects = UserManager()
 
     username = CharField(
         max_length=150,

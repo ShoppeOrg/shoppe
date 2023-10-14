@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     "products",
     "articles",
     "pictures",
+    "orders",
+    "cities",
 ]
 
 MIDDLEWARE = [
@@ -122,10 +124,32 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("DEFAULT_DB_NAME"),
+        "USER": os.getenv("DEFAULT_DB_USER"),
+        "PASSWORD": os.getenv("DEFAULT_DB_PASSWORD"),
+    },
+    "geocity": {
+        "ENGINE": "django.contrib.gis.db.backends.postgis",
+        "NAME": os.getenv("GEOCITY_DB_NAME"),
+        "USER": os.getenv("GEOCITY_DB_USER"),
+        "PASSWORD": os.getenv("GEOCITY_DB_PASSWORD"),
+    },
 }
+DATABASE_ROUTERS = ["api.core.routers.GeoCityRouter"]
+
+CITIES_FILES = {
+    "city": {
+        "filenames": ["UA.zip"],
+    },
+    "alt_name": {
+        "filename": "alternateNamesV2.zip",
+    },
+}
+
+CITIES_LOCALES = ["uk", "ru", "en", "und"]
+CITIES_POSTAL_CODES = ["UA"]
+CITIES_SKIP_CITIES_WITH_EMPTY_REGIONS = True
 
 
 AUTH_PASSWORD_VALIDATORS = [
